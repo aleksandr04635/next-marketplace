@@ -1,9 +1,9 @@
-import { Resend } from "resend";
+//import { Resend } from "resend";
 import nodemailer from "nodemailer";
 import Handlebars from "handlebars";
 import { readFileSync } from "fs";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+//const resend = new Resend(process.env.RESEND_API_KEY);
 
 //const adress = process.env.EMAIL_SENDING_ADRESS as string;
 

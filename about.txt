@@ -13,3 +13,6 @@ it can work in production only with bought domain
 
 deployed to https://next14-auth-kappa.vercel.app
 https://github.com/aleksandr04635/next14-auth
+
+Google OAuth is here
+https://console.cloud.google.com/apis/credentials?authuser=0&project=nextjs-ecommerce-402904
