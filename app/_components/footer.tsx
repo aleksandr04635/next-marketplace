@@ -20,7 +20,7 @@ export const Footer = () => {
   //absolute bottom-0  bg-secondary
   return (
     <div
-      className="w-full  h-16  rounded-none border-t absolute bottom-0
+      className="w-full  h-16 pr-[20px]  rounded-none border-t absolute bottom-0
       border-layout-border bg-white dark:bg-dark-additional-bg/40 flex items-center justify-between "
     >
       <Link
@@ -30,7 +30,7 @@ export const Footer = () => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        &copy; {new Date().getFullYear()} My blog
+        &copy; {new Date().getFullYear()} My Marketplace
       </Link>
 
       <Link

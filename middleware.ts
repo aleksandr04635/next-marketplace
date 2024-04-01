@@ -16,12 +16,12 @@ export default auth((req) => {
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
   //console.log("isLoggedIn: ", isLoggedIn);
-  console.log(
+  /*   console.log(
     "req.nextUrl.pathname in auth middleware: ",
     req.nextUrl.pathname
   );
   console.log("split in auth middleware: ", nextUrl.pathname.split("/"));
-  console.log("first in auth middleware: ", nextUrl.pathname.split("/")[1]);
+  console.log("first in auth middleware: ", nextUrl.pathname.split("/")[1]); */
 
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
   const isPublicRoute =

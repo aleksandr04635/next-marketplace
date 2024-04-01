@@ -32,6 +32,7 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { UserRole } from "@prisma/client";
+import MyButton from "@/components/my-button";
 
 const SettingsPage = () => {
   const user = useCurrentUser();
@@ -205,9 +206,12 @@ const SettingsPage = () => {
             </div>
             <FormError message={error} />
             <FormSuccess message={success} />
-            <Button disabled={isPending} type="submit">
+            {/*  <Button disabled={isPending} type="submit">
               Save
-            </Button>
+            </Button> */}
+            <MyButton disabled={isPending} type="submit">
+              Save
+            </MyButton>
           </form>
         </Form>
       </CardContent>

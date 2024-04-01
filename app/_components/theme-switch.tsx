@@ -11,6 +11,21 @@ export default function ThemeSwitch() {
 
   useEffect(() => setMounted(true), []);
 
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-color-scheme: dark)");
+    if (mq.matches) {
+      //dispatch(toggleTheme("dark"));
+      setTheme("dark");
+    }
+
+    // This callback will fire if the perferred color scheme changes without a reload
+    // mq.addEventListener("change", (evt) => setIsDark(evt.matches));
+    mq.addEventListener("change", (evt) => {
+      //dispatch(toggleTheme(evt.matches ? "dark" : "light"));
+      setTheme(evt.matches ? "dark" : "light");
+    });
+  }, []);
+
   if (!mounted)
     return (
       <div className=" h-[40px] w-[40px]"></div>

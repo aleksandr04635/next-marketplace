@@ -23,24 +23,27 @@ export default async function RootLayout({
 }) {
   const session = await auth();
 
-  //h-fit justify-stretch from-sky-400 to-blue-800
+  //h-fit justify-stretch from-sky-200 to-blue-600
+  //className="w-screen overflow-x-hidden "
   return (
     <SessionProvider session={session}>
       <html lang="en">
-        <body className={` ${inter.className}`}>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <Toaster />
+        <body className="w-screen overflow-x-hidden ">
+          <div className={` ${inter.className}`}>
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+              <Toaster />
 
-            <div
-              className="relative w-full flex flex-col gap-y-3 items-center    min-h-screen bg-white
+              <div
+                className="  relative w-full flex flex-col gap-y-3 items-center    min-h-screen bg-white
      bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))]
-     from-sky-200 to-blue-600 dark:from-[#065179] dark:to-[#0e1425]"
-            >
-              <Header />
-              <div className=" mb-20">{children}</div>
-              <Footer />
-            </div>
-          </ThemeProvider>
+      dark:from-[#065179] dark:to-[#0e1425]"
+              >
+                <Header />
+                <div className=" mb-20">{children}</div>
+                <Footer />
+              </div>
+            </ThemeProvider>
+          </div>
         </body>
       </html>
     </SessionProvider>

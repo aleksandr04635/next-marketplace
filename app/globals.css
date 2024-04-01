@@ -3,9 +3,19 @@
 @tailwind utilities;
 
 html,
-body,
+/* body, */
 :root {
   height: 100%;
+}
+/* body {
+  margin: 0;
+  padding: 0;
+}
+ */
+body {
+  /*  margin-right: 0 !important; */
+  /*  margin: 0 !important; */
+  /*  overflow-x: hidden !important; */
 }
 
 @layer base {
@@ -72,14 +82,18 @@ body,
   }
 }
 
+/* body { @apply !min-w-full; } */
 @layer base {
   * {
     @apply border-border;
   }
-  body {
+  /*  body {
     @apply bg-background text-foreground;
-  }
+  } */
 }
+/* body[data-scroll-locked] {
+  min-width: 100%;
+} */
 
 .link-stand {
   @apply text-base text-blue-700 hover:text-cyan-500 dark:text-cyan-400 dark:hover:text-blue-500;

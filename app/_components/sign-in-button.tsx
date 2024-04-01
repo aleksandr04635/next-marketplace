@@ -11,25 +11,29 @@ type Props = {};
 
 const SignInButton = (props: Props) => {
   const location = usePathname();
-  const router = useRouter();
+  //const router = useRouter();
   const searchParams = useSearchParams();
   const callbackUrlFromUrl = searchParams.get("callbackUrl");
-  //const currentSearch = qs.parse(searchParams.toString());
-  const currentSearch = searchParams.get("search");
-  console.log(" location from SingInButton: ", location);
-  //console.log(" router from SingInButton: ", router);
-  console.log(" currentSearch from SingInButton: ", currentSearch);
-  console.log(" callbackUrlFromUrl from SingInButton: ", callbackUrlFromUrl);
-  /*   const callbackUrlFromUrl = searchParams.get("callbackUrl");*/
+
+  //const currentSearch = searchParams.get("search");
+  //console.log(" location from SignInButton: ", location);
+  //console.log(" currentSearch from SignInButton: ", currentSearch);
+  //console.log(" callbackUrlFromUrl from SignInButton: ", callbackUrlFromUrl);
   const encodedCallbackUrl = encodeURIComponent(
     callbackUrlFromUrl
       ? callbackUrlFromUrl
-      : location + (currentSearch ? currentSearch : "")
+      : location + "?" + searchParams.toString()
   );
+  //console.log(" encodedCallbackUrl from Header: ", encodedCallbackUrl);
+
+  /*   const current = qs.parse(searchParams.toString());
+  console.log(" current from SignInButton: ", current);
+  console.log(
+    " searchParams.toString() from SignInButton: ",
+    searchParams.toString()
+  ); */
+
   //const [encodedCallbackUrl, setEncodedCallbackUrl] = useState("");
-
-  console.log(" encodedCallbackUrl from Header: ", encodedCallbackUrl);
-
   /*   useEffect(() => {
     const urlParams = new URLSearchParams(searchParams);
     const callbackUrlFromUrl = urlParams.get("callbackUrl");

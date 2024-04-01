@@ -7,6 +7,7 @@ import { useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
+import MyButton from "../my-button";
 
 export const Social = () => {
   const searchParams = useSearchParams();
@@ -16,26 +17,17 @@ export const Social = () => {
     signIn(provider, {
       callbackUrl: callbackUrl || DEFAULT_LOGIN_REDIRECT,
     });
-  }
+  };
 
   return (
     <div className="flex items-center w-full gap-x-2">
-      <Button
-        size="lg"
-        className="w-full"
-        variant="outline"
-        onClick={() => onClick("google")}
-      >
+      {/*  <MyButton className=" font-semibold">My Marketplace</MyButton> */}
+      <MyButton className="w-full" onClick={() => onClick("google")}>
         <FcGoogle className="h-5 w-5" />
-      </Button>
-      <Button
-        size="lg"
-        className="w-full"
-        variant="outline"
-        onClick={() => onClick("github")}
-      >
+      </MyButton>
+      <MyButton className="w-full" onClick={() => onClick("github")}>
         <FaGithub className="h-5 w-5" />
-      </Button>
+      </MyButton>
     </div>
   );
 };

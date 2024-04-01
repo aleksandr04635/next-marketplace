@@ -1,9 +1,18 @@
+import { ReactNode } from "react";
+
+interface MyButtonProps {
+  style?: "standard" | "danger" | "attention";
+  children?: ReactNode;
+  className?: string;
+  props?: (string | boolean)[];
+}
+
 export default function MyButton({
   style = "standard",
   children,
   className,
   ...props
-}) {
+}: any) {
   let colorStyleString;
   switch (style) {
     case "danger":

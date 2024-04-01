@@ -1,21 +1,25 @@
 "use client";
 
 import { FaUser } from "react-icons/fa";
-import { ExitIcon } from "@radix-ui/react-icons";
+import { ExitIcon, GearIcon } from "@radix-ui/react-icons";
 
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { LogoutButton } from "@/components/auth/logout-button";
+import Link from "next/link";
 
 export const UserButton = () => {
   const user = useCurrentUser();
 
+  //w-48
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="rounded-full">
@@ -26,7 +30,23 @@ export const UserButton = () => {
           </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-40" align="end">
+      <DropdownMenuContent
+        className="w-fit dark:bg-dark-additional-bg"
+        align="end"
+      >
+        <DropdownMenuLabel>
+          <div className=" text-xs">
+            <p> {user?.name}</p>
+            <p> {user?.email}</p>
+          </div>
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <Link href="/settings">
+          <DropdownMenuItem className="cursor-pointer">
+            <GearIcon className="h-4 w-4 mr-2" />
+            Settings
+          </DropdownMenuItem>
+        </Link>
         <LogoutButton>
           <DropdownMenuItem className="cursor-pointer">
             <ExitIcon className="h-4 w-4 mr-2" />

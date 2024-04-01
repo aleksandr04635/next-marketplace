@@ -17,8 +17,8 @@ export const Header = () => {
   //rounded-xl bg-secondary
   return (
     <nav
-      className="bg-white dark:bg-dark-additional-bg/40 flex justify-between items-center 
-    p-4  w-full h-16 shadow-sm border-layout-border border-b"
+      className=" bg-white dark:bg-dark-additional-bg/40 flex justify-between items-center 
+    p-4 pr-[30px] w-full h-16 shadow-sm border-layout-border border-b"
     >
       <Link className="" href={`/`}>
         <MyButton className=" font-semibold">My Marketplace</MyButton>

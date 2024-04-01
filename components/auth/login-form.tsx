@@ -22,6 +22,7 @@ import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { login } from "@/actions/login";
+import MyButton from "../my-button";
 
 export const LoginForm = () => {
   const searchParams = useSearchParams();
@@ -31,6 +32,8 @@ export const LoginForm = () => {
       ? "Email already in use with different provider!"
       : "";
 
+  const emailFromURL = searchParams.get("email");
+
   const [showTwoFactor, setShowTwoFactor] = useState(false);
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
@@ -39,7 +42,7 @@ export const LoginForm = () => {
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
-      email: "",
+      email: emailFromURL || "",
       password: "",
     },
   });
@@ -72,9 +75,9 @@ export const LoginForm = () => {
 
   return (
     <CardWrapper
-      headerLabel="Welcome back"
+      headerLabel="Sign in"
       backButtonLabel="Don't have an account?"
-      backButtonHref="/auth/register"
+      backButtonHref={"/auth/register?" + searchParams.toString()}
       showSocial
     >
       <Form {...form}>
@@ -89,7 +92,9 @@ export const LoginForm = () => {
                 name="code"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Two Factor Code</FormLabel>
+                    <FormLabel>
+                      Enter the two factor code, that was sent to your e-mail
+                    </FormLabel>
                     <FormControl>
                       <Input
                         {...field}
@@ -142,7 +147,9 @@ export const LoginForm = () => {
                         asChild
                         className="px-0 font-normal"
                       >
-                        <Link href="/auth/reset">Forgot password?</Link>
+                        <Link href={"/auth/reset?" + searchParams.toString()}>
+                          Forgot password?
+                        </Link>
                       </Button>
                       <FormMessage />
                     </FormItem>
@@ -153,9 +160,16 @@ export const LoginForm = () => {
           </div>
           <FormError message={error || urlError} />
           <FormSuccess message={success} />
-          <Button disabled={isPending} type="submit" className="w-full">
+          <MyButton
+            className="w-full font-semibold"
+            disabled={isPending}
+            type="submit"
+          >
             {showTwoFactor ? "Confirm" : "Login"}
-          </Button>
+          </MyButton>
+          {/* <Button disabled={isPending} type="submit" className="w-full">
+            {showTwoFactor ? "Confirm" : "Login"}
+          </Button> */}
         </form>
       </Form>
     </CardWrapper>

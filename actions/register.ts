@@ -9,7 +9,10 @@ import { getUserByEmail } from "@/data/user";
 import { sendVerificationEmail } from "@/lib/mail";
 import { generateVerificationToken } from "@/lib/tokens";
 
-export const register = async (values: z.infer<typeof RegisterSchema>) => {
+export const register = async (
+  values: z.infer<typeof RegisterSchema>,
+  callbackUrl?: string | null
+) => {
   const validatedFields = RegisterSchema.safeParse(values);
 
   if (!validatedFields.success) {
@@ -34,9 +37,12 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
   });
 
   const verificationToken = await generateVerificationToken(email);
+  //console.log("verificationToken from register: ", verificationToken);
+  //console.log("callbackUrl from register: ", callbackUrl);
   await sendVerificationEmail(
     verificationToken.email,
     verificationToken.token,
+    callbackUrl
   );
 
   return { success: "Confirmation email sent!" };

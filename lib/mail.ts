@@ -1,5 +1,7 @@
 import { Resend } from "resend";
-//import nodemailer from "nodemailer";
+import nodemailer from "nodemailer";
+import Handlebars from "handlebars";
+import { readFileSync } from "fs";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -7,7 +9,7 @@ const adress = process.env.EMAIL_SENDING_ADRESS as string;
 
 const domain = process.env.NEXT_PUBLIC_APP_URL;
 
-export const sendTwoFactorTokenEmail = async (email: string, token: string) => {
+/* export const sendTwoFactorTokenEmail = async (email: string, token: string) => {
   await resend.emails.send({
     //from: "mail@auth-masterclass-tutorial.com",
     from: adress,
@@ -15,9 +17,87 @@ export const sendTwoFactorTokenEmail = async (email: string, token: string) => {
     subject: "2FA Code",
     html: `<p>Your two factor authentication code: ${token}</p>`,
   });
+}; */
+
+export const sendTwoFactorTokenEmail = async (email: string, token: string) => {
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    port: 465,
+    host: "smtp.gmail.com",
+    secure: true,
+    auth: {
+      user: process.env.EMAIL_SERVER_USER,
+      pass: process.env.EMAIL_SERVER_PASSWORD,
+    },
+  });
+  //console.log("transporter: ", transporter);
+  // verify connection configuration
+  try {
+    await new Promise((resolve, reject) => {
+      transporter.verify(function (error, success) {
+        console.log("verify connection configuration");
+        if (error) {
+          console.log("error:", error);
+          reject(error);
+        } else {
+          console.log("Server is ready to take our messages");
+          resolve(success);
+        }
+      });
+    });
+
+    console.log("process.cwd(): ", process.cwd());
+    const emailFile = readFileSync(
+      process.cwd() + "/emails/two-factor-email.html",
+      {
+        encoding: "utf8",
+      }
+    );
+    //console.log("emailFile: ", emailFile);
+    const emailTemplate = Handlebars.compile(emailFile);
+
+    let mailOptions = {
+      from: `My blog <${process.env.EMAIL_FROM}>`,
+      to: email,
+      subject: "Your two factor authentication code",
+      text: "Your two factor authentication code:" + token,
+      html: emailTemplate({
+        base_url: domain,
+        code: token,
+        email: email,
+      }),
+    };
+    // html: `Click on the link to reset the password ${link}`, //new
+    //console.log("mailOptions: ", mailOptions);
+
+    const prom = new Promise((resolve, reject) => {
+      //return resolve("info"); //REMOVE
+      transporter.sendMail(mailOptions, (err, info) => {
+        console.log("Email sent: " + info.response);
+        if (err) {
+          console.error(err);
+          return reject(err);
+        } else {
+          //console.log("info from transporter.sendMail", info);
+          return resolve(info);
+        }
+      });
+    });
+
+    try {
+      const result = await prom;
+      console.log("result from verification email prom: ", result);
+      return "success";
+    } catch (error) {
+      console.log("error from verification email prom: ", error);
+      return "error";
+    }
+  } catch (error) {
+    return "error";
+  }
 };
 
-export const sendPasswordResetEmail = async (email: string, token: string) => {
+/* export const sendPasswordResetEmail = async (email: string, token: string) => {
   const resetLink = `${domain}/auth/new-password?token=${token}`;
 
   await resend.emails.send({
@@ -27,9 +107,93 @@ export const sendPasswordResetEmail = async (email: string, token: string) => {
     subject: "Reset your password",
     html: `<p>Click <a href="${resetLink}">here</a> to reset password.</p>`,
   });
+}; */
+
+export const sendPasswordResetEmail = async (email: string, token: string) => {
+  /*  console.log(
+    "email, callbackUrl, token from sendVerificationEmail: ",
+    email,
+    callbackUrl,
+    token
+  ); */
+  const resetLink = `${domain}/auth/new-password?token=${token}`;
+
+  console.log("confirmLink from sendVerificationEmail: ", resetLink);
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    port: 465,
+    host: "smtp.gmail.com",
+    secure: true,
+    auth: {
+      user: process.env.EMAIL_SERVER_USER,
+      pass: process.env.EMAIL_SERVER_PASSWORD,
+    },
+  });
+  //console.log("transporter: ", transporter);
+  // verify connection configuration
+  try {
+    await new Promise((resolve, reject) => {
+      transporter.verify(function (error, success) {
+        console.log("verify connection configuration");
+        if (error) {
+          console.log("error:", error);
+          reject(error);
+        } else {
+          console.log("Server is ready to take our messages");
+          resolve(success);
+        }
+      });
+    });
+
+    console.log("process.cwd(): ", process.cwd());
+    const emailFile = readFileSync(process.cwd() + "/emails/reset-email.html", {
+      encoding: "utf8",
+    });
+    //console.log("emailFile: ", emailFile);
+    const emailTemplate = Handlebars.compile(emailFile);
+
+    let mailOptions = {
+      from: `My blog <${process.env.EMAIL_FROM}>`,
+      to: email,
+      subject: "Reset your password",
+      text: resetLink,
+      html: emailTemplate({
+        base_url: domain,
+        signin_url: resetLink,
+        email: email,
+      }),
+    };
+    // html: `Click on the link to reset the password ${link}`, //new
+    //console.log("mailOptions: ", mailOptions);
+
+    const prom = new Promise((resolve, reject) => {
+      //return resolve("info"); //REMOVE
+      transporter.sendMail(mailOptions, (err, info) => {
+        console.log("Email sent: " + info.response);
+        if (err) {
+          console.error(err);
+          return reject(err);
+        } else {
+          //console.log("info from transporter.sendMail", info);
+          return resolve(info);
+        }
+      });
+    });
+
+    try {
+      const result = await prom;
+      console.log("result from verification email prom: ", result);
+      return "success";
+    } catch (error) {
+      console.log("error from verification email prom: ", error);
+      return "error";
+    }
+  } catch (error) {
+    return "error";
+  }
 };
 
-export const sendVerificationEmail = async (email: string, token: string) => {
+/* export const sendVerificationEmail = async (email: string, token: string) => {
   const confirmLink = `${domain}/auth/new-verification?token=${token}`;
 
   await resend.emails.send({
@@ -40,6 +204,99 @@ export const sendVerificationEmail = async (email: string, token: string) => {
     subject: "Confirm your email",
     html: `<p>Click <a href="${confirmLink}">here</a> to confirm email.</p>`,
   });
+}; */
+
+export const sendVerificationEmail = async (
+  email: string,
+  token: string,
+  callbackUrl: string | null | undefined
+) => {
+  /*  console.log(
+    "email, callbackUrl, token from sendVerificationEmail: ",
+    email,
+    callbackUrl,
+    token
+  ); */
+  const confirmLink = `${domain}/auth/new-verification?token=${token}&email=${email}${
+    callbackUrl ? `&callbackUrl=${callbackUrl}` : ""
+  }`;
+
+  console.log("confirmLink from sendVerificationEmail: ", confirmLink);
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    port: 465,
+    host: "smtp.gmail.com",
+    secure: true,
+    auth: {
+      user: process.env.EMAIL_SERVER_USER,
+      pass: process.env.EMAIL_SERVER_PASSWORD,
+    },
+  });
+  //console.log("transporter: ", transporter);
+  // verify connection configuration
+  try {
+    await new Promise((resolve, reject) => {
+      transporter.verify(function (error, success) {
+        console.log("verify connection configuration");
+        if (error) {
+          console.log("error:", error);
+          reject(error);
+        } else {
+          console.log("Server is ready to take our messages");
+          resolve(success);
+        }
+      });
+    });
+
+    console.log("process.cwd(): ", process.cwd());
+    const emailFile = readFileSync(
+      process.cwd() + "/emails/confirm-email.html",
+      {
+        encoding: "utf8",
+      }
+    );
+    //console.log("emailFile: ", emailFile);
+    const emailTemplate = Handlebars.compile(emailFile);
+
+    let mailOptions = {
+      from: `My blog <${process.env.EMAIL_FROM}>`,
+      to: email,
+      subject: "Confirm your email",
+      text: confirmLink,
+      html: emailTemplate({
+        base_url: domain,
+        signin_url: confirmLink,
+        email: email,
+      }),
+    };
+    // html: `Click on the link to reset the password ${link}`, //new
+    //console.log("mailOptions: ", mailOptions);
+
+    const prom = new Promise((resolve, reject) => {
+      //return resolve("info"); //REMOVE
+      transporter.sendMail(mailOptions, (err, info) => {
+        console.log("Email sent: " + info.response);
+        if (err) {
+          console.error(err);
+          return reject(err);
+        } else {
+          //console.log("info from transporter.sendMail", info);
+          return resolve(info);
+        }
+      });
+    });
+
+    try {
+      const result = await prom;
+      console.log("result from verification email prom: ", result);
+      return "success";
+    } catch (error) {
+      console.log("error from verification email prom: ", error);
+      return "error";
+    }
+  } catch (error) {
+    return "error";
+  }
 };
 
 /* export const NEWsendVerificationEmail = async (
