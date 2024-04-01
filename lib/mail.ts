@@ -250,6 +250,7 @@ export const sendVerificationEmail = async (
 
     console.log("process.cwd(): ", process.cwd());
     const emailsDir = path.resolve(process.cwd(), "emails");
+    console.log("emailsDir: ", emailsDir);
     const emailFile = readFileSync(path.join(emailsDir, "confirm-email.html"), {
       encoding: "utf8",
     });
@@ -260,7 +261,7 @@ export const sendVerificationEmail = async (
         encoding: "utf8",
       }
     ); */
-    console.log("emailFile: ", emailFile);
+    console.log("emailFile: ", emailFile.slice(0, 100));
     const emailTemplate = Handlebars.compile(emailFile);
 
     let mailOptions = {
@@ -278,7 +279,7 @@ export const sendVerificationEmail = async (
     //console.log("mailOptions: ", mailOptions);
 
     const prom = new Promise((resolve, reject) => {
-      //return resolve("info"); //REMOVE
+      return resolve("info"); //REMOVE
       transporter.sendMail(mailOptions, (err, info) => {
         console.log("Email sent: " + info.response);
         if (err) {
