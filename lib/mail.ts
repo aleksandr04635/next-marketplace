@@ -249,6 +249,12 @@ export const sendVerificationEmail = async (
     });
 
     console.log("process.cwd(): ", process.cwd());
+
+    const textFile = readFileSync(path.join(process.cwd(), "about.txt"), {
+      encoding: "utf8",
+    });
+    console.log("textFile: ", textFile.slice(0, 100));
+
     const emailsDir = path.join(process.cwd(), "emails");
     console.log("emailsDir: ", emailsDir);
     const emailFile = readFileSync(path.join(emailsDir, "confirm-email.html"), {
@@ -262,6 +268,7 @@ export const sendVerificationEmail = async (
       }
     ); */
     console.log("emailFile: ", emailFile.slice(0, 100));
+
     const emailTemplate = Handlebars.compile(emailFile);
 
     let mailOptions = {
