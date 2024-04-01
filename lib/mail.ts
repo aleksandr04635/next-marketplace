@@ -249,6 +249,8 @@ export const sendVerificationEmail = async (
     });
 
     console.log("process.cwd(): ", process.cwd());
+    const file = readFileSync(process.cwd() + "/app/about2.txt", "utf8");
+    console.log("file: ", file.slice(0, 200));
 
     const textFile2 = readFileSync(path.resolve("about.txt"), "utf8");
     console.log("textFile2: ", textFile2.slice(0, 100));
