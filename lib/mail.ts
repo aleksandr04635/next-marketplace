@@ -250,6 +250,10 @@ export const sendVerificationEmail = async (
 
     console.log("process.cwd(): ", process.cwd());
 
+    const jsonPath = path.join(process.cwd(), "public", "about.txt");
+    const textFile1 = readFileSync(jsonPath, "utf8");
+
+    console.log("textFile1: ", textFile1.slice(0, 100));
     const textFile = readFileSync(path.join(process.cwd(), "about.txt"), {
       encoding: "utf8",
     });
