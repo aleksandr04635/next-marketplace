@@ -2,7 +2,7 @@
 import nodemailer from "nodemailer";
 import Handlebars from "handlebars";
 import { readFileSync } from "fs";
-
+import path from "path";
 //const resend = new Resend(process.env.RESEND_API_KEY);
 
 //const adress = process.env.EMAIL_SENDING_ADRESS as string;
@@ -249,12 +249,17 @@ export const sendVerificationEmail = async (
     });
 
     console.log("process.cwd(): ", process.cwd());
-    const emailFile = readFileSync(
+    const emailsDir = path.resolve(process.cwd(), "emails");
+    const emailFile = readFileSync(path.join(emailsDir, "confirm-email.html"), {
+      encoding: "utf8",
+    });
+
+    /*  const emailFile = readFileSync(
       process.cwd() + "/emails/confirm-email.html",
       {
         encoding: "utf8",
       }
-    );
+    ); */
     console.log("emailFile: ", emailFile);
     const emailTemplate = Handlebars.compile(emailFile);
 
