@@ -5,7 +5,7 @@ import { readFileSync } from "fs";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const adress = process.env.EMAIL_SENDING_ADRESS as string;
+//const adress = process.env.EMAIL_SENDING_ADRESS as string;
 
 const domain = process.env.NEXT_PUBLIC_APP_URL;
 

@@ -20,9 +20,9 @@ function page({}: Props) {
             Mongo database accessed through Mongoose ORM. Deployment to Vercel
             required the minimization of the number of .js files in the API
             directory and a new database connection for each serverless
-            function. That's the reason of the file structure of the api folder
-            being so far from optimal. For UI elements Flowbite library with
-            Tailwind styles is used.
+            function. That&apos;s the reason of the file structure of the api
+            folder being so far from optimal. For UI elements Flowbite library
+            with Tailwind styles is used.
           </p>
           <p>
             Redux Toolkit is used to store user data, the theme, and the number
@@ -66,10 +66,11 @@ function page({}: Props) {
             page varies depending on the total number of posts, corresponding to
             the query. It, and the whole pagination system was made with the
             intent of full correspondence of shown data to the URL, so that the
-            addition of new posts doesn't change which posts are shown by the
-            old URL, so that they all can be stored in bookmarks, for example.
-            Note how changing the number of posts per page changes the URL, just
-            like the selection of author or tag, the posts of which are shown.
+            addition of new posts doesn&apos;t change which posts are shown by
+            the old URL, so that they all can be stored in bookmarks, for
+            example. Note how changing the number of posts per page changes the
+            URL, just like the selection of author or tag, the posts of which
+            are shown.
           </p>
           <p>
             User authentication is made with two options: email and password or
