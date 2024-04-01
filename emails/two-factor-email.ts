@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+export const twoFactorTemplate = `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -104,6 +104,11 @@
         text-align: center;
       }
       /* Buttons ------------------------------ */
+
+      .code {
+        padding: 10px;
+        font-size: 20px;
+      }
 
       .button {
         /*background-color: #f43f5e;
@@ -254,8 +259,8 @@
       .email-body_inner {
         width: 570px;
         margin: 0 auto;
-        border-radius: 0.375rem;
         padding: 0;
+        border-radius: 0.375rem;
         -premailer-width: 570px;
         -premailer-cellpadding: 0;
         -premailer-cellspacing: 0;
@@ -392,7 +397,7 @@
                     <td class="content-cell">
                       <div class="f-fallback">
                         <p>
-                          Click the button to reset your password to My
+                          Your two factor authentication code for My
                           Marketplace.<br />
                         </p>
                         <!-- Action -->
@@ -416,36 +421,15 @@
                                 role="presentation"
                               >
                                 <tr>
-                                  <td>
-                                    <a
-                                      href="{{signin_url}}"
-                                      class="f-fallback button"
-                                      target="_blank"
-                                      >Reset the password on My Marketplace</a
-                                    >
-                                  </td>
+                                  <td class="code">{{code}}</td>
                                 </tr>
                               </table>
                             </td>
                           </tr>
                         </table>
-                        <p>
-                          After that you will be able to sign-in with {{email}}.
-                        </p>
+                        <p>Use it to sign-in with {{email}}.</p>
                         <p>Best,<br />the My Marketplace team</p>
                         <!-- Sub copy -->
-                        <table class="body-sub" role="presentation">
-                          <tr>
-                            <td>
-                              <p class="f-fallback sub">
-                                If you’re having trouble with the button above,
-                                click the link below or copy and paste the URL
-                                into your web browser.
-                              </p>
-                              <p class="f-fallback sub">{{signin_url}}</p>
-                            </td>
-                          </tr>
-                        </table>
                       </div>
                     </td>
                   </tr>
@@ -478,3 +462,4 @@
     </table>
   </body>
 </html>
+`;

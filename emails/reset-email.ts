@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+export const resetTemplate = `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -392,7 +392,7 @@
                     <td class="content-cell">
                       <div class="f-fallback">
                         <p>
-                          Click the button to confirm your email for My
+                          Click the button to reset your password to My
                           Marketplace.<br />
                         </p>
                         <!-- Action -->
@@ -421,9 +421,7 @@
                                       href="{{signin_url}}"
                                       class="f-fallback button"
                                       target="_blank"
-                                      >Confirm the email for
-                                      <!--SupaVacation -->
-                                      My Marketplace</a
+                                      >Reset the password on My Marketplace</a
                                     >
                                   </td>
                                 </tr>
@@ -480,3 +478,4 @@
     </table>
   </body>
 </html>
+`;

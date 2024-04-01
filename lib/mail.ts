@@ -3,7 +3,10 @@ import nodemailer from "nodemailer";
 import Handlebars from "handlebars";
 import { readFileSync, promises as fs } from "fs";
 import path from "path";
+
 import { confirmTemplate } from "@/emails/confirm-email";
+import { resetTemplate } from "@/emails/reset-email";
+import { twoFactorTemplate } from "@/emails/two-factor-email";
 //const resend = new Resend(process.env.RESEND_API_KEY);
 
 //const adress = process.env.EMAIL_SENDING_ADRESS as string;
@@ -47,7 +50,7 @@ export const sendTwoFactorTokenEmail = async (email: string, token: string) => {
       });
     });
 
-    console.log("process.cwd(): ", process.cwd());
+    /*    console.log("process.cwd(): ", process.cwd());
     const emailFile = readFileSync(
       process.cwd() + "/emails/two-factor-email.html",
       {
@@ -55,7 +58,8 @@ export const sendTwoFactorTokenEmail = async (email: string, token: string) => {
       }
     );
     //console.log("emailFile: ", emailFile);
-    const emailTemplate = Handlebars.compile(emailFile);
+    const emailTemplate = Handlebars.compile(emailFile); */
+    const emailTemplate = Handlebars.compile(twoFactorTemplate);
 
     let mailOptions = {
       from: `My blog <${process.env.EMAIL_FROM}>`,
@@ -146,12 +150,13 @@ export const sendPasswordResetEmail = async (email: string, token: string) => {
       });
     });
 
-    console.log("process.cwd(): ", process.cwd());
+    /*  console.log("process.cwd(): ", process.cwd());
     const emailFile = readFileSync(process.cwd() + "/emails/reset-email.html", {
       encoding: "utf8",
     });
     //console.log("emailFile: ", emailFile);
-    const emailTemplate = Handlebars.compile(emailFile);
+    const emailTemplate = Handlebars.compile(emailFile); */
+    const emailTemplate = Handlebars.compile(resetTemplate);
 
     let mailOptions = {
       from: `My blog <${process.env.EMAIL_FROM}>`,
@@ -249,7 +254,7 @@ export const sendVerificationEmail = async (
       });
     });
 
-    console.log("process.cwd(): ", process.cwd());
+    //console.log("process.cwd(): ", process.cwd());
     /*     const jsonPath = path.join(process.cwd(), "public", "about.txt");
     const textFile1 = readFileSync(jsonPath, "utf8");
 
