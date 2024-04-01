@@ -1,7 +1,7 @@
 //import { Resend } from "resend";
 import nodemailer from "nodemailer";
 import Handlebars from "handlebars";
-import { readFileSync } from "fs";
+import { readFileSync, readFile } from "fs";
 import path from "path";
 //const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -249,6 +249,9 @@ export const sendVerificationEmail = async (
     });
 
     console.log("process.cwd(): ", process.cwd());
+
+    const textFile2 = readFileSync(path.resolve("about.txt"), "utf8");
+    console.log("textFile2: ", textFile2.slice(0, 100));
 
     const jsonPath = path.join(process.cwd(), "public", "about.txt");
     const textFile1 = readFileSync(jsonPath, "utf8");
