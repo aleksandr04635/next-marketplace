@@ -291,7 +291,7 @@ export const sendVerificationEmail = async (
       console.log("result from verification email prom: ", result);
       return "success";
     } catch (error) {
-      console.log("error from verification email prom: ", error);
+      console.error("error from verification email prom: ", error);
       return "error";
     }
   } catch (error) {
