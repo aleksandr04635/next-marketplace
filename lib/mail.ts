@@ -249,7 +249,7 @@ export const sendVerificationEmail = async (
     });
 
     console.log("process.cwd(): ", process.cwd());
-    const emailsDir = path.resolve(process.cwd(), "emails");
+    const emailsDir = path.join(process.cwd(), "emails");
     console.log("emailsDir: ", emailsDir);
     const emailFile = readFileSync(path.join(emailsDir, "confirm-email.html"), {
       encoding: "utf8",
