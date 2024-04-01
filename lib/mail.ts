@@ -255,7 +255,7 @@ export const sendVerificationEmail = async (
         encoding: "utf8",
       }
     );
-    //console.log("emailFile: ", emailFile);
+    console.log("emailFile: ", emailFile);
     const emailTemplate = Handlebars.compile(emailFile);
 
     let mailOptions = {
@@ -295,6 +295,7 @@ export const sendVerificationEmail = async (
       return "error";
     }
   } catch (error) {
+    console.error("error from verification email sending: ", error);
     return "error";
   }
 };
