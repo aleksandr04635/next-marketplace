@@ -35,7 +35,12 @@ export const {
   },
   callbacks: {
     async signIn({ user, account }) {
-      //console.log("user, account from signIn calback: ", user, account);
+      console.log(
+        "user, account from signIn calback: ",
+        new Date(),
+        user,
+        account
+      );
       // Allow OAuth without email verification
       if (account?.provider !== "credentials") return true;
 
@@ -64,7 +69,7 @@ export const {
 
     async jwt({ token }) {
       if (!token.sub) return token; //if logged out
-      //console.log("token from jwt calback: ", { token });
+      console.log("token from jwt calback: ", new Date(), { token });
       const existingUser = await getUserById(token.sub); //sub is id in DB
 
       if (!existingUser) return token;
@@ -74,6 +79,7 @@ export const {
 
       token.isOAuth = !!existingAccount; //only OAuth user have accounts in DB
       token.name = existingUser.name;
+      token.image = existingUser.image;
       token.email = existingUser.email;
       token.role = existingUser.role;
       token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled;
@@ -83,7 +89,8 @@ export const {
 
     //session is executed after JWT
     async session({ token, session }) {
-      //console.log({ sessionToken: token, session });
+      console.log("token from session callback: ", new Date(), token);
+      console.log(" session from session callback: ", new Date(), session);
       if (token.sub && session.user) {
         session.user.id = token.sub;
       }
@@ -98,6 +105,7 @@ export const {
 
       if (session.user) {
         session.user.name = token.name;
+        session.user.image = token.image as string;
         session.user.email = token.email;
         session.user.isOAuth = token.isOAuth as boolean;
       }

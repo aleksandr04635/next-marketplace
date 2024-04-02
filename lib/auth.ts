@@ -2,7 +2,7 @@ import { auth } from "@/auth";
 //for server comp
 export const currentUser = async () => {
   const session = await auth();
-
+  console.log("session from @/auth from currentUser: ", session);
   return session?.user;
 };
 

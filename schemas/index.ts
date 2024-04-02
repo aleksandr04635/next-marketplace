@@ -3,7 +3,8 @@ import { UserRole } from "@prisma/client";
 
 export const SettingsSchema = z
   .object({
-    name: z.optional(z.string()),
+    image: z.optional(z.string()),
+    name: z.optional(z.string().min(4)),
     isTwoFactorEnabled: z.optional(z.boolean()),
     role: z.enum([UserRole.ADMIN, UserRole.USER]),
     email: z.optional(z.string().email()),
@@ -19,7 +20,7 @@ export const SettingsSchema = z
       return true;
     },
     {
-      message: "New password is required!",
+      message: "To change a password enter your current one and a new one!",
       path: ["newPassword"],
     }
   )
@@ -32,7 +33,7 @@ export const SettingsSchema = z
       return true;
     },
     {
-      message: "Password is required!",
+      message: "To change a password enter your current one!",
       path: ["password"],
     }
   );

@@ -1,6 +1,6 @@
-import * as React from "react"
+import * as React from "react";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {}
@@ -11,15 +11,30 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <input
         type={type}
         className={cn(
-          "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
+          " flex h-9 w-full rounded-md border border-input dark:border-gray-500 bg-transparent px-3 py-1 text-sm shadow-sm " +
+            " transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium " +
+            " placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-teal-700 " +
+            " disabled:cursor-not-allowed disabled:opacity-50 ",
           className
         )}
         ref={ref}
         {...props}
       />
-    )
+    );
   }
-)
-Input.displayName = "Input"
+);
+Input.displayName = "Input";
 
-export { Input }
+export { Input };
+
+/* "dark-active-bg": "#151e37",
+"active-bg": "#f2faff",
+"dark-main-bg": "#10172a",
+"dark-additional-bg": "#1f2937",
+"secondary-border": "#6366F1",
+"light-additional-bg": "#ffffff",
+"main-border": "#078493",
+"layout-border": "#0a5b6b",
+"additional-text": "#374151",
+"dark-additional-text": "#E5E7EB", 
+"main-border-light":#0ac6db*/

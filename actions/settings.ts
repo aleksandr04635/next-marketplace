@@ -66,10 +66,11 @@ export const settings = async (values: z.infer<typeof SettingsSchema>) => {
       ...values,
     },
   });
-
+  console.log("updatedUser from settings:", updatedUser);
   update({
     //updates session
     user: {
+      image: updatedUser.image,
       name: updatedUser.name,
       email: updatedUser.email,
       isTwoFactorEnabled: updatedUser.isTwoFactorEnabled,

@@ -4,6 +4,7 @@ import * as z from "zod";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { BsEyeSlash, BsEye } from "react-icons/bs";
 
 import { RegisterSchema } from "@/schemas";
 import { Input } from "@/components/ui/input";
@@ -30,6 +31,8 @@ export const RegisterForm = () => {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
+
+  const [visible, setVisible] = useState(false);
 
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
@@ -104,12 +107,21 @@ export const RegisterForm = () => {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input
-                      {...field}
-                      disabled={isPending}
-                      placeholder="******"
-                      type="password"
-                    />
+                    <div className="relative">
+                      <Input
+                        {...field}
+                        disabled={isPending}
+                        placeholder="password"
+                        type={visible ? "text" : "password"}
+                        /* type="password" */
+                      />
+                      <p
+                        onClick={() => setVisible(!visible)}
+                        className="absolute right-[-20px] top-[8px] h-10 w-12 cursor-pointer border-none text-xl"
+                      >
+                        {visible ? <BsEyeSlash /> : <BsEye />}
+                      </p>
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>

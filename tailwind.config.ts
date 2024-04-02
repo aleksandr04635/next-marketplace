@@ -29,6 +29,7 @@ const config = {
         "layout-border": "#0a5b6b",
         "additional-text": "#374151",
         "dark-additional-text": "#E5E7EB",
+        "main-border-light": "#0ac6db",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

@@ -7,10 +7,13 @@ import { NewPasswordSchema } from "@/schemas";
 import { getPasswordResetTokenByToken } from "@/data/password-reset-token";
 import { getUserByEmail } from "@/data/user";
 import { db } from "@/lib/db";
+import { signIn } from "@/auth";
+import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
+import { AuthError } from "next-auth";
 
 export const newPassword = async (
-  values: z.infer<typeof NewPasswordSchema> ,
-  token?: string | null,
+  values: z.infer<typeof NewPasswordSchema>,
+  token?: string | null
 ) => {
   if (!token) {
     return { error: "Missing token!" };
@@ -37,9 +40,10 @@ export const newPassword = async (
   }
 
   const existingUser = await getUserByEmail(existingToken.email);
+  const email = existingToken.email;
 
   if (!existingUser) {
-    return { error: "Email does not exist!" }
+    return { error: "Email does not exist!" };
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -50,8 +54,30 @@ export const newPassword = async (
   });
 
   await db.passwordResetToken.delete({
-    where: { id: existingToken.id }
+    where: { id: existingToken.id },
   });
 
-  return { success: "Password updated!" };
+  // return { success: "Password updated!" };
+  //MY
+  try {
+    await signIn("credentials", {
+      email,
+      password,
+      redirectTo: DEFAULT_LOGIN_REDIRECT,
+    });
+  } catch (error) {
+    console.error(error);
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case "CredentialsSignin":
+          return { error: "Invalid credentials!" };
+        default:
+          return { error: "Something went wrong!" };
+      }
+    }
+
+    throw error; //it's somehow really necessary
+  } finally {
+    return { success: "Password updated!" };
+  }
 };

@@ -34,7 +34,6 @@ import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { UserRole } from "@prisma/client";
 import MyButton from "@/components/my-button";
-import FrontImageUpload from "./_components/front-image-upload";
 
 const SettingsPage = () => {
   const user = useCurrentUser();
@@ -51,7 +50,6 @@ const SettingsPage = () => {
     defaultValues: {
       password: undefined,
       newPassword: undefined,
-      image: user?.image || undefined,
       name: user?.name || undefined,
       email: user?.email || undefined,
       role: user?.role || undefined,
@@ -64,13 +62,11 @@ const SettingsPage = () => {
       settings(values)
         .then((data) => {
           if (data.error) {
-            setSuccess(undefined);
             setError(data.error);
           }
 
           if (data.success) {
             update(); //updates the session on the client side. update from the server side doesn't work immediately
-            setError(undefined);
             setSuccess(data.success);
           }
         })
@@ -87,26 +83,24 @@ const SettingsPage = () => {
         <Form {...form}>
           <form className="space-y-5" onSubmit={form.handleSubmit(onSubmit)}>
             <div className="space-y-3">
-              <FormField
+              {/* <FormField
                 control={form.control}
-                name="image"
+                name="imageUrl"
                 render={({ field }) => (
                   <FormItem>
-                    <div className="flex flex-col  items-center space-y-2 ">
-                      <FormLabel>Front image of your store</FormLabel>
-                      <FormControl>
-                        <FrontImageUpload
-                          value={field.value ? field.value : ""}
-                          disabled={isPending}
-                          onChange={(url) => field.onChange(url)}
-                          onRemove={() => field.onChange("")}
-                        />
-                      </FormControl>
-                    </div>
+                    <FormLabel>Background image</FormLabel>
+                    <FormControl>
+                      <ImageUpload
+                        value={field.value ? [field.value] : []}
+                        disabled={isPending}
+                        onChange={(url) => field.onChange(url)}
+                        onRemove={() => field.onChange("")}
+                      />
+                    </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
-              />
+              /> */}
               <FormField
                 control={form.control}
                 name="name"
