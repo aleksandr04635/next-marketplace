@@ -41,7 +41,7 @@ export const UserButton = () => {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <Link href="/settings">
+        <Link href="/admin/settings">
           <DropdownMenuItem className="cursor-pointer">
             <GearIcon className="h-4 w-4 mr-2" />
             Settings

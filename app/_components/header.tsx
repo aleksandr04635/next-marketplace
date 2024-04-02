@@ -9,6 +9,7 @@ import ThemeSwitch from "./theme-switch";
 import MyButton from "@/components/my-button";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import SignInButton from "./sign-in-button";
+import SearchFormForHeader from "./search";
 
 export const Header = () => {
   const pathname = usePathname();
@@ -31,29 +32,7 @@ export const Header = () => {
       >
         About this project
       </Link>
-      <div className="flex gap-x-2">
-        <Button
-          asChild
-          variant={pathname === "/server" ? "default" : "outline"}
-        >
-          <Link href="/server">Server</Link>
-        </Button>
-        <Button
-          asChild
-          variant={pathname === "/client" ? "default" : "outline"}
-        >
-          <Link href="/client">Client</Link>
-        </Button>
-        <Button asChild variant={pathname === "/admin" ? "default" : "outline"}>
-          <Link href="/admin">Admin</Link>
-        </Button>
-        <Button
-          asChild
-          variant={pathname === "/settings" ? "default" : "outline"}
-        >
-          <Link href="/settings">Settings</Link>
-        </Button>
-      </div>
+      <SearchFormForHeader type="wide-scr" />
       <ThemeSwitch />
       {user ? <UserButton /> : <SignInButton />}
     </nav>

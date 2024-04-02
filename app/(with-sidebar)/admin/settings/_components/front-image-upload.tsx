@@ -50,7 +50,7 @@ const FrontImageUpload: React.FC<ImageUploadProps> = ({
           return (
             <div
               onClick={onClick}
-              className="cursor-pointer relative w-[200px] h-[200px] rounded-full overflow-hidden"
+              className="cursor-pointer relative w-[100px] h-[100px] rounded-full overflow-hidden"
             >
               <Image fill className="object-cover" alt="Image" src={value} />
             </div>

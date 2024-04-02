@@ -42,7 +42,7 @@ export const settings = async (values: z.infer<typeof SettingsSchema>) => {
     await sendVerificationEmail(
       verificationToken.email,
       verificationToken.token,
-      "/settings"
+      "/admin/settings"
     );
     return { success: "Verification email sent!" };
   }

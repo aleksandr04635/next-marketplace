@@ -69,7 +69,7 @@ export const {
 
     async jwt({ token }) {
       if (!token.sub) return token; //if logged out
-      console.log("token from jwt calback: ", new Date(), { token });
+      //console.log("token from jwt calback: ", new Date(), { token });
       const existingUser = await getUserById(token.sub); //sub is id in DB
 
       if (!existingUser) return token;
@@ -89,8 +89,8 @@ export const {
 
     //session is executed after JWT
     async session({ token, session }) {
-      console.log("token from session callback: ", new Date(), token);
-      console.log(" session from session callback: ", new Date(), session);
+      //console.log("token from session callback: ", new Date(), token);
+      //console.log(" session from session callback: ", new Date(), session);
       if (token.sub && session.user) {
         session.user.id = token.sub;
       }

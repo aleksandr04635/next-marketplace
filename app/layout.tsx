@@ -23,7 +23,7 @@ export default async function RootLayout({
 }) {
   const session = await auth();
 
-  //h-fit justify-stretch from-sky-200 to-blue-600
+  //h-fit justify-stretch from-sky-200 to-blue-600 gap-y-3 items-center
   //className="w-screen overflow-x-hidden "
   return (
     <SessionProvider session={session}>
@@ -34,12 +34,12 @@ export default async function RootLayout({
               <Toaster />
 
               <div
-                className="  relative w-full flex flex-col gap-y-3 items-center    min-h-screen bg-white
+                className="  relative w-full flex flex-col    min-h-screen bg-white
      bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))]
       dark:from-[#065179] dark:to-[#0e1425]"
               >
                 <Header />
-                <div className=" mb-20">{children}</div>
+                <div className=" mb-16">{children}</div>
                 <Footer />
               </div>
             </ThemeProvider>
