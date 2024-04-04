@@ -5,6 +5,7 @@ export const SettingsSchema = z
   .object({
     image: z.optional(z.string()),
     name: z.optional(z.string().min(4)),
+    storeName: z.optional(z.string().min(6)),
     isTwoFactorEnabled: z.optional(z.boolean()),
     role: z.enum([UserRole.ADMIN, UserRole.USER]),
     email: z.optional(z.string().email()),

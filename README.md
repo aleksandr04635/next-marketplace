@@ -1,4 +1,4 @@
-# Next Auth v5 - Advanced Guide (2024)
+<!-- # Next Auth v5 - Advanced Guide (2024)
 
 ![image](https://github.com/AntonioErdeljac/next-auth-v5-advanced-guide/assets/23248726/d0175397-8c3f-4e82-91c4-78c14f29bb81)
 
@@ -95,3 +95,4 @@ Running commands with npm `npm run [command]`
 | command         | description                              |
 | :-------------- | :--------------------------------------- |
 | `dev`           | Starts a development instance of the app |
+ -->

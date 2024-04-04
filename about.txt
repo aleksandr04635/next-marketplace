@@ -1,3 +1,5 @@
+My main marketplace
+Based on
 https://www.youtube.com/watch?v=1MTyCvS05V4
 https://github.com/AntonioErdeljac/next-auth-v5-advanced-guide
 https://www.codewithantonio.com/projects/auth-masterclass
@@ -8,11 +10,9 @@ shadcn-ui
 next-auth-v5 = auth.js
 postgres string from neon.tech db
 
-email sending with https://resend.com/
-it can work in production only with bought domain
 
-deployed to https://next14-auth-kappa.vercel.app
-https://github.com/aleksandr04635/next14-auth
+deployed to https://oleksandrs-next-marketplace.vercel.app/
+https://github.com/aleksandr04635/next-marketplace
 
 Google OAuth is here
 https://console.cloud.google.com/apis/credentials?authuser=0&project=nextjs-ecommerce-402904

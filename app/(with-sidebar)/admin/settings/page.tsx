@@ -53,6 +53,7 @@ const SettingsPage = () => {
       newPassword: undefined,
       image: user?.image || undefined,
       name: user?.name || undefined,
+      storeName: user?.storeName || undefined,
       email: user?.email || undefined,
       role: user?.role || undefined,
       isTwoFactorEnabled: user?.isTwoFactorEnabled || undefined,
@@ -79,7 +80,7 @@ const SettingsPage = () => {
   };
 
   return (
-    <Card className=" w-full max-w-[600px] md:w-[600px] ">
+    <Card className=" w-full mx-auto max-w-[600px] md:w-[600px] ">
       <CardHeader>
         <p className="text-2xl font-semibold text-center py-0">⚙️ Settings</p>
       </CardHeader>
@@ -112,11 +113,28 @@ const SettingsPage = () => {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Name</FormLabel>
+                    <FormLabel>Your name</FormLabel>
                     <FormControl>
                       <Input
                         {...field}
                         placeholder="John Doe"
+                        disabled={isPending}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="storeName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Name of your store</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        placeholder="Amazon"
                         disabled={isPending}
                       />
                     </FormControl>

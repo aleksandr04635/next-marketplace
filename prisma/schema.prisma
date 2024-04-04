@@ -25,6 +25,7 @@ enum UserRole {
 model User {
   id                    String                 @id @default(cuid())
   name                  String?
+  storeName             String?
   email                 String?                @unique
   emailVerified         DateTime?
   image                 String?                @default("https://res.cloudinary.com/dqwdfhxgl/image/upload/v1712025676/contacts/mtgn8ph1cyvu5hebxf1x.jpg")
@@ -33,6 +34,7 @@ model User {
   accounts              Account[]
   isTwoFactorEnabled    Boolean                @default(false)
   twoFactorConfirmation TwoFactorConfirmation?
+  categories            Category[]
 }
 
 model Account {
@@ -88,4 +90,43 @@ model TwoFactorConfirmation {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId])
+}
+
+model Category {
+  id         String     @id @default(uuid())
+  userId     String
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name       String
+  slug       String
+  properties Property[]
+  //products    Product[] @relation("CategoryToProduct")
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+
+  @@index([userId])
+}
+
+model Property {
+  id         String   @id @default(uuid())
+  categoryId String // Foreign Key to Product
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  name       String
+  slug       String
+  values     Value[]
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([categoryId])
+}
+
+model Value {
+  id         String   @id @default(uuid())
+  propertyId String // Foreign Key to Product
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  name       String
+  slug       String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([propertyId])
 }

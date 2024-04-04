@@ -11,7 +11,7 @@ export const Sidebar = () => {
   return (
     <nav
       className="hidden lg:block  grow-0 shrink-0   p-3
-  lg:min-h-[calc(100vh_-_128px)] lg:w-[300px] shadow-sm 
+  min-h-[calc(100vh_-_128px)] lg:w-[300px] shadow-sm 
   border-r border-layout-border bg-white dark:bg-dark-additional-bg/40"
     >
       <SideContent />

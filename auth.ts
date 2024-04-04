@@ -23,24 +23,28 @@ export const {
   events: {
     //async linkAccount({ user }) {
     async linkAccount(params) {
-      console.log("params from linkAccount: ", params);
       //on creation of OAuth accout add emailVerified
-      //ADD HERE IMAGE
+      console.log("params from linkAccount: ", params);
+
+      //ADD HERE STORE NAME
       await db.user.update({
         //where: { id: user.id },
         where: { id: params.user.id },
-        data: { emailVerified: new Date() },
+        data: {
+          emailVerified: new Date(),
+          storeName: params.user.name + "'s store",
+        },
       });
     },
   },
   callbacks: {
     async signIn({ user, account }) {
-      console.log(
+      /*  console.log(
         "user, account from signIn calback: ",
         new Date(),
         user,
         account
-      );
+      ); */
       // Allow OAuth without email verification
       if (account?.provider !== "credentials") return true;
 
@@ -79,6 +83,7 @@ export const {
 
       token.isOAuth = !!existingAccount; //only OAuth user have accounts in DB
       token.name = existingUser.name;
+      token.storeName = existingUser.storeName;
       token.image = existingUser.image;
       token.email = existingUser.email;
       token.role = existingUser.role;
@@ -105,6 +110,7 @@ export const {
 
       if (session.user) {
         session.user.name = token.name;
+        session.user.storeName = token.storeName as string;
         session.user.image = token.image as string;
         session.user.email = token.email;
         session.user.isOAuth = token.isOAuth as boolean;

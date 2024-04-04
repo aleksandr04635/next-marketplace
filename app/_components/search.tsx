@@ -87,7 +87,12 @@ const SearchFormForHeader = ({ type }: Props) => {
       <form /* it's just a native form element */
         //onSubmit={form.handleSubmit(handleSubmit)}
         onSubmit={handleSubmit}
-        className="space-y-6"
+        className={
+          "w-full   md:w-[300px] " +
+          (type == "wide-scr"
+            ? "relative hidden  md:inline "
+            : "relative mx-auto mt-1   md:hidden")
+        }
       >
         <div className="space-y-4">
           <FormField
@@ -99,11 +104,11 @@ const SearchFormForHeader = ({ type }: Props) => {
                   <div className="relative">
                     <Input
                       {...field}
-                      placeholder="password"
+                      placeholder="Search"
                       type="text"
-                      onChange={(val) => {
-                        setSearchTerm(val.target.value);
-                        field.onChange(val);
+                      onChange={(ev) => {
+                        setSearchTerm(ev.target.value);
+                        field.onChange(ev);
                       }}
                     />
                     {/* <p className="absolute right-[-20px] top-[8px] h-10 w-12 cursor-pointer border-none text-xl">

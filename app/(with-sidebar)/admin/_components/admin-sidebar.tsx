@@ -37,6 +37,12 @@ export const AdminSidebar = () => {
         >
           <Link href="/admin/settings">Settings</Link>
         </Button>
+        <Button
+          asChild
+          variant={pathname === "/admin/categories" ? "default" : "outline"}
+        >
+          <Link href="/admin/categories">Categories</Link>
+        </Button>
       </div>
     </div>
   );

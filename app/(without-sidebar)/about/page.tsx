@@ -88,7 +88,7 @@ function page({}: Props) {
 
           <Link
             className="link-stand"
-            href={`https://github.com/aleksandr04635/mern-blog-3`}
+            href={`https://github.com/aleksandr04635/next-marketplace`}
           >
             You can see the code here
           </Link>

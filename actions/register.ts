@@ -29,9 +29,11 @@ export const register = async (
   }
 
   await db.user.create({
+    //ADD HERE STORE NAME
     data: {
       name,
       email,
+      storeName: name + "'s store",
       password: hashedPassword,
     },
   });

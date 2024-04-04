@@ -39,7 +39,7 @@ export default async function RootLayout({
       dark:from-[#065179] dark:to-[#0e1425]"
               >
                 <Header />
-                <div className=" mb-16">{children}</div>
+                <div className=" mb-[63px] ">{children}</div>
                 <Footer />
               </div>
             </ThemeProvider>
