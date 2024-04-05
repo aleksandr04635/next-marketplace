@@ -8,6 +8,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { Header } from "./_components/header";
 import { Footer } from "./_components/footer";
 import { ThemeProvider } from "./_components/theme-provider";
+import { ToastProvider } from "./_components/toast-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,7 +33,7 @@ export default async function RootLayout({
           <div className={` ${inter.className}`}>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
               <Toaster />
-
+              <ToastProvider />
               <div
                 className="  relative w-full flex flex-col    min-h-screen bg-white
      bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))]

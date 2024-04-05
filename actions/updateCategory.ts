@@ -11,7 +11,7 @@ import { currentUser } from "@/lib/auth";
 import { generateVerificationToken } from "@/lib/tokens";
 import { sendVerificationEmail } from "@/lib/mail";
 
-interface Value {
+/* interface Value {
   name: string;
   slug: string;
 }
@@ -24,9 +24,35 @@ interface Category {
   name: string;
   slug: string;
   properties: Property[];
+} */
+interface Value {
+  id?: string;
+  propertyId?: string;
+  name: string;
+  slug: string;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
-export const createCategory = async (category: Category) => {
-  console.log("category from createCategory: ", category);
+interface Property {
+  id?: string;
+  categoryId?: string;
+  name: string;
+  slug: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+  values: Value[];
+}
+interface Category {
+  id?: string;
+  userId?: string;
+  name: string;
+  slug: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+  properties: Property[];
+}
+export const updateCategory = async (category: Category) => {
+  console.log("category from updateCategory: ", category);
   const user = await currentUser();
 
   if (!user) {
@@ -38,7 +64,47 @@ export const createCategory = async (category: Category) => {
   if (!dbUser) {
     return { error: "Unauthorized" };
   }
-  const categoryCr = await db.category.create({
+  if (category.userId != user.id) {
+    return { error: "You are not the creator of the category" };
+  }
+  await await db.category.update({
+    where: {
+      id: category.id,
+    },
+    data: {
+      name: category.name,
+      slug: category.slug,
+      properties: {
+        deleteMany: {},
+      },
+    },
+  });
+
+  const categoryCr = await db.category.update({
+    where: {
+      id: category.id,
+    },
+    data: {
+      properties: {
+        create: category.properties.map((property: Property) => {
+          return {
+            name: property.name,
+            slug: property.slug,
+            values: {
+              create: property.values.map((value: Value) => {
+                return { name: value.name, slug: value.slug };
+              }),
+            },
+          };
+        }),
+      },
+    },
+    include: {
+      properties: { include: { values: true } },
+    },
+  });
+  console.log("categoryCr from func: ", categoryCr);
+  /*   const categoryCr = await db.category.create({
     data: {
       name: category.name,
       slug: category.slug,
@@ -60,8 +126,8 @@ export const createCategory = async (category: Category) => {
     include: {
       properties: { include: { values: true } },
     },
-  });
-
+  }); 
+  */
   /*   const categoryCr = await db.category.create({
     data: {
       name: category.name,
@@ -91,7 +157,7 @@ export const createCategory = async (category: Category) => {
       },
     },
   }); */
-  console.log("categoryCr from func: ", categoryCr);
+
   /*   const product = await prismadb.product.create({
     data: {
       name,
@@ -166,5 +232,5 @@ export const createCategory = async (category: Category) => {
     },
   }); */
   //return { error: "Test err" };
-  return { success: "Category created" };
+  return { success: "Category updated" };
 };

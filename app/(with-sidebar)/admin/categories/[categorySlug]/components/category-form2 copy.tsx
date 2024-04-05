@@ -2,7 +2,7 @@
 
 import * as z from "zod";
 //import axios from "axios";
-import { useEffect, useState, useTransition } from "react";
+import { useState, useTransition } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 //import { toast } from "react-hot-toast";
@@ -25,8 +25,6 @@ import { Label } from "@/components/ui/label";
 import MyButton from "@/components/my-button";
 import { createCategory } from "@/actions/createCategory";
 import { FormError } from "@/components/form-error";
-import { Category as CategoryDB } from "@prisma/client";
-import { updateCategory } from "@/actions/updateCategory";
 //import { Category } from "@prisma/client";
 
 /* const formSchema = z.object({
@@ -39,85 +37,25 @@ type BillboardFormValues = z.infer<typeof formSchema>;
 interface BillboardFormProps {
   initialData: Category | null;
 } */
-/*interface Value {
-  name: string;
-  slug: string;
-}
-interface Property {
-  name: string;
-  slug: string;
-  values: Value[];
-}
- interface Category {
-  name: string;
-  slug: string;
-  properties: Property[];
-} */
-/* interface Category extends CategoryDB {
-  properties: Property[];
-} */
 interface Value {
-  id?: string;
-  propertyId?: string;
   name: string;
   slug: string;
-  createdAt?: Date;
-  updatedAt?: Date;
 }
 interface Property {
-  id?: string;
-  categoryId?: string;
   name: string;
   slug: string;
-  createdAt?: Date;
-  updatedAt?: Date;
   values: Value[];
 }
 interface Category {
-  id?: string;
-  userId?: string;
   name: string;
   slug: string;
-  createdAt?: Date;
-  updatedAt?: Date;
   properties: Property[];
 }
-/* type Category = {
-  id: string;
-  userId: string;
-  name: string;
-  slug: string;
-  createdAt: Date;
-  updatedAt: Date;
-  properties: {
-    values: {
-      id: string;
-      propertyId: string;
-      name: string;
-      slug: string;
-      createdAt: Date;
-      updatedAt: Date;
-    }[];
-
-    id: string;
-    categoryId: string;
-    name: string;
-    slug: string;
-    createdAt: Date;
-    updatedAt: Date;
-  }[];
-}; */
 interface CategoryFormProps {
   initialData: Category | null;
 }
-export const CategoryForm2: React.FC<CategoryFormProps> = ({
-  initialData,
-}: {
-  initialData: Category | null;
-}) => {
+export const CategoryForm2: React.FC<CategoryFormProps> = ({ initialData }) => {
   /* export const CategoryForm2 = ({}) => { */
-  console.log("initialData: ", initialData);
-
   const params = useParams();
   //params.categorySlug
   const router = useRouter();
@@ -128,21 +66,11 @@ export const CategoryForm2: React.FC<CategoryFormProps> = ({
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [category, setCategory] = useState<Category>({
-    //const [category, setCategory] = useState({
     name: "",
     slug: "",
     properties: [],
   });
   console.log("category: ", category);
-  useEffect(() => {
-    if (initialData) {
-      setCategory(initialData);
-    }
-  }, []);
-  useEffect(() => {
-    setError(undefined);
-  }, [category]);
-
   const [property, setProperty] = useState("");
   //console.log("property: ", property);
   const inArr = [];
@@ -151,7 +79,6 @@ export const CategoryForm2: React.FC<CategoryFormProps> = ({
   }
   //console.log("inArr: ", inArr);
   const [newValues, setNewValues] = useState<Value[]>(inArr);
-  //const [newValues, setNewValues] = useState(inArr);
   //console.log("newValues: ", newValues);
 
   /*  const title = initialData ? "Edit billboard" : "Create billboard";
@@ -237,9 +164,7 @@ export const CategoryForm2: React.FC<CategoryFormProps> = ({
 
   const Send = () => {
     startTransition(() => {
-      const Func = initialData ? updateCategory : createCategory;
-      //createCategory(category)
-      Func(category)
+      createCategory(category)
         .then((data) => {
           if (data.error) {
             setError(data.error);
@@ -395,7 +320,6 @@ export const CategoryForm2: React.FC<CategoryFormProps> = ({
             properties: [
               ...category.properties,
               { name: property, slug: slugFromString(property), values: [] },
-              /*  { name: property, slug: slugFromString(property) }, */
             ],
           });
           setProperty("");
@@ -409,7 +333,7 @@ export const CategoryForm2: React.FC<CategoryFormProps> = ({
         //disabled={prohibitedToCreatePropertyFromString()}
         onClick={Send}
       >
-        {initialData ? "Update a category" : "Create a category"}
+        Create a category
       </MyButton>
 
       {/* <AlertModal

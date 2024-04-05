@@ -7,37 +7,36 @@ import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/data-table";
 import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
-import { ApiList } from "@/components/ui/api-list";
 
-import { columns, BillboardColumn } from "./columns";
+import { columns, CategoryColumn } from "./columns";
+import MyButton from "@/components/my-button";
 
-interface BillboardClientProps {
-  data: BillboardColumn[];
+interface CategoryClientProps {
+  data: CategoryColumn[];
 }
 
-export const BillboardClient: React.FC<BillboardClientProps> = ({ data }) => {
+export const CategoryClient: React.FC<CategoryClientProps> = ({ data }) => {
   const params = useParams();
   const router = useRouter();
 
   return (
     <>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between my-2">
         <Heading
-          title={`Billboards (${data.length})`}
-          description="Manage billboards for your store"
+          title={`${data.length} Categories exist`}
+          /* description="The list of all categories" */
+          description=""
         />
-        <Button
-          onClick={() => router.push(`/${params.storeId}/billboards/new`)}
-        >
-          {/*Button sends to [billboardId] with billboardId==new*/}
-          <Plus className="mr-2 h-4 w-4" /> Add New
-        </Button>
+        <MyButton onClick={() => router.push(`/admin/categories/new`)}>
+          <Plus className="mr-2 h-4 w-4" /> New category
+        </MyButton>
+        {/*  <Button onClick={() => router.push(`/${params.storeId}/categorys/new`)}>
+          Button sends to [categoryId] with categoryId==new
+          <Plus className="mr-2 h-4 w-4" /> New category
+        </Button> */}
       </div>
       <Separator />
       <DataTable searchKey="label" columns={columns} data={data} />
-      <Heading title="API" description="API Calls for Billboards" />
-      <Separator />
-      <ApiList entityName="billboards" entityIdName="billboardId" />
     </>
   );
 };

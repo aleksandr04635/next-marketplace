@@ -14,6 +14,7 @@ export default function ThemeSwitch() {
   useEffect(() => {
     const mq = window.matchMedia("(prefers-color-scheme: dark)");
     if (mq.matches) {
+      console.log("from if (mq.matches): ");
       //dispatch(toggleTheme("dark"));
       setTheme("dark");
     }
@@ -21,14 +22,14 @@ export default function ThemeSwitch() {
     // This callback will fire if the perferred color scheme changes without a reload
     // mq.addEventListener("change", (evt) => setIsDark(evt.matches));
     mq.addEventListener("change", (evt) => {
-      //console.log("change from addEventListener: ");
+      console.log("change from addEventListener: ");
       //dispatch(toggleTheme(evt.matches ? "dark" : "light"));
       setTheme(evt.matches ? "dark" : "light");
     });
   }, []);
 
   if (!mounted) {
-    //console.log("mounted and return: ");
+    console.log("mounted and return: ");
     return <div className=" h-[40px] w-[40px]"></div>;
   }
   /*   useEffect(console.log("resolvedTheme: ", resolvedTheme), [resolvedTheme]); */
@@ -50,7 +51,7 @@ export default function ThemeSwitch() {
       </>
     );
   } */
-  //console.log("resolvedTheme from outside: ", resolvedTheme);
+  console.log("resolvedTheme from outside: ", resolvedTheme);
   return (
     <button
       className="   flex h-[40px] w-[40px]   items-center   justify-center rounded-full
@@ -59,7 +60,7 @@ export default function ThemeSwitch() {
       onClick={() =>
         /*  dispatch(toggleTheme(resolvedTheme === "light" ? "dark" : "light")) */
         {
-          //console.log("resolvedTheme from onClick: ", resolvedTheme);
+          console.log("resolvedTheme from onClick: ", resolvedTheme);
           setTheme(resolvedTheme === "light" ? "dark" : "light");
         }
       }
