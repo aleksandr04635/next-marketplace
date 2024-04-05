@@ -4,6 +4,8 @@ interface ProtectedLayoutProps {
   children: React.ReactNode;
 }
 
+//export const dynamic = "force-dynamic"; //tells next to not cache ay pages in the layout
+
 //h-fit xl:min-h-[calc(100vh_-_130px)] xl:min-h-fit bg-red-500
 const ProtectedLayout = ({ children }: ProtectedLayoutProps) => {
   return (

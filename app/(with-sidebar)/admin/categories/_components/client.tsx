@@ -21,7 +21,7 @@ export const CategoryClient: React.FC<CategoryClientProps> = ({ data }) => {
 
   return (
     <>
-      <div className="flex items-center justify-between my-2">
+      <div className="flex items-center justify-between mt-3 mb-2">
         <Heading
           title={`${data.length} Categories exist`}
           /* description="The list of all categories" */
@@ -36,7 +36,7 @@ export const CategoryClient: React.FC<CategoryClientProps> = ({ data }) => {
         </Button> */}
       </div>
       <Separator />
-      <DataTable searchKey="label" columns={columns} data={data} />
+      <DataTable searchKey="name" columns={columns} data={data} />
     </>
   );
 };

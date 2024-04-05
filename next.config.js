@@ -7,6 +7,7 @@ const nextConfig = {
       "t3.ftcdn.net",
       "lh3.googleusercontent.com",
       "avatars.githubusercontent.com",
+      "lh3.googleusercontent.com",
     ],
   },
 };

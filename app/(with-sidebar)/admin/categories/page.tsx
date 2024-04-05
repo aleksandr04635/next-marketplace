@@ -1,12 +1,13 @@
 import { format } from "date-fns";
 
 import { db } from "@/lib/db";
-import { CategoryForm2 } from "./[categorySlug]/components/category-form2";
+import { CategoryForm } from "./[categoryId]/_components/category-form";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
-import { CategoryColumn } from "./components/columns";
-import { CategoryClient } from "./components/client";
+import { CategoryColumn } from "./_components/columns";
+import { CategoryClient } from "./_components/client";
 
+export const revalidate = 0;
 const CategoryPage = async () => {
   const categories = await db.category.findMany({
     include: {
@@ -21,11 +22,19 @@ const CategoryPage = async () => {
   const formattedCategories: CategoryColumn[] = categories.map((item) => ({
     id: item.id,
     name: item.name,
+    content: item.properties.map((pr) => {
+      return {
+        prName: pr.name,
+        prVal: pr.values.map((val) => val.name).join(","),
+      };
+    }),
+    userId: item.userId,
     createdAt: format(item.createdAt, "MMMM do, yyyy"),
   }));
 
+  // max-w-[600px]
   return (
-    <Card className=" w-full mx-auto max-w-[600px] md:w-[600px] ">
+    <Card className=" w-full mx-auto lg:max-w-[900px] ">
       {/*  <CardHeader>
         <p className="text-2xl font-semibold text-center py-0">
           {`${categories?.length}`} Categories exist

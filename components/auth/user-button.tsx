@@ -18,7 +18,7 @@ import Link from "next/link";
 
 export const UserButton = () => {
   const user = useCurrentUser();
-
+  //console.log("user: ", user.image);
   //w-48
   return (
     <DropdownMenu>

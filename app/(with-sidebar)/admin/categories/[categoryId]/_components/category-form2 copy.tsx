@@ -57,7 +57,7 @@ interface CategoryFormProps {
 export const CategoryForm2: React.FC<CategoryFormProps> = ({ initialData }) => {
   /* export const CategoryForm2 = ({}) => { */
   const params = useParams();
-  //params.categorySlug
+  //params.categoryId
   const router = useRouter();
 
   const [isPending, startTransition] = useTransition();

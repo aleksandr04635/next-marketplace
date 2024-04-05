@@ -51,7 +51,7 @@ export default function ThemeSwitch() {
       </>
     );
   } */
-  console.log("resolvedTheme from outside: ", resolvedTheme);
+  //console.log("resolvedTheme from outside: ", resolvedTheme);
   return (
     <button
       className="   flex h-[40px] w-[40px]   items-center   justify-center rounded-full

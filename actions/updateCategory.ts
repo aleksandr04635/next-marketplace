@@ -10,6 +10,7 @@ import { getUserByEmail, getUserById } from "@/data/user";
 import { currentUser } from "@/lib/auth";
 import { generateVerificationToken } from "@/lib/tokens";
 import { sendVerificationEmail } from "@/lib/mail";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 /* interface Value {
   name: string;
@@ -52,59 +53,60 @@ interface Category {
   properties: Property[];
 }
 export const updateCategory = async (category: Category) => {
-  console.log("category from updateCategory: ", category);
-  const user = await currentUser();
+  //console.log("category entered into from updateCategory: ", category);
+  try {
+    const user = await currentUser();
 
-  if (!user) {
-    return { error: "Unauthorized" };
-  }
+    if (!user) {
+      return { error: "Unauthorized" };
+    }
 
-  const dbUser = await getUserById(user.id);
+    const dbUser = await getUserById(user.id);
 
-  if (!dbUser) {
-    return { error: "Unauthorized" };
-  }
-  if (category.userId != user.id) {
-    return { error: "You are not the creator of the category" };
-  }
-  await await db.category.update({
-    where: {
-      id: category.id,
-    },
-    data: {
-      name: category.name,
-      slug: category.slug,
-      properties: {
-        deleteMany: {},
+    if (!dbUser) {
+      return { error: "Unauthorized" };
+    }
+    if (category.userId != user.id && user.role != "ADMIN") {
+      return { error: "You are not the creator of the category" };
+    }
+    await db.category.update({
+      where: {
+        id: category.id,
       },
-    },
-  });
-
-  const categoryCr = await db.category.update({
-    where: {
-      id: category.id,
-    },
-    data: {
-      properties: {
-        create: category.properties.map((property: Property) => {
-          return {
-            name: property.name,
-            slug: property.slug,
-            values: {
-              create: property.values.map((value: Value) => {
-                return { name: value.name, slug: value.slug };
-              }),
-            },
-          };
-        }),
+      data: {
+        name: category.name,
+        slug: category.slug,
+        properties: {
+          deleteMany: {},
+        },
       },
-    },
-    include: {
-      properties: { include: { values: true } },
-    },
-  });
-  console.log("categoryCr from func: ", categoryCr);
-  /*   const categoryCr = await db.category.create({
+    });
+
+    const categoryCr = await db.category.update({
+      where: {
+        id: category.id,
+      },
+      data: {
+        properties: {
+          create: category.properties.map((property: Property) => {
+            return {
+              name: property.name,
+              slug: property.slug,
+              values: {
+                create: property.values.map((value: Value) => {
+                  return { name: value.name, slug: value.slug };
+                }),
+              },
+            };
+          }),
+        },
+      },
+      include: {
+        properties: { include: { values: true } },
+      },
+    });
+    console.log("category exiting from updateCategory:: ", categoryCr);
+    /*   const categoryCr = await db.category.create({
     data: {
       name: category.name,
       slug: category.slug,
@@ -128,7 +130,7 @@ export const updateCategory = async (category: Category) => {
     },
   }); 
   */
-  /*   const categoryCr = await db.category.create({
+    /*   const categoryCr = await db.category.create({
     data: {
       name: category.name,
       slug: category.slug,
@@ -157,80 +159,17 @@ export const updateCategory = async (category: Category) => {
       },
     },
   }); */
-
-  /*   const product = await prismadb.product.create({
-    data: {
-      name,
-      price,
-      isFeatured,
-      isArchived,
-      categoryId,
-      colorId,
-      sizeId,
-      storeId: params.storeId,
-      images: {
-        createMany: {
-          data: [
-            ...images.map((image: { url: string }) => image), //it's just to fix Typescript error
-          ],
-        },
-      },
-    },
-  });
-
-  if (user.isOAuth) {
-    //if auth via OAuth not update these fields
-    values.email = undefined;
-    values.password = undefined;
-    values.newPassword = undefined;
-    values.isTwoFactorEnabled = undefined;
+    revalidatePath("/admin/category/" + category.id!); //IT SOLVED THE PROBLEM
+    /* revalidatePath(category.id!);
+    import { revalidatePath } from "next/cache";
+    revalidateTag(category.id!);
+    revalidateTag("/admin/category"); */
+    //return { error: "Test err" };
+    //return { success: "Category updated" };
+    return { success: categoryCr.id };
+  } catch (error) {
+    //console.log("error", error);
+    console.error(error);
+    return { error: "Some error" };
   }
-
-  if (values.email && values.email !== user.email) {
-    //if an email is changed
-    const existingUser = await getUserByEmail(values.email);
-    if (existingUser && existingUser.id !== user.id) {
-      return { error: "Email already in use!" };
-    }
-    const verificationToken = await generateVerificationToken(values.email);
-    await sendVerificationEmail(
-      verificationToken.email,
-      verificationToken.token,
-      "/admin/settings"
-    );
-    return { success: "Verification email sent!" };
-  }
-
-  if (values.password && values.newPassword && dbUser.password) {
-    const passwordsMatch = await bcrypt.compare(
-      values.password,
-      dbUser.password
-    );
-    if (!passwordsMatch) {
-      return { error: "Incorrect password!" };
-    }
-    const hashedPassword = await bcrypt.hash(values.newPassword, 10);
-    values.password = hashedPassword;
-    values.newPassword = undefined;
-  }
-
-  const updatedUser = await db.user.update({
-    where: { id: dbUser.id },
-    data: {
-      ...values,
-    },
-  });
-  console.log("updatedUser from settings:", updatedUser);
-  update({
-    //updates session
-    user: {
-      image: updatedUser.image,
-      name: updatedUser.name,
-      email: updatedUser.email,
-      isTwoFactorEnabled: updatedUser.isTwoFactorEnabled,
-      role: updatedUser.role,
-    },
-  }); */
-  //return { error: "Test err" };
-  return { success: "Category updated" };
 };

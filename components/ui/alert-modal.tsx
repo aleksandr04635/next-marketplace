@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 import { Modal } from "@/components/ui/modal";
 import { Button } from "@/components/ui/button";
+import MyButton from "../my-button";
 
 interface AlertModalProps {
   isOpen: boolean;
@@ -16,7 +17,7 @@ export const AlertModal: React.FC<AlertModalProps> = ({
   isOpen,
   onClose,
   onConfirm,
-  loading
+  loading,
 }) => {
   const [isMounted, setIsMounted] = useState(false);
 
@@ -36,10 +37,21 @@ export const AlertModal: React.FC<AlertModalProps> = ({
       onClose={onClose}
     >
       <div className="pt-6 space-x-2 flex items-center justify-end w-full">
-        <Button disabled={loading} variant="outline" onClick={onClose}>
+        <MyButton className=" " disabled={loading} onClick={onClose}>
+          Cancel
+        </MyButton>
+        <MyButton
+          className=""
+          disabled={loading}
+          style="danger"
+          onClick={onConfirm}
+        >
+          Continue
+        </MyButton>
+        {/*  <Button disabled={loading} variant="outline" onClick={onClose}>
           Cancel
         </Button>
-        <Button disabled={loading} variant="destructive" onClick={onConfirm}>Continue</Button>
+        <Button disabled={loading} variant="destructive" onClick={onConfirm}>Continue</Button> */}
       </div>
     </Modal>
   );
