@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 interface MyButtonProps {
-  style?: "standard" | "danger" | "attention";
+  style?: "standard" | "danger" | "attention" | "inactive";
   children?: ReactNode;
   className?: string;
   props?: (string | boolean)[];
@@ -22,6 +22,10 @@ export default function MyButton({
     case "attention":
       colorStyleString =
         " from-lime-300 via-amber-400 to-orange-500 disabled:from-lime-300/40 disabled:via-amber-400/40 disabled:to-orange-500/40 ";
+      break;
+    case "inactive":
+      colorStyleString =
+        " from-cyan-400/40 via-blue-500/40 to-purple-600/40 hover:from-cyan-400 hover:via-blue-500 hover:to-purple-600 ";
       break;
     default:
       colorStyleString =

@@ -10,7 +10,7 @@ import { getUserByEmail, getUserById } from "@/data/user";
 import { currentUser } from "@/lib/auth";
 import { generateVerificationToken } from "@/lib/tokens";
 import { sendVerificationEmail } from "@/lib/mail";
-import { admin } from "./admin";
+import { admin } from "../auth/admin";
 import { revalidatePath } from "next/cache";
 
 interface Value {

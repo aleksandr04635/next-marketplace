@@ -20,8 +20,8 @@ import { CardWrapper } from "@/components/auth/card-wrapper";
 import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
-import { reset } from "@/actions/reset";
-import MyButton from "../my-button";
+import { reset } from "@/actions/auth/reset";
+import MyButton from "../ui/my-button";
 
 export const ResetForm = () => {
   const searchParams = useSearchParams();

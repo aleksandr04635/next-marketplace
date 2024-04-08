@@ -6,13 +6,13 @@ import { Copy, Edit, MoreHorizontal, Trash } from "lucide-react";
 import { toast } from "react-hot-toast";
 import { useParams, useRouter } from "next/navigation";
 
-import { CategoryColumn } from "./columns";
+import { ProductColumn } from "./columns";
 import MyButton from "@/components/ui/my-button";
 import { deleteCategory } from "@/actions/category/deleteCategory";
 import Link from "next/link";
 
 interface DataCellProps {
-  data: CategoryColumn;
+  data: ProductColumn;
 }
 
 export const DataCell: React.FC<DataCellProps> = ({ data }) => {
@@ -25,17 +25,17 @@ export const DataCell: React.FC<DataCellProps> = ({ data }) => {
 
   return (
     <>
-      {data.content.map((pr, j) => (
+      {data.properties.map((pr, j) => (
         <div
           key={j}
           className="mr-4 flex flex-col sm:flex-row w-full  sm:items-center justify-start space-x-2 rounded-lg bg-active-bg 
         px-2 py-1 dark:bg-dark-active-bg dark:text-white "
         >
           <div>
-            {pr.prName}
+            {pr.propertyName}
             {": "}
           </div>
-          <div>{pr.prVal}</div>
+          <div>{pr.valueName}</div>
         </div>
       ))}
     </>

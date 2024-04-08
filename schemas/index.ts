@@ -72,3 +72,15 @@ export const RegisterSchema = z.object({
     message: "Minimum 4 characters required",
   }),
 });
+
+export const productFormSchema = z.object({
+  name: z.string().min(3),
+  images: z.object({ url: z.string() }).array(),
+  productProperties: z
+    .object({ propertyName: z.string().min(3), valueName: z.string().min(3) })
+    .array(),
+  number: z.coerce.number().min(1),
+  price: z.coerce.number().min(1),
+  categoryId: z.string().min(1),
+  description: z.string().min(3),
+});

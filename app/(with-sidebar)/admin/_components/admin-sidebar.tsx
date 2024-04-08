@@ -1,10 +1,10 @@
 "use client";
-//NOT USED
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
-import { UserButton } from "@/components/auth/user-button";
+import MyButton from "@/components/ui/my-button";
 
 export const AdminSidebar = () => {
   const pathname = usePathname();
@@ -31,18 +31,48 @@ export const AdminSidebar = () => {
         >
           <Link href="/admin/admin">Admin</Link>
         </Button>
-        <Button
+        {/*  <Button
           asChild
           variant={pathname === "/admin/settings" ? "default" : "outline"}
         >
           <Link href="/admin/settings">Settings</Link>
-        </Button>
-        <Button
+        </Button> */}
+        <Link href="/admin/settings">
+          <MyButton
+            className="w-full"
+            style={pathname === "/admin/settings" ? "default" : "inactive"}
+          >
+            Settings
+          </MyButton>
+        </Link>
+        {/*  <Button
           asChild
           variant={pathname === "/admin/categories" ? "default" : "outline"}
         >
           <Link href="/admin/categories">Categories</Link>
-        </Button>
+        </Button> */}
+        <Link href="/admin/categories">
+          <MyButton
+            className="w-full"
+            style={pathname === "/admin/categories" ? "default" : "inactive"}
+          >
+            Categories
+          </MyButton>
+        </Link>
+        {/*  <Button
+          asChild
+          variant={pathname === "/admin/products" ? "default" : "outline"}
+        >
+          <Link href="/admin/products">Products</Link>
+        </Button> */}
+        <Link href="/admin/products">
+          <MyButton
+            className="w-full"
+            style={pathname === "/admin/products" ? "default" : "inactive"}
+          >
+            Products
+          </MyButton>
+        </Link>
       </div>
     </div>
   );

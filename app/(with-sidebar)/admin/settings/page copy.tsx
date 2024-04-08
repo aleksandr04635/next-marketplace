@@ -33,7 +33,7 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { UserRole } from "@prisma/client";
-import MyButton from "@/components/my-button";
+import MyButton from "@/components/ui/my-button";
 
 const SettingsPage = () => {
   const user = useCurrentUser();

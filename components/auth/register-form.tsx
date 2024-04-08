@@ -20,8 +20,8 @@ import { CardWrapper } from "@/components/auth/card-wrapper";
 import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
-import { register } from "@/actions/register";
-import MyButton from "../my-button";
+import { register } from "@/actions/auth/register";
+import MyButton from "../ui/my-button";
 import { useSearchParams } from "next/navigation";
 
 export const RegisterForm = () => {
@@ -58,7 +58,7 @@ export const RegisterForm = () => {
   return (
     <CardWrapper
       headerLabel="Create an account"
-      backButtonLabel="Already have an account?"
+      backButtonLabel="Already have an account? Sign in."
       backButtonHref={"/auth/login?" + searchParams.toString()}
       showSocial
     >

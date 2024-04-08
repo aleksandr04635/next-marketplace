@@ -22,8 +22,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Label } from "@/components/ui/label";
-import MyButton from "@/components/my-button";
-import { createCategory } from "@/actions/createCategory";
+import MyButton from "@/components/ui/my-button";
+import { createCategory } from "@/actions/category/createCategory";
 import { FormError } from "@/components/form-error";
 //import { Category } from "@prisma/client";
 

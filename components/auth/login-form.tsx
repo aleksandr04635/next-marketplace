@@ -22,8 +22,8 @@ import { CardWrapper } from "@/components/auth/card-wrapper";
 import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
-import { login } from "@/actions/login";
-import MyButton from "../my-button";
+import { login } from "@/actions/auth/login";
+import MyButton from "../ui/my-button";
 
 export const LoginForm = () => {
   const searchParams = useSearchParams();
@@ -79,7 +79,7 @@ export const LoginForm = () => {
   return (
     <CardWrapper
       headerLabel="Sign in"
-      backButtonLabel="Don't have an account?"
+      backButtonLabel="Don't have an account? Sign up."
       backButtonHref={"/auth/register?" + searchParams.toString()}
       showSocial
     >
@@ -153,16 +153,16 @@ export const LoginForm = () => {
                           </p>
                         </div>
                       </FormControl>
-                      <Button
+                      {/*   <Button
                         size="sm"
                         variant="link"
                         asChild
                         className="px-0 font-normal"
                       >
-                        <Link href={"/auth/reset?" + searchParams.toString()}>
-                          Forgot password?
+                        <Link  className=" link-stand text-base " href={"/auth/reset?" + searchParams.toString()}>
+                          Forgot password? Reset the password.
                         </Link>
-                      </Button>
+                      </Button> */}
                       <FormMessage />
                     </FormItem>
                   )}
@@ -170,6 +170,23 @@ export const LoginForm = () => {
               </>
             )}
           </div>
+          {!showTwoFactor && (
+            <div className="flex items-center justify-center mt-3">
+              <Button
+                size="sm"
+                variant="link"
+                asChild
+                className="px-0 font-normal mx-auto"
+              >
+                <Link
+                  className=" link-stand text-base text-center mx-auto "
+                  href={"/auth/reset?" + searchParams.toString()}
+                >
+                  Forgot the password? Reset it.
+                </Link>
+              </Button>
+            </div>
+          )}
           <FormError message={error || urlError} />
           <FormSuccess message={success} />
           <MyButton

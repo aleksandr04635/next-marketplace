@@ -5,7 +5,7 @@ import qs from "query-string";
 import React, { useEffect, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-import MyButton from "@/components/my-button";
+import MyButton from "@/components/ui/my-button";
 
 type Props = {};
 

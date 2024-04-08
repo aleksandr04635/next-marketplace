@@ -8,15 +8,15 @@ import { DataTable } from "@/components/ui/data-table";
 import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
 
-import { columns, CategoryColumn } from "./columns";
+import { ProductColumn, columns } from "./columns";
 import MyButton from "@/components/ui/my-button";
 import Link from "next/link";
 
-interface CategoryClientProps {
-  data: CategoryColumn[];
+interface ProductsClientProps {
+  data: ProductColumn[];
 }
 
-export const CategoryClient: React.FC<CategoryClientProps> = ({ data }) => {
+export const ProductsClient: React.FC<ProductsClientProps> = ({ data }) => {
   const params = useParams();
   const router = useRouter();
 
@@ -25,19 +25,17 @@ export const CategoryClient: React.FC<CategoryClientProps> = ({ data }) => {
     <>
       <div className="flex items-center justify-between mt-3 mb-2">
         <Heading
-          title={`${data.length} Categories exist`}
-          /* description="The list of all categories" */
-          description=""
+          title={`You have ${data.length} products`}
+          description="Manage products for your store"
         />
-        <Link href="/admin/categories/new">
+        {/* <Button onClick={() => router.push(`/admin/products/new`)}>
+          <Plus className="mr-2 h-4 w-4" /> New product
+        </Button> */}
+        <Link href="/admin/products/new">
           <MyButton>
-            <Plus className="mr-2 h-4 w-4" /> New category
+            <Plus className="mr-2 h-4 w-4" /> New product
           </MyButton>
         </Link>
-        {/*  <Button onClick={() => router.push(`/${params.storeId}/categorys/new`)}>
-          Button sends to [categoryId] with categoryId==new
-          <Plus className="mr-2 h-4 w-4" /> New category
-        </Button> */}
       </div>
       <Separator />
       <DataTable searchKey="name" columns={columns} data={data} />

@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { UserButton } from "@/components/auth/user-button";
 import ThemeSwitch from "./theme-switch";
-import MyButton from "@/components/my-button";
+import MyButton from "@/components/ui/my-button";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import SignInButton from "./sign-in-button";
 import SearchFormForHeader from "./search";

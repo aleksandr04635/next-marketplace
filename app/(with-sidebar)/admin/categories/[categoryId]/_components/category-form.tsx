@@ -23,15 +23,15 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Label } from "@/components/ui/label";
-import MyButton from "@/components/my-button";
-import { createCategory } from "@/actions/createCategory";
+import MyButton from "@/components/ui/my-button";
+import { createCategory } from "@/actions/category/createCategory";
 import { FormError } from "@/components/form-error";
 import { Category as CategoryDB } from "@prisma/client";
-import { updateCategory } from "@/actions/updateCategory";
+import { updateCategory } from "@/actions/category/updateCategory";
 import { revalidatePath } from "next/cache";
 import toast from "react-hot-toast";
 import { AlertModal } from "@/components/ui/alert-modal";
-import { deleteCategory } from "@/actions/deleteCategory";
+import { deleteCategory } from "@/actions/category/deleteCategory";
 //import { useRouter } from "next/router";
 //import { Category } from "@prisma/client";
 
