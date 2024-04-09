@@ -1,4 +1,4 @@
-"use client";
+/* "use client";
 
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { ExitIcon, GearIcon } from "@radix-ui/react-icons";
@@ -18,13 +18,13 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { SideContent } from "../(with-sidebar)/_components/side-content ";
 
-export const MenuDropdown = ({ children }: { children: React.ReactNode }) => {
+export const MenuDropdown = () => {
   const user = useCurrentUser();
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
   if (!mounted) return <div className=" h-[40px] w-[40px]"></div>;
 
-  //w-48 color="red" w-fit
+  //w-48 color="red"
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="rounded-full  lg:hidden">
@@ -44,12 +44,12 @@ export const MenuDropdown = ({ children }: { children: React.ReactNode }) => {
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        className="ml-2 w-48 dark:bg-dark-additional-bg"
+        className="w-fit dark:bg-dark-additional-bg"
         align="end"
       >
-        {children}
-        {/* <SideContent /> */}
+        <SideContent />
       </DropdownMenuContent>
     </DropdownMenu>
   );
 };
+ */

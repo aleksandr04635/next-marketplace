@@ -42,7 +42,7 @@ export const createCategory = async (category: Category) => {
     }
     const categoryCr = await db.category.create({
       data: {
-        name: category.name,
+        name: category.name.trim(),
         slug: category.slug,
         userId: user.id,
         properties: {

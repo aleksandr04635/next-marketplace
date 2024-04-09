@@ -11,6 +11,7 @@ export type ProductColumn = {
   price: string;
   category: string;
   number: number;
+  imagesNumber: number;
   createdAt: string;
   description: string;
   properties: { propertyName: string; valueName: string }[];
@@ -44,6 +45,16 @@ export const columns: ColumnDef<ProductColumn>[] = [
   {
     accessorKey: "price",
     header: "Price",
+  },
+  {
+    accessorKey: "number",
+    header: "In stock",
+  },
+  {
+    header: "Images",
+    accessorKey: "imagesNumber",
+    //id: "imagesNumber",
+    //cell: ({ row }) => <div>{row.original.imagesNumber}</div>,
   },
   {
     accessorKey: "category",

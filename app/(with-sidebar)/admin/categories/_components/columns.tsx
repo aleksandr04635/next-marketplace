@@ -8,6 +8,7 @@ import { DataCell } from "./data-cell";
 export type CategoryColumn = {
   id: string;
   name: string;
+  productsLength: number;
   content: { prName: string; prVal: string }[];
   userId: string;
   createdAt: string;
@@ -26,6 +27,10 @@ export const columns: ColumnDef<CategoryColumn>[] = [
   {
     accessorKey: "createdAt",
     header: "Creation date",
+  },
+  {
+    accessorKey: "productsLength",
+    header: "Products",
   },
   {
     header: "Properties and their variants",

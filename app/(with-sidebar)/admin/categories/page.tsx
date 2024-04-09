@@ -12,16 +12,18 @@ const CategoryPage = async () => {
   const categories = await db.category.findMany({
     include: {
       properties: { include: { values: true } },
+      products: true,
     },
     orderBy: {
       createdAt: "desc",
     },
   });
-  //console.log("categories from CategoryPage: ", categories);
+  console.log("categories from CategoryPage: ", categories);
 
   const formattedCategories: CategoryColumn[] = categories.map((item) => ({
     id: item.id,
     name: item.name,
+    productsLength: item.products.length,
     content: item.properties.map((pr) => {
       return {
         prName: pr.name,

@@ -1,42 +1,18 @@
 import { ReactNode } from "react";
 
 interface MyButtonProps {
-  variant?: "standard" | "icon";
   style?: "standard" | "danger" | "attention" | "inactive";
   children?: ReactNode;
   className?: string;
-  disabled?: boolean;
-  type?: string;
-  props?: React.HTMLAttributes<HTMLButtonElement>; //(string | boolean)[];
+  props?: (string | boolean)[];
 }
 
 export default function MyButton({
-  variant = "standard",
   style = "standard",
   children,
   className,
   ...props
 }: any) {
-  //MyButtonProps
-  let paddingStyleString;
-  switch (variant) {
-    case "icon":
-      paddingStyleString = " px-1 py-1 sm:px-1 sm:py-1 ";
-      break;
-    default:
-      paddingStyleString = "  px-2 py-1 sm:px-5 sm:py-2 ";
-  }
-
-  //bg-transparent
-  let bgStyleString;
-  switch (variant) {
-    case "icon":
-      bgStyleString = " bg-white dark:bg-dark-additional-bg ";
-      break;
-    default:
-      bgStyleString = "  bg-white dark:bg-dark-additional-bg ";
-  }
-
   let colorStyleString;
   switch (style) {
     case "danger":
@@ -59,7 +35,7 @@ export default function MyButton({
   return (
     <button
       {...props}
-      className={`${colorStyleString}  flex
+      className={`${colorStyleString} flex
         w-fit items-center justify-center rounded-[7px] bg-gradient-to-bl  p-[2px] 
        disabled:cursor-not-allowed
     dark:hover:bg-dark-active-bg  
@@ -67,14 +43,14 @@ export default function MyButton({
     [&_div]:dark:disabled:text-gray-400 
     [&_div]:[&:not(:disabled)]:hover:bg-transparent 
     [&_div]:[&:not(:disabled)]:hover:text-white
-    [&_div]:[&:not(:disabled)]:dark:hover:bg-transparent  
+    [&_div]:[&:not(:disabled)]:dark:hover:bg-transparent 
       ${className}`}
       /*  https://tailwindcss.com/docs/hover-focus-and-other-states#using-arbitrary-variants */
     >
       <div
-        className={`flex w-full items-center justify-center  rounded-[5px]   text-sm 
-   text-slate-900  dark:text-white ${bgStyleString} ${paddingStyleString} 
-    `}
+        className="flex w-full items-center justify-center  rounded-[5px]  bg-white px-2 py-1 text-sm 
+   text-slate-900 dark:bg-dark-additional-bg dark:text-white sm:px-5 sm:py-2 
+    "
       >
         {children}
       </div>

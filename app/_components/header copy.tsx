@@ -1,4 +1,4 @@
-//"use client";
+/* "use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -11,12 +11,10 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 import SignInButton from "./sign-in-button";
 import SearchFormForHeader from "./search";
 import { MenuDropdown } from "./menu-dropdown";
-import { SideContent } from "../(with-sidebar)/_components/side-content ";
-import { StoreSidebar } from "../(with-sidebar)/(store)/_components/store-sidebar";
 
 export const Header = () => {
-  //const pathname = usePathname();
-  // const user = useCurrentUser();
+  const pathname = usePathname();
+  const user = useCurrentUser();
 
   //rounded-xl bg-secondary  h-16
   return (
@@ -26,11 +24,7 @@ export const Header = () => {
     >
       <div className="flex w-full flex-col">
         <div className="flex justify-between items-center">
-          <MenuDropdown>
-            <SideContent>
-              <StoreSidebar />
-            </SideContent>
-          </MenuDropdown>
+          <MenuDropdown />
           <Link className="" href={`/`}>
             <MyButton className=" font-semibold">My Marketplace</MyButton>
           </Link>
@@ -44,10 +38,11 @@ export const Header = () => {
           </Link>
           <SearchFormForHeader type="wide-scr" />
           <ThemeSwitch />
-          <UserButton />
+          {user ? <UserButton /> : <SignInButton />}
         </div>
         <SearchFormForHeader type="narrow-scr" />
       </div>
     </nav>
   );
 };
+ */

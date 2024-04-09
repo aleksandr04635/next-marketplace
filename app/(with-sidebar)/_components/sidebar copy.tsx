@@ -1,6 +1,5 @@
 //"use client";
 
-import { StoreSidebar } from "../(store)/_components/store-sidebar";
 import { SideContent } from "./side-content ";
 
 export const Sidebar = () => {
@@ -15,9 +14,7 @@ export const Sidebar = () => {
   min-h-[calc(100vh_-_128px)] lg:w-[250px] shadow-sm 
   border-r border-layout-border bg-white dark:bg-dark-additional-bg/40"
     >
-      <SideContent>
-        <StoreSidebar />
-      </SideContent>
+      {/*   <SideContent /> */}
     </nav>
   );
 };

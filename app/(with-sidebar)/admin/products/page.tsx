@@ -23,6 +23,7 @@ const ProductsPage = async () => {
     },
     include: {
       category: true,
+      images: true,
       productProperties: true,
     },
     orderBy: {
@@ -35,6 +36,7 @@ const ProductsPage = async () => {
     name: item.name,
     userId: item.userId,
     number: item.number,
+    imagesNumber: item.images.length,
     description: item.description,
     price: formatter.format(item.price.toNumber()),
     category: item.category.name,
@@ -59,8 +61,9 @@ const ProductsPage = async () => {
     createdAt: format(item.createdAt, "MMMM do, yyyy"),
   })); */
 
+  //lg:max-w-[1200px]
   return (
-    <Card className=" w-full mx-auto lg:max-w-[900px] ">
+    <Card className=" w-full mx-auto  ">
       {/*  <CardHeader>
       <p className="text-2xl font-semibold text-center py-0">
         {`${categories?.length}`} Categories exist

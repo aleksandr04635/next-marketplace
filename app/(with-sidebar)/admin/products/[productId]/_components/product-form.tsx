@@ -133,17 +133,17 @@ export const ProductForm: React.FC<ProductFormProps> = ({
   // const cat = form.watch("name");
   const watchAllFields = form.watch();
   useEffect(() => {
-    console.log("watchAllFields from ProductForm: ", watchAllFields);
+    //console.log("watchAllFields from ProductForm: ", watchAllFields);
     productError();
   }, [watchAllFields, initialData]);
 
   const categorySelectedId = form.watch("categoryId");
   useEffect(() => {
-    console.log(
+    /* console.log(
       "categorySelectedId, allVal from ProductForm: ",
       categorySelectedId,
       allVal
-    );
+    ); */
     productError();
   }, [allVal, allVal.productProperties.length, categorySelectedId]);
   /*  if (categorySelected) {
@@ -157,26 +157,26 @@ export const ProductForm: React.FC<ProductFormProps> = ({
   //console.log("categorySelected from ProductForm: ", categorySelected);
 
   useEffect(() => {
-    console.log("cat from ProductForm: ", categorySelectedId);
+    /* console.log("cat from ProductForm: ", categorySelectedId);
     console.log(
       "initialData?..categoryId from ProductForm: ",
       initialData?.categoryId
-    );
+    ); */
     if (categorySelectedId != initialData?.categoryId) {
       const categorySelected: CategoryWithProperties | null | undefined =
         categories.find((cat) => cat.id == categorySelectedId);
 
-      console.log("categorySelected from ProductForm: ", categorySelected);
+      //console.log("categorySelected from ProductForm: ", categorySelected);
       const temp = [];
       for (let i = 0; i < categorySelected?.properties?.length!; i++) {
         const obj = {
           propertyName: categorySelected?.properties[i].name!,
           valueName: categorySelected?.properties[i].values[0].name!,
         };
-        console.log("obj from ProductForm: ", obj);
+        //console.log("obj from ProductForm: ", obj);
         temp.push(obj);
       }
-      console.log("temp from ProductForm: ", temp);
+      //console.log("temp from ProductForm: ", temp);
 
       form.setValue("productProperties", temp);
     }
@@ -382,6 +382,21 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                   <ImageUpload
                     value={field.value.map((image) => image.url)}
                     disabled={isPending}
+                    moveLeft={(i) => {
+                      const temp = field.value
+                        .filter((current, j) => j !== i)
+                        .toSpliced(i - 1, 0, field.value[i]);
+                      //console.log("field.value[i]:", field.value[i]);
+                      //console.log("fieldChanged:", temp);
+                      field.onChange(temp);
+                    }}
+                    moveRight={(i) => {
+                      field.onChange([
+                        ...field.value
+                          .filter((current, j) => j !== i)
+                          .toSpliced(i + 1, 0, field.value[i]),
+                      ]);
+                    }}
                     onChange={(url) =>
                       field.onChange([...field.value, { url }])
                     }
@@ -686,6 +701,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
             </MyButton>
             {initialData && (
               <MyButton
+                type="button"
                 className=" "
                 style="danger"
                 onClick={() => setOpen(true)}
