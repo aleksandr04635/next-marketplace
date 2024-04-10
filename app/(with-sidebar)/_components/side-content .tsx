@@ -15,8 +15,8 @@ export const SideContent = ({ children }: { children: React.ReactNode }) => {
   console.log("headersList:", headersList);
   console.log("fullUrl:", fullUrl); */
   const pathname = usePathname();
-  console.log("pathname from Sidebar: ", pathname);
-  console.log("path from Sidebar: ", pathname?.split("/"));
+  // console.log("pathname from Sidebar: ", pathname);
+  //console.log("path from Sidebar: ", pathname?.split("/"));
 
   /*  if (pathname.split("/")[1] == "admin") {
     return <AdminSidebar />;

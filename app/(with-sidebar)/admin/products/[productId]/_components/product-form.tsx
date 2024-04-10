@@ -370,7 +370,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-6 w-full mt-2"
+          className="space-y-4 w-full mt-2"
         >
           <FormField
             control={form.control}
@@ -411,71 +411,16 @@ export const ProductForm: React.FC<ProductFormProps> = ({
               </FormItem>
             )}
           />
-          <div className="md:grid md:grid-cols-3 gap-8">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Name</FormLabel>
-                  <FormControl>
-                    <Input
-                      disabled={isPending}
-                      placeholder="Product name"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="price"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Price in format 9.99</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="number"
-                      disabled={isPending}
-                      placeholder="9.99"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="number"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Number in stock</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="number"
-                      disabled={isPending}
-                      placeholder="1"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
           <FormField
             control={form.control}
-            name="description"
+            name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Description</FormLabel>
+                <FormLabel>Name</FormLabel>
                 <FormControl>
-                  <Textarea
-                    placeholder="Product description"
-                    className="resize-none"
+                  <Input
+                    disabled={isPending}
+                    placeholder="Product name"
                     {...field}
                   />
                 </FormControl>
@@ -541,6 +486,62 @@ export const ProductForm: React.FC<ProductFormProps> = ({
               )}
             />
           )}
+          <div className="md:grid md:grid-cols-2 gap-8">
+            <FormField
+              control={form.control}
+              name="price"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Price in format 9.99</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="number"
+                      disabled={isPending}
+                      placeholder="9.99"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="number"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Number in stock</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="number"
+                      disabled={isPending}
+                      placeholder="1"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <FormField
+            control={form.control}
+            name="description"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Description</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="Product description"
+                    className="resize-none h-[150px]"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
           {/*  {categorySelected && (
               <FormField
                 control={form.control}

@@ -72,7 +72,8 @@ const SearchFormForHeader = ({ type }: Props) => {
       } */
       const url = qs.stringifyUrl(
         {
-          url: window.location.origin,
+          //url: window.location.origin,
+          url: window.location.href,
           query,
         },
         { skipNull: true }

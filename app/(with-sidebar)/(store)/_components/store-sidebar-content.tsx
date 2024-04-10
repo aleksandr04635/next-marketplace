@@ -42,7 +42,7 @@ export const StoreSidebarContent = ({
   //console.log("categorySelected from StoreSidebarContent: ", categorySelected);
 
   const currentQ = qs.parse(searchParams.toString());
-  console.log("currentQ from StoreSidebarContent: ", currentQ);
+  //console.log("currentQ from StoreSidebarContent: ", currentQ);
 
   const DEFAULT_PRICE = [0, 100] as [number, number];
   //const minPrice = Math.min(filter.price.range[0], filter.price.range[1]);

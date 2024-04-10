@@ -11,22 +11,16 @@ import getColors from '@/actions/get-colors';
 import Filter from './components/filter';
 import MobileFilters from './components/mobile-filters'; */
 
-export const revalidate = 0;
+import { CategoryPageProps } from "@/types";
+import ProductsList from "../_components/products-list";
 
-interface CategoryPageProps {
-  params: {
-    categorySlug: string;
-  };
-  searchParams: {
-    colorId: string;
-    sizeId: string;
-  };
-}
+//export const revalidate = 0;
 
 const CategoryPage: React.FC<CategoryPageProps> = async ({
   params,
   searchParams,
 }) => {
+  //console.log("searchParams from CategoryPage: ", searchParams);
   /*  const products = await getProducts({ 
     categoryId: params.categoryId,
     colorId: searchParams.colorId,
@@ -37,8 +31,12 @@ const CategoryPage: React.FC<CategoryPageProps> = async ({
   const category = await getCategory(params.categoryId); */
 
   return (
-    <div className="bg-white">
-      {params.categorySlug}
+    <div className="w-full h-full p-2 pl-0 lg:pl-2">
+      <ProductsList
+        categorySlug={params.categorySlug}
+        searchParams={searchParams}
+      />
+
       {/*  <Container>
         <Billboard 
           data={category.billboard}

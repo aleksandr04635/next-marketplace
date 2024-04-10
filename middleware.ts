@@ -15,18 +15,20 @@ const { auth } = NextAuth(authConfig);
 export default auth((req) => {
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
-  //console.log("isLoggedIn: ", isLoggedIn);
-  /*   console.log(
+  /* console.log("isLoggedIn: ", isLoggedIn);
+  console.log(
     "req.nextUrl.pathname in auth middleware: ",
     req.nextUrl.pathname
   );
-  console.log("split in auth middleware: ", nextUrl.pathname.split("/"));
+  //console.log("split in auth middleware: ", nextUrl.pathname.split("/"));
   console.log("first in auth middleware: ", nextUrl.pathname.split("/")[1]); */
 
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
-  const isPublicRoute =
+  /*  const isPublicRoute =
     publicRoutes.includes(nextUrl.pathname) ||
-    publicRouteGroups.includes(nextUrl.pathname.split("/")[1]);
+    publicRouteGroups.includes(nextUrl.pathname.split("/")[1]); */
+  const isPublicRoute = nextUrl.pathname.split("/")[1] != "admin";
+
   const isAuthRoute = authRoutes.includes(nextUrl.pathname); //if logged in - redirect
 
   if (isApiAuthRoute) {

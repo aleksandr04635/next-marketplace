@@ -27,7 +27,7 @@ interface Category {
   properties: Property[];
 } */
 type ProductFormValues = z.infer<typeof productFormSchema>;
-export const createProduct = async (data: ProductFormValues) => {
+export const createProducts = async (data: ProductFormValues) => {
   console.log("data from createCategory: ", data);
   try {
     const user = await currentUser();
@@ -42,38 +42,41 @@ export const createProduct = async (data: ProductFormValues) => {
       return { error: "Unauthorized" };
     }
 
-    const productCr = await db.product.create({
-      data: {
-        name: data.name,
-        slug: slugFromString(data.name),
-        number: data.number,
-        price: data.price,
-        categoryId: data.categoryId,
-        description: data.description,
-        userId: user.id,
-        productProperties: {
-          create: data.productProperties.map(
-            (property: { propertyName: string; valueName: string }) => {
-              return {
-                propertyName: property.propertyName,
-                propertySlug: slugFromString(property.propertyName),
-                valueName: property.valueName,
-                valueSlug: slugFromString(property.valueName),
-              };
-            }
-          ),
+    // const productCr =
+    for (let i = 1; i < 6; i++) {
+      await db.product.create({
+        data: {
+          name: data.name,
+          slug: slugFromString(data.name),
+          number: data.number,
+          price: data.price,
+          categoryId: data.categoryId,
+          description: data.description,
+          userId: user.id,
+          productProperties: {
+            create: data.productProperties.map(
+              (property: { propertyName: string; valueName: string }) => {
+                return {
+                  propertyName: property.propertyName,
+                  propertySlug: slugFromString(property.propertyName),
+                  valueName: property.valueName,
+                  valueSlug: slugFromString(property.valueName),
+                };
+              }
+            ),
+          },
+          images: {
+            create: data.images.map((image: { url: string }) => image),
+          },
         },
-        images: {
-          create: data.images.map((image: { url: string }) => image),
+        include: {
+          productProperties: true,
+          images: true,
         },
-      },
-      include: {
-        productProperties: true,
-        images: true,
-      },
-    });
+      });
+    }
 
-    console.log("productCr from createProduct: ", productCr);
+    //console.log("productCr from createProduct: ", productCr);
 
     /*   const categoryCr = await db.category.create({
     data: {
@@ -129,8 +132,8 @@ export const createProduct = async (data: ProductFormValues) => {
     //return { error: "Test err" };
 
     revalidatePath("/admin/products");
-    return { success: productCr.id };
-    //return { success: "productCr.id" };
+    //return { success: productCr.id };
+    return { success: "productCr.id" };
   } catch (error) {
     //console.log("error", error);
     console.error(error);
