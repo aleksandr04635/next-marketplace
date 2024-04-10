@@ -17,12 +17,19 @@ import { LogoutButton } from "@/components/auth/logout-button";
 import Link from "next/link";
 import { Package } from "lucide-react";
 import SignInButton from "./sign-in-button";
+import { useEffect, useState } from "react";
 
 export const UserButton = () => {
   const user = useCurrentUser();
   //console.log("user: ", user.image);
   //w-48
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   if (user) {
+    if (!mounted) {
+      return <div className=" h-[40px] w-[40px]"></div>;
+    }
     return (
       <DropdownMenu>
         <DropdownMenuTrigger className="rounded-full">
@@ -67,6 +74,9 @@ export const UserButton = () => {
       </DropdownMenu>
     );
   } else {
+    if (!mounted) {
+      return <div className=" h-[40px] w-[89px]"></div>;
+    }
     return <SignInButton />;
   }
 };

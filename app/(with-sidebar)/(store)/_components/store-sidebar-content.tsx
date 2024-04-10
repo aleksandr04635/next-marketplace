@@ -12,7 +12,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Category, Property, Value } from "@prisma/client";
 import { Slider } from "@/components/ui/slider";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import MyButton from "@/components/ui/my-button";
 
@@ -37,9 +37,18 @@ export const StoreSidebarContent = ({
   //console.log("path from StoreSidebarContent: ", pathname?.split("/"));
   //const categorySelected: CategoryWithProperties | null | undefined =
   const categorySelected = categories.find(
-    (cat) => cat.slug == pathname?.split("/")[1]
+    (cat) => cat.slug == pathname?.split("/")[2]
   );
+  const valuesArr = categorySelected?.properties.map((pr, i) => pr.slug);
   //console.log("categorySelected from StoreSidebarContent: ", categorySelected);
+  const [val, setVal] = useState(categorySelected ? valuesArr : ["categories"]);
+  useEffect(() => {
+    setVal(
+      categorySelected
+        ? categorySelected?.properties.map((pr, i) => pr.slug)
+        : ["categories"]
+    );
+  }, [categorySelected]);
 
   const currentQ = qs.parse(searchParams.toString());
   //console.log("currentQ from StoreSidebarContent: ", currentQ);
@@ -72,7 +81,13 @@ export const StoreSidebarContent = ({
   // type="single"
   return (
     <div className=" p-1">
-      <Accordion type="multiple" className="animate-none">
+      <Accordion
+        type="multiple"
+        className="animate-none"
+        /*  defaultValue={categorySelected ? valuesArr : ["categories"]} */
+        value={val}
+        onValueChange={(value) => setVal(value)}
+      >
         <AccordionItem value="categories">
           <AccordionTrigger>
             <h3 className="font-semibold">Categories:</h3>
@@ -81,9 +96,9 @@ export const StoreSidebarContent = ({
             {categories.map((cat, i) => (
               <div key={i} className=" w-full">
                 <Link
-                  href={"/" + cat.slug}
+                  href={"/category/" + cat.slug}
                   className={`  ${
-                    pathname?.split("/")[1] == cat.slug
+                    pathname?.split("/")[2] == cat.slug
                       ? " text-cyan-500 dark:text-blue-500 text-base hover:no-underline "
                       : " link-stand "
                   }`}
@@ -100,7 +115,7 @@ export const StoreSidebarContent = ({
 
         {categorySelected && (
           <>
-            <h3 className="font-semibold">{categorySelected.name}s:</h3>
+            <h3 className="font-semibold">{categorySelected.name}:</h3>
             <div className="flex justify-between mb-2">
               <p className="text-sm">Price</p>
               <div className="text-sm">
@@ -137,7 +152,7 @@ export const StoreSidebarContent = ({
               Set price range
             </MyButton>
             {categorySelected.properties.map((pr, i) => (
-              <AccordionItem key={i} value={pr.name} className="border-b-0">
+              <AccordionItem key={i} value={pr.slug} className="border-b-0">
                 <AccordionTrigger>
                   <h3 className="font-semibold">{pr.name}:</h3>
                 </AccordionTrigger>

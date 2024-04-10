@@ -341,11 +341,11 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
         loading={isPending}
       />
       <div className="space-y-2 flex  flex-col">
-        <Label htmlFor="name">Category name</Label>
+        <Label htmlFor="name">Laptops</Label>
         <Input
           type="text"
           id="name"
-          placeholder="Category name"
+          placeholder="Category name (plural noun)"
           value={category?.name || ""}
           onChange={(e) =>
             setCategory({

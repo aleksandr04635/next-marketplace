@@ -96,7 +96,7 @@ model TwoFactorConfirmation {
 model Category {
   id         String     @id @default(uuid())
   userId     String
-  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user       User       @relation(fields: [userId], references: [id]) //, onDelete: Cascade)
   name       String
   slug       String
   properties Property[]

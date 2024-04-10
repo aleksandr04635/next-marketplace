@@ -1,3 +1,10 @@
+import {
+  Category,
+  Product,
+  productProperty,
+  Image as ImageType,
+} from "@prisma/client";
+
 export interface CategoryPageProps {
   params: {
     categorySlug: string | null;
@@ -6,4 +13,12 @@ export interface CategoryPageProps {
       colorId: string;
       sizeId: string;
     }; */;
+}
+
+export interface ProductCard {
+  data: Product & {
+    images: ImageType[];
+    category: Category;
+    productProperties: productProperty[];
+  };
 }

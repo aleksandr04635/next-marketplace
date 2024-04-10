@@ -4,27 +4,14 @@ import Image from "next/image";
 import { MouseEventHandler } from "react";
 import { Expand, ShoppingCart } from "lucide-react";
 import { useRouter } from "next/navigation";
-import Currency from "./currency";
-import {
-  Category,
-  Image as ImageType,
-  Product,
-  productProperty,
-} from "@prisma/client";
+import Currency from "../../../../components/currency";
 import Link from "next/link";
+import { ProductCard } from "@/types";
 
 //import IconButton  from "@/components/ui/icon-button";
 //import usePreviewModal from "@/hooks/use-preview-modal";
 //import useCart from "@/hooks/use-cart";
 //import { Product } from "@/types";
-
-interface ProductCard {
-  data: Product & {
-    images: ImageType[];
-    category: Category;
-    productProperties: productProperty[];
-  };
-}
 
 const ProductCard: React.FC<ProductCard> = ({ data }) => {
   //const previewModal = usePreviewModal();
@@ -60,7 +47,10 @@ const ProductCard: React.FC<ProductCard> = ({ data }) => {
           rel="noopener noreferrer"
         >
           <Image
-            src={data.images?.[0]?.url}
+            src={
+              data.images?.[0]?.url ||
+              "https://res.cloudinary.com/dqwdfhxgl/image/upload/v1712544917/contacts/hlpiz8yi2vi8ksfleelk.jpg"
+            }
             alt=""
             fill
             className="aspect-square object-cover border-0"
@@ -80,8 +70,15 @@ const ProductCard: React.FC<ProductCard> = ({ data }) => {
           </div> 
         </div>*/}
       </div>
-      <div className="flex flex-col justify-between   p-2 space-y-1">
-        <p className="font-semibold text-lg">{data.name}</p>
+      <div className="flex flex-col justify-between h-[230px]  p-2 space-y-1">
+        <Link
+          href={`/product/${data?.id}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="link-stand cursor-pointer"
+        >
+          <p className="font-semibold text-lg">{data.name}</p>{" "}
+        </Link>
         <div className="flex items-center justify-between">
           <Currency value={+data?.price} />
         </div>

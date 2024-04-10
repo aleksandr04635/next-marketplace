@@ -15,7 +15,8 @@ const CategoryPage = async () => {
       products: true,
     },
     orderBy: {
-      createdAt: "desc",
+      products: { _count: "desc" },
+      // createdAt: "desc",
     },
   });
   console.log("categories from CategoryPage: ", categories);

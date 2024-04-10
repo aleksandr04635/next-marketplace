@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import qs from "query-string";
 import * as z from "zod";
@@ -23,6 +23,8 @@ type Props = { type: string };
 const SearchFormForHeader = ({ type }: Props) => {
   //const { pageSize } = useSelector((state) => state.pageSize);
   const router = useRouter();
+  const pathname = usePathname();
+  //pathname?.split("/")[2]
 
   const searchParams = useSearchParams();
   //const callbackUrl = searchParams.get("callbackUrl");
@@ -57,6 +59,7 @@ const SearchFormForHeader = ({ type }: Props) => {
   const handleSubmit = (e: any) => {
     //console.log("window.location.href in header: ", window.location.href);
     //console.log("window.location.origin in header: ", window.location.origin);
+    //console.log("pathname in header: ", pathname);
     //console.log("handleSubmit in header, e: ", e);
     //console.log("searchTerm in header, e: ", searchTerm);
     //console.log("form in header, e: ", form);
@@ -73,7 +76,10 @@ const SearchFormForHeader = ({ type }: Props) => {
       const url = qs.stringifyUrl(
         {
           //url: window.location.origin,
-          url: window.location.href,
+          url:
+            pathname?.split("/")[1] == "category"
+              ? window.location.href
+              : window.location.origin,
           query,
         },
         { skipNull: true }
@@ -82,6 +88,11 @@ const SearchFormForHeader = ({ type }: Props) => {
     }
   };
 
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  if (!mounted) {
+    return <div className=" h-[36px] w-[300px]"></div>;
+  }
   //overflow-hidden
   return (
     <Form {...form}>
@@ -89,7 +100,7 @@ const SearchFormForHeader = ({ type }: Props) => {
         //onSubmit={form.handleSubmit(handleSubmit)}
         onSubmit={handleSubmit}
         className={
-          "w-full   md:w-[300px] " +
+          "w-full   md:w-[200px] lg:w-[300px] " +
           (type == "wide-scr"
             ? "relative hidden  md:inline "
             : "relative mx-auto mt-1   md:hidden")

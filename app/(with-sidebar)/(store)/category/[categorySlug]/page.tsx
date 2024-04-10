@@ -12,7 +12,7 @@ import Filter from './components/filter';
 import MobileFilters from './components/mobile-filters'; */
 
 import { CategoryPageProps } from "@/types";
-import ProductsList from "../_components/products-list";
+import ProductsList from "../../_components/products-list";
 
 //export const revalidate = 0;
 
