@@ -15,7 +15,8 @@ const ProtectedLayout = ({ children }: ProtectedLayoutProps) => {
     > */
     <div className=" w-full flex flex-row gap-x-0   ">
       <Sidebar />
-      <div className="mx-auto w-full py-2 min-h-[calc(100vh_-_128px)] pr-[16px] flex items-center justify-center">
+      <div className="mx-auto w-full  min-h-[calc(100vh_-_128px)] pr-[16px] flex items-center justify-center">
+        {/*  py-2 */}
         {children}
       </div>
     </div>

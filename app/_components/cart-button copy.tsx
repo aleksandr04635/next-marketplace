@@ -37,7 +37,7 @@ export default function CartButton() {
         {num > 0 && (
           <div
             className="px-1 z-10 absolute top-0 right-[-10px] rounded-full
-           border border-cyan-500 dark:border-blue-500 bg-white dark:bg-dark-additional-bg text-orange-400"
+           border border-cyan-500 dark:border-blue-500 bg-white dark:bg-dark-additional-bg  "
           >
             {num}
           </div>

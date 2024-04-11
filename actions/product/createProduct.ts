@@ -10,7 +10,7 @@ import { currentUser } from "@/lib/auth";
 import { generateVerificationToken } from "@/lib/tokens";
 import { sendVerificationEmail } from "@/lib/mail";
 import { revalidatePath } from "next/cache";
-import { slugFromString } from "@/lib/utils";
+import { DEFAULT_IMAGES, slugFromString } from "@/lib/utils";
 
 /* interface Value {
   name: string;
@@ -64,7 +64,10 @@ export const createProduct = async (data: ProductFormValues) => {
           ),
         },
         images: {
-          create: data.images.map((image: { url: string }) => image),
+          create:
+            data.images.length > 0
+              ? data.images.map((image: { url: string }) => image)
+              : DEFAULT_IMAGES.map((image: { url: string }) => image),
         },
       },
       include: {

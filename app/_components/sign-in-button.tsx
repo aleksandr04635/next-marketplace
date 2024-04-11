@@ -52,9 +52,15 @@ const SignInButton = (props: Props) => {
     //console.log(" encodedCallbackUrl from Header1: ", encodedCallbackUrl);
   }, [location]); */
 
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  if (!mounted) {
+    return <div className=" h-[40px] w-[89px]"></div>;
+  }
+
   return (
     <Link className="" href={`/auth/login?callbackUrl=${encodedCallbackUrl}`}>
-      <MyButton>Sign In</MyButton>
+      <MyButton>Sign&nbsp;In</MyButton>
     </Link>
   );
 };

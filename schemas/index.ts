@@ -17,7 +17,6 @@ export const SettingsSchema = z
       if (data.password && !data.newPassword) {
         return false;
       }
-
       return true;
     },
     {
@@ -30,7 +29,6 @@ export const SettingsSchema = z
       if (data.newPassword && !data.password) {
         return false;
       }
-
       return true;
     },
     {
@@ -84,3 +82,16 @@ export const productFormSchema = z.object({
   categoryId: z.string().min(1),
   description: z.string().min(3),
 });
+//UNCOMMENT IN PRODUCTION
+/*   .refine(
+    (data) => {
+      if (data.images.length == 0) {
+        return false;
+      }
+      return true;
+    },
+    {
+      message: "Add at least one image",
+      path: ["images"],
+    }
+  ); */

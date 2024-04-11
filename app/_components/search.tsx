@@ -36,13 +36,13 @@ const SearchFormForHeader = ({ type }: Props) => {
   // setSearchTerm(searchTermFromUrl || "");
 
   const SearchSchema = z.object({
-    search: z.string(),
+    searchTerm: z.string(),
   });
 
   const form = useForm<z.infer<typeof SearchSchema>>({
     resolver: zodResolver(SearchSchema),
     defaultValues: {
-      search: searchTermFromUrl,
+      searchTerm: searchTermFromUrl,
     },
   });
 
@@ -53,7 +53,7 @@ const SearchFormForHeader = ({ type }: Props) => {
     //console.log("urlParams in header: ", urlParams);
     const searchTermFromUrl = searchParams.get("searchTerm");
     setSearchTerm(searchTermFromUrl || "");
-    form.setValue("search", searchTermFromUrl || "");
+    form.setValue("searchTerm", searchTermFromUrl || "");
   }, [searchParams]);
 
   const handleSubmit = (e: any) => {
@@ -63,35 +63,46 @@ const SearchFormForHeader = ({ type }: Props) => {
     //console.log("handleSubmit in header, e: ", e);
     //console.log("searchTerm in header, e: ", searchTerm);
     //console.log("form in header, e: ", form);
-    if (searchTerm) {
-      e.preventDefault();
-      const current = qs.parse(searchParams.toString());
-      const query = {
-        ...current,
-        ["searchTerm"]: searchTerm,
-      };
-      /*  if (current[valueKey] === id) {
+    //if (searchTerm) {
+    //console.log(" if (searchTerm) in header run, searchTerm: ", searchTerm);
+    e.preventDefault();
+    const current = qs.parse(searchParams.toString());
+    const query = {
+      ...current,
+      ["searchTerm"]: searchTerm ? searchTerm : null,
+    };
+    /*  if (current[valueKey] === id) {
         query[valueKey] = null;
       } */
-      const url = qs.stringifyUrl(
-        {
-          //url: window.location.origin,
-          url:
-            pathname?.split("/")[1] == "category"
-              ? window.location.href
-              : window.location.origin,
-          query,
-        },
-        { skipNull: true }
-      );
-      router.push(url);
-    }
+    const url = qs.stringifyUrl(
+      {
+        //url: window.location.origin,
+        url:
+          pathname?.split("/")[1] == "category"
+            ? window.location.href
+            : window.location.origin,
+        query,
+      },
+      { skipNull: true }
+    );
+    router.push(url);
+    // }
   };
 
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
   if (!mounted) {
-    return <div className=" h-[36px] w-[300px]"></div>;
+    /*  return <div className=" h-[36px] w-[300px]"></div>; */
+    return (
+      <div
+        className={
+          "w-full  h-[36px] md:w-[200px] lg:w-[300px] " +
+          (type == "wide-scr"
+            ? "relative hidden  md:inline "
+            : "relative mx-auto mt-1   md:hidden")
+        }
+      ></div>
+    );
   }
   //overflow-hidden
   return (
@@ -109,14 +120,14 @@ const SearchFormForHeader = ({ type }: Props) => {
         <div className="space-y-4">
           <FormField
             control={form.control}
-            name="search"
+            name="searchTerm"
             render={({ field }) => (
               <FormItem>
                 <FormControl>
                   <div className="relative">
                     <Input
                       {...field}
-                      placeholder="Search"
+                      placeholder="Search in product name"
                       type="text"
                       onChange={(ev) => {
                         setSearchTerm(ev.target.value);

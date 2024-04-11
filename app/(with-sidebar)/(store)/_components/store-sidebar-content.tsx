@@ -136,7 +136,8 @@ export const StoreSidebarContent = ({
               step={5}
             />
             <MyButton
-              className="w-full my-2 "
+              variant="icon"
+              className="mx-auto my-2 "
               onClick={() => {
                 const query = { ...currentQ, price: minPrice + "_" + maxPrice };
                 const url = qs.stringifyUrl(

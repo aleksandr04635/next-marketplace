@@ -1,5 +1,6 @@
 "use client";
 
+import { useDispatch, useSelector } from "react-redux";
 import Image from "next/image";
 import { MouseEventHandler } from "react";
 import { Expand, ShoppingCart } from "lucide-react";
@@ -7,6 +8,9 @@ import { useRouter } from "next/navigation";
 import Currency from "../../../../components/currency";
 import Link from "next/link";
 import { ProductCard } from "@/types";
+import MyButton from "@/components/ui/my-button";
+import { GrCart } from "react-icons/gr";
+import { addProduct } from "@/redux/cart/cartSlice";
 
 //import IconButton  from "@/components/ui/icon-button";
 //import usePreviewModal from "@/hooks/use-preview-modal";
@@ -17,6 +21,7 @@ const ProductCard: React.FC<ProductCard> = ({ data }) => {
   //const previewModal = usePreviewModal();
   //const cart = useCart();
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const handleClick = () => {
     router.push(`/product/${data?.id}`);
@@ -70,14 +75,22 @@ const ProductCard: React.FC<ProductCard> = ({ data }) => {
           </div> 
         </div>*/}
       </div>
-      <div className="flex flex-col justify-between h-[230px]  p-2 space-y-1">
+      <div className="flex flex-col justify-between h-[250px]  p-2 space-y-0">
+        <MyButton
+          variant="icon"
+          className=" "
+          onClick={() => dispatch(addProduct(data.id))}
+        >
+          <GrCart className="mr-2 h-5 w-5" />
+          Add To Cart
+        </MyButton>
         <Link
           href={`/product/${data?.id}`}
           target="_blank"
           rel="noopener noreferrer"
           className="link-stand cursor-pointer"
         >
-          <p className="font-semibold text-lg">{data.name}</p>{" "}
+          <p className="font-semibold text-base text-justify">{data.name}</p>{" "}
         </Link>
         <div className="flex items-center justify-between">
           <Currency value={+data?.price} />

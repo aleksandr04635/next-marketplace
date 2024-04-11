@@ -12,7 +12,7 @@ import { generateVerificationToken } from "@/lib/tokens";
 import { sendVerificationEmail } from "@/lib/mail";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { Product } from "@prisma/client";
-import { slugFromString } from "@/lib/utils";
+import { DEFAULT_IMAGES, slugFromString } from "@/lib/utils";
 
 /* interface Value {
   name: string;
@@ -117,7 +117,10 @@ export const updateProduct = async (data: ProductFormValues) => {
           ),
         },
         images: {
-          create: data.images.map((image: { url: string }) => image),
+          create:
+            data.images.length > 0
+              ? data.images.map((image: { url: string }) => image)
+              : DEFAULT_IMAGES.map((image: { url: string }) => image),
         },
       },
       include: {
