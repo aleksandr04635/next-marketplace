@@ -32,7 +32,7 @@ export const UserButton = () => {
     }
     return (
       <DropdownMenu>
-        <DropdownMenuTrigger className="rounded-full">
+        <DropdownMenuTrigger className="rounded-full !outline-none ">
           <Avatar>
             <AvatarImage src={user?.image || ""} />
             <AvatarFallback className="bg-sky-500">

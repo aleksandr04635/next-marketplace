@@ -1,5 +1,8 @@
 import { db } from "@/lib/db";
 import ProductCard from "./product-card";
+import { PAGE_SIZE } from "@/lib/utils";
+import PaginationBar from "./pagination-bar";
+//import { useState } from "react";
 
 export const revalidate = 0;
 
@@ -16,10 +19,14 @@ const ProductsList: React.FC<ProductsListProps> = async ({
   searchParams,
 }) => {
   console.log("searchParams from ProductsList: ", searchParams);
+  /* const [page, setPage] = useState(1);
+  console.log("page from ProductsList: ", page); */
+
   const whereObject: any = categorySlug
     ? { category: { slug: categorySlug } }
     : {};
 
+  let page = 1;
   let paramsArray: any = [];
   for (let x in searchParams) {
     //console.log(" from searchParams: ", x, searchParams[x]);
@@ -31,6 +38,8 @@ const ProductsList: React.FC<ProductsListProps> = async ({
         };
         break;
       case "page":
+        //setPage(parseInt(searchParams.page));
+        page = parseInt(searchParams.page);
         break;
       case "searchTerm":
         whereObject.name = {
@@ -54,6 +63,7 @@ const ProductsList: React.FC<ProductsListProps> = async ({
     }
   }
   //console.log("paramsArray from ProductsList: ", paramsArray);
+  console.log("page from ProductsList: ", page);
 
   if (categorySlug) {
     const category = await db.category.findFirst({
@@ -104,6 +114,13 @@ const ProductsList: React.FC<ProductsListProps> = async ({
     whereObject.productProperties.some.AND
   ); */
   //for (let x of whereObject.productProperties.some.AND) { console.log("x[1].valueSlug from ProductsList: ",x[1].valueSlug);}
+
+  const totaProductsCount = await db.product.count({ where: whereObject });
+  const totalPages = Math.ceil(totaProductsCount / PAGE_SIZE);
+  //whereObject.skip = (page - 1) * pageSize;
+  //whereObject.take = pageSize;
+  console.log("totaProductsCount from ProductsList: ", totaProductsCount);
+
   const products = await db.product.findMany({
     where: whereObject,
     include: {
@@ -114,26 +131,34 @@ const ProductsList: React.FC<ProductsListProps> = async ({
     orderBy: {
       createdAt: "desc",
     },
+    skip: (page - 1) * PAGE_SIZE,
+    take: PAGE_SIZE,
   });
-  //console.log("products from ProductsList: ", products);
+  console.log("products from ProductsList: ", products);
 
   return (
-    <div className="w-full ml-1  mr-1 h-full">
+    <div className="w-full ml-1  mr-1 mt-1 h-full">
       {/*  <div>Category: {categorySlug}</div>
       <div>searchParams.price: {searchParams.price}</div>
       <div>searchParams.searchTerm: {searchParams.searchTerm}</div> */}
-      <div className="mt-0 lg:col-span-4 lg:mt-0">
-        {products.length === 0 && (
+      <div className="">
+        Total number of products, corresponding to your query:{" "}
+        {totaProductsCount}
+      </div>
+      <PaginationBar currentPage={page} totalPages={totalPages} />
+      <div className=" lg:col-span-4 my-2 ">
+        {/*   {products.length === 0 && (
           <div className="flex items-center justify-center h-full w-full  dark:text-cyan-400">
             No results found.
           </div>
-        )}
+        )} */}
         <div className=" w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
           {products.map((item) => (
             <ProductCard key={item.id} data={item} />
           ))}
         </div>
       </div>
+      <PaginationBar currentPage={page} totalPages={totalPages} />
     </div>
   );
 };

@@ -218,7 +218,7 @@ const SettingsPage = () => {
                   />
                 </>
               )}
-              {/*  ADMIN */}
+              {/*  ADMIN COMMENT IN PRODUCTION*/}
               <FormField
                 control={form.control}
                 name="role"

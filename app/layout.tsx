@@ -10,7 +10,7 @@ import { Footer } from "./_components/footer";
 import { ThemeProvider } from "./_components/theme-provider";
 import { ToastProvider } from "./_components/toast-provider";
 import { ReduxProvider } from "./_components/redux-provider";
-import StoreProvider from "./_components/store-provider";
+//import StoreProvider from "./_components/store-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 

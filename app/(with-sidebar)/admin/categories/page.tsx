@@ -19,7 +19,7 @@ const CategoryPage = async () => {
       // createdAt: "desc",
     },
   });
-  console.log("categories from CategoryPage: ", categories);
+  //console.log("categories from CategoryPage: ", categories);
 
   const formattedCategories: CategoryColumn[] = categories.map((item) => ({
     id: item.id,

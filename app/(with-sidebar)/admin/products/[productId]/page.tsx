@@ -18,7 +18,7 @@ const ProductPage = async ({ params }: { params: { productId: string } }) => {
       },
     },
   });
-  console.log("product from ProductPage: ", product);
+  //console.log("product from ProductPage: ", product);
 
   const categories = await db.category.findMany({
     include: {

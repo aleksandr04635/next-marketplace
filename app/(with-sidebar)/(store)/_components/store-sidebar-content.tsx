@@ -51,6 +51,7 @@ export const StoreSidebarContent = ({
   }, [categorySelected]);
 
   const currentQ = qs.parse(searchParams.toString());
+  currentQ.page = null; //NEW
   //console.log("currentQ from StoreSidebarContent: ", currentQ);
 
   const DEFAULT_PRICE = [0, 100] as [number, number];

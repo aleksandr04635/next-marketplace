@@ -34,3 +34,5 @@ export const DEFAULT_IMAGES = [
     url: "https://res.cloudinary.com/dqwdfhxgl/image/upload/v1712551569/contacts/z1twkp38rsmntieeda60.jpg",
   },
 ] as const;
+
+export const PAGE_SIZE = 8;
