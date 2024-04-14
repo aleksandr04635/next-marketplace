@@ -127,7 +127,7 @@ const SearchFormForHeader = ({ type }: Props) => {
                   <div className="relative">
                     <Input
                       {...field}
-                      placeholder="Search in product name"
+                      placeholder="Search in product names"
                       type="text"
                       onChange={(ev) => {
                         setSearchTerm(ev.target.value);

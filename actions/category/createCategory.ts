@@ -48,11 +48,14 @@ export const createCategory = async (category: Category) => {
         properties: {
           create: category.properties.map((property: Property) => {
             return {
-              name: property.name,
+              name: property.name.trim(),
               slug: property.slug,
               values: {
                 create: property.values.map((value: Value) => {
-                  return { name: value.name, slug: value.slug };
+                  return {
+                    name: value.name.trim(),
+                    slug: value.slug,
+                  };
                 }),
               },
             };

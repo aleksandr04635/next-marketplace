@@ -14,14 +14,14 @@ export default function CartButton() {
   //const { cart } = useSelector(selectCart);
   //const store = useSelector(selectCart);
   const { cart } = useAppSelector(selectCart);
-  console.log("  cart  from CartButton: ", cart);
+  // console.log("  cart  from CartButton: ", cart);
   let num = 0;
   if (cart) {
     for (let item of cart) {
       num += item.number;
     }
   }
-  console.log("   num  from CartButton: ", num);
+  // console.log("   num  from CartButton: ", num);
 
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);

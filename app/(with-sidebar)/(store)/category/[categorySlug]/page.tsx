@@ -10,11 +10,33 @@ import getColors from '@/actions/get-colors';
 
 import Filter from './components/filter';
 import MobileFilters from './components/mobile-filters'; */
-
+import { Metadata } from "next";
 import { CategoryPageProps } from "@/types";
 import ProductsList from "../../_components/products-list";
+import { db } from "@/lib/db";
 
 //export const revalidate = 0;
+
+/* export const metadata: Metadata = {
+  title: "Category | My Marketplace",
+  description: "A marketplace created with Next.js 14 and Prisma",
+}; */
+export async function generateMetadata({
+  params,
+  searchParams,
+}: CategoryPageProps): Promise<Metadata> {
+  const category = await db.category.findFirst({
+    where: {
+      slug: params.categorySlug || "",
+    },
+  });
+  console.log("category from CategoryPage: ", category);
+  const str = category?.name || "";
+  return {
+    title: `${str} | My Marketplace`,
+    description: "A marketplace created with Next.js 14 and Prisma",
+  };
+}
 
 const CategoryPage: React.FC<CategoryPageProps> = async ({
   params,

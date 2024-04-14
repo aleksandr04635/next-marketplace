@@ -10,6 +10,7 @@ import { db } from "@/lib/db";
 import { ProductCard } from "@/types";
 import MyButton from "@/components/ui/my-button";
 import { addProduct } from "@/redux/cart/cartSlice";
+import { useAppDispatch } from "@/redux/store";
 
 export const revalidate = 0;
 
@@ -22,7 +23,7 @@ export const revalidate = 0;
 //const ProductPage: React.FC<ProductPageProps> = async ({ params }) => {
 const ProductComponent: React.FC<ProductCard> = ({ data }) => {
   //console.log("data from ProductComponent: ", data);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   if (!data) {
     return null;
@@ -38,7 +39,7 @@ const ProductComponent: React.FC<ProductCard> = ({ data }) => {
           <div className="flex flex-col gap-3 mt-2 p-0 md:mt-0 md:px-0 text-gray-900 dark:text-white ">
             <MyButton
               className=" "
-              onClick={() => dispatch(addProduct(data.id))}
+              onClick={() => dispatch(addProduct({ data: data }))}
             >
               <GrCart className="mr-2 h-5 w-5" />
               Add To Cart

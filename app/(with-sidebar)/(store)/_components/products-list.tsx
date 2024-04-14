@@ -6,6 +6,12 @@ import PaginationBar from "./pagination-bar";
 
 export const revalidate = 0;
 
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Category2 | My Marketplace",
+  description: "A marketplace created with Next.js 14 and Prisma",
+};
 interface ProductsListProps {
   categorySlug: string | null;
   searchParams: any /* {
@@ -23,8 +29,8 @@ const ProductsList: React.FC<ProductsListProps> = async ({
   console.log("page from ProductsList: ", page); */
 
   const whereObject: any = categorySlug
-    ? { category: { slug: categorySlug } }
-    : {};
+    ? { category: { slug: categorySlug }, number: { gte: 0 } }
+    : { number: { gte: 0 } };
 
   let page = 1;
   let paramsArray: any = [];
@@ -63,7 +69,7 @@ const ProductsList: React.FC<ProductsListProps> = async ({
     }
   }
   //console.log("paramsArray from ProductsList: ", paramsArray);
-  console.log("page from ProductsList: ", page);
+  //console.log("page from ProductsList: ", page);
 
   if (categorySlug) {
     const category = await db.category.findFirst({
@@ -134,10 +140,10 @@ const ProductsList: React.FC<ProductsListProps> = async ({
     skip: (page - 1) * PAGE_SIZE,
     take: PAGE_SIZE,
   });
-  console.log("products from ProductsList: ", products);
+  //console.log("products from ProductsList: ", products);
 
   return (
-    <div className="w-full ml-1  mr-1 mt-1 h-full">
+    <div className="w-full ml-1  mr-1 mt-1 mb-1 h-full pt-1 md:pt-3">
       {/*  <div>Category: {categorySlug}</div>
       <div>searchParams.price: {searchParams.price}</div>
       <div>searchParams.searchTerm: {searchParams.searchTerm}</div> */}

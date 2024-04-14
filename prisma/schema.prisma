@@ -36,6 +36,8 @@ model User {
   twoFactorConfirmation TwoFactorConfirmation?
   categories            Category[]
   products              Product[]
+  ordersTo              Order[]                @relation("OrdersToUser")
+  ordersFrom            Order[]                @relation("OrdersFromUser")
 }
 
 model Account {
@@ -151,6 +153,7 @@ model Product {
   createdAt         DateTime          @default(now())
   updatedAt         DateTime          @updatedAt
   productProperties productProperty[]
+  OrderItem         OrderItem[]
 
   @@index([userId])
   @@index([categoryId])
@@ -179,5 +182,35 @@ model Image {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  @@index([productId])
+}
+
+model Order {
+  id         String      @id @default(uuid())
+  userToId   String
+  userTo     User        @relation("OrdersToUser", fields: [userToId], references: [id], onDelete: Cascade)
+  userFromId String
+  userFrom   User        @relation("OrdersFromUser", fields: [userFromId], references: [id], onDelete: Cascade)
+  orderItems OrderItem[] // Relation to OrderItem model
+  isPaid     Boolean     @default(false)
+  phone      String      @default("")
+  address    String      @default("")
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+
+  @@index([userToId])
+  @@index([userFromId])
+}
+
+// Intermediary for a many-to-many relationship
+model OrderItem {
+  id        String  @id @default(uuid())
+  number    Int
+  orderId   String // Foreign Key to Order
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId String // Foreign Key to Product
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([orderId])
   @@index([productId])
 }

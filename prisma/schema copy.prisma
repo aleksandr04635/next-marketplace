@@ -35,6 +35,7 @@ model User {
   isTwoFactorEnabled    Boolean                @default(false)
   twoFactorConfirmation TwoFactorConfirmation?
   categories            Category[]
+  products              Product[]
 }
 
 model Account {
@@ -95,13 +96,14 @@ model TwoFactorConfirmation {
 model Category {
   id         String     @id @default(uuid())
   userId     String
-  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user       User       @relation(fields: [userId], references: [id]) //, onDelete: Cascade)
   name       String
   slug       String
   properties Property[]
   //products    Product[] @relation("CategoryToProduct")
   createdAt  DateTime   @default(now())
   updatedAt  DateTime   @updatedAt
+  products   Product[]
 
   @@index([userId])
 }
@@ -120,13 +122,62 @@ model Property {
 }
 
 model Value {
-  id         String   @id @default(uuid())
-  propertyId String // Foreign Key to Product
-  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
-  name       String
-  slug       String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id                String           @id @default(uuid())
+  propertyId        String // Foreign Key to Product
+  property          Property         @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  name              String
+  slug              String
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+  productProperty   productProperty? @relation(fields: [productPropertyId], references: [id])
+  productPropertyId String?
 
   @@index([propertyId])
+}
+
+model Product {
+  id                String            @id @default(uuid())
+  userId            String // Foreign Key to Store
+  user              User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  categoryId        String // Foreign Key to Category
+  category          Category          @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  name              String
+  slug              String
+  description       String
+  price             Decimal
+  number            Int
+  images            Image[] // Relation to Image model
+  //orderItems OrderItem[] // Relation to Order model
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  productProperties productProperty[]
+
+  @@index([userId])
+  @@index([categoryId])
+}
+
+model productProperty {
+  id           String   @id @default(uuid())
+  productId    String // Foreign Key to Product
+  product      Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  propertyName String
+  propertySlug String
+  valueName    String
+  valueSlug    String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  Value        Value[]
+
+  @@index([productId])
+}
+
+model Image {
+  id        String   @id @default(uuid())
+  productId String // Foreign Key to Product
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  url       String // URL of the image
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([productId])
 }

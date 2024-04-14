@@ -24,9 +24,9 @@ export default function PaginationBar({
   const currentQ = qs.parse(searchParams.toString());
   //const { pageSize: pageSizeStore } = useSelector((state) => state.pageSize);
   //const pageSize = PAGE_SIZE;
-  console.log("currentQ: ", currentQ);
-  console.log("currentPage: ", currentPage);
-  console.log("totalPages: ", totalPages);
+  //console.log("currentQ: ", currentQ);
+  //console.log("currentPage: ", currentPage);
+  //console.log("totalPages: ", totalPages);
   if (totalPages <= 1) {
     return (
       <>
@@ -63,7 +63,7 @@ export default function PaginationBar({
     return cn;
   };
 
-  console.log("pathname from PaginationBar: ", pathname);
+  /*  console.log("pathname from PaginationBar: ", pathname);
   console.log(
     " window.location.href from PaginationBar: ",
     window.location.href
@@ -71,7 +71,7 @@ export default function PaginationBar({
   console.log(
     " window.location.origin from PaginationBar: ",
     window.location.origin
-  );
+  ); */
   const makeQuery = (page: number) => {
     const query = { ...currentQ, page: page };
     const url = qs.stringifyUrl(
