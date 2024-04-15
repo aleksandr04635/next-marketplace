@@ -24,7 +24,7 @@ const ProductsList: React.FC<ProductsListProps> = async ({
   categorySlug,
   searchParams,
 }) => {
-  console.log("searchParams from ProductsList: ", searchParams);
+  //console.log("searchParams from ProductsList: ", searchParams);
   /* const [page, setPage] = useState(1);
   console.log("page from ProductsList: ", page); */
 
@@ -114,7 +114,7 @@ const ProductsList: React.FC<ProductsListProps> = async ({
     }
   }
 
-  console.log("whereObject from ProductsList: ", whereObject);
+  // console.log("whereObject from ProductsList: ", whereObject);
   /*   console.log(
     "whereObject.productProperties.some.AND from ProductsList: ",
     whereObject.productProperties.some.AND
@@ -125,7 +125,7 @@ const ProductsList: React.FC<ProductsListProps> = async ({
   const totalPages = Math.ceil(totaProductsCount / PAGE_SIZE);
   //whereObject.skip = (page - 1) * pageSize;
   //whereObject.take = pageSize;
-  console.log("totaProductsCount from ProductsList: ", totaProductsCount);
+  //console.log("totaProductsCount from ProductsList: ", totaProductsCount);
 
   const products = await db.product.findMany({
     where: whereObject,
@@ -152,7 +152,7 @@ const ProductsList: React.FC<ProductsListProps> = async ({
         {totaProductsCount}
       </div>
       <PaginationBar currentPage={page} totalPages={totalPages} />
-      <div className=" lg:col-span-4 my-2 ">
+      <div className=" lg:col-span-4 my-2 lg:pr-4 ">
         {/*   {products.length === 0 && (
           <div className="flex items-center justify-center h-full w-full  dark:text-cyan-400">
             No results found.

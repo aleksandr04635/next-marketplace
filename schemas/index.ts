@@ -71,19 +71,20 @@ export const RegisterSchema = z.object({
   }),
 });
 
-export const productFormSchema = z.object({
-  name: z.string().min(3),
-  images: z.object({ url: z.string() }).array(),
-  productProperties: z
-    .object({ propertyName: z.string().min(3), valueName: z.string().min(3) })
-    .array(),
-  number: z.coerce.number().min(1),
-  price: z.coerce.number().min(1),
-  categoryId: z.string().min(1),
-  description: z.string().min(3),
-});
-//UNCOMMENT IN PRODUCTION
-/*   .refine(
+export const productFormSchema = z
+  .object({
+    name: z.string().min(3),
+    images: z.object({ url: z.string() }).array(),
+    productProperties: z
+      .object({ propertyName: z.string().min(3), valueName: z.string().min(3) })
+      .array(),
+    number: z.coerce.number().min(1),
+    price: z.coerce.number().min(1),
+    categoryId: z.string().min(1),
+    description: z.string().min(3),
+  })
+  .refine(
+    //UNCOMMENT IN PRODUCTION
     (data) => {
       if (data.images.length == 0) {
         return false;
@@ -94,4 +95,4 @@ export const productFormSchema = z.object({
       message: "Add at least one image",
       path: ["images"],
     }
-  ); */
+  );

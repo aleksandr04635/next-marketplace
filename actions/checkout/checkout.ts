@@ -142,7 +142,7 @@ export const checkout = async (cart: checkoutProps[]) => {
           orderItems: true,
         },
       });
-      console.log("order from checkout: ", order);
+      //console.log("order from checkout: ", order);
       ordersIds.push(order.id);
       // };
     }
@@ -178,15 +178,15 @@ export const checkout = async (cart: checkoutProps[]) => {
         ordersIds.push(order.id);
       }
     ); */
-    console.log("ordersIds from checkout: ", ordersIds);
+    //console.log("ordersIds from checkout: ", ordersIds);
 
     const session = await stripe.checkout.sessions.create({
       line_items,
       mode: "payment",
-      /*   billing_address_collection: "required",
+      billing_address_collection: "required",
       phone_number_collection: {
         enabled: true,
-      }, */
+      },
       success_url: `${process.env.NEXT_PUBLIC_APP_URL}/cart?success=1`,
       cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/cart?canceled=1`,
       metadata: {

@@ -15,7 +15,7 @@ const HomePage: React.FC<CategoryPageProps> = async ({
   params,
   searchParams,
 }) => {
-  console.log("searchParams from CategoryPage: ", searchParams);
+  //console.log("searchParams from CategoryPage: ", searchParams);
 
   return <ProductsList categorySlug={null} searchParams={searchParams} />;
 };

@@ -52,8 +52,9 @@ const CategoryPage: React.FC<CategoryPageProps> = async ({
   const colors = await getColors();
   const category = await getCategory(params.categoryId); */
 
+  // <div className="w-full h-full p-2 pl-0 lg:pl-2">
   return (
-    <div className="w-full h-full p-2 pl-0 lg:pl-2">
+    <div className="w-full h-full ">
       <ProductsList
         categorySlug={params.categorySlug}
         searchParams={searchParams}

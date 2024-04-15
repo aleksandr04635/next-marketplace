@@ -63,7 +63,7 @@ const ProductsPage = async () => {
 
   //lg:max-w-[1200px]
   return (
-    <Card className=" w-full mx-auto  ">
+    <Card className=" w-full my-2  mx-auto  ">
       {/*  <CardHeader>
       <p className="text-2xl font-semibold text-center py-0">
         {`${categories?.length}`} Categories exist

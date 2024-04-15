@@ -11,9 +11,9 @@ export const AdminSidebar = () => {
 
   return (
     <div>
-      <h3>Admin Sidebar</h3>
+      {/* <h3>Admin Sidebar</h3> */}
       <div className="flex gap-y-2 flex-col ">
-        <Button
+        {/*  <Button
           asChild
           variant={pathname === "/admin/server" ? "default" : "outline"}
         >
@@ -30,7 +30,7 @@ export const AdminSidebar = () => {
           variant={pathname === "/admin/admin" ? "default" : "outline"}
         >
           <Link href="/admin/admin">Admin</Link>
-        </Button>
+        </Button> */}
         {/*  <Button
           asChild
           variant={pathname === "/admin/settings" ? "default" : "outline"}
@@ -59,18 +59,30 @@ export const AdminSidebar = () => {
             Categories
           </MyButton>
         </Link>
-        {/*  <Button
-          asChild
-          variant={pathname === "/admin/products" ? "default" : "outline"}
-        >
-          <Link href="/admin/products">Products</Link>
-        </Button> */}
         <Link href="/admin/products">
           <MyButton
             className="w-full"
             style={pathname === "/admin/products" ? "default" : "inactive"}
           >
             Products
+          </MyButton>
+        </Link>
+        <Link href="/admin/orders-for-me">
+          <MyButton
+            className="w-full"
+            style={pathname === "/admin/orders-for-me" ? "default" : "inactive"}
+          >
+            Orders for me
+          </MyButton>
+        </Link>
+        <Link href="/admin/orders-from-me">
+          <MyButton
+            className="w-full"
+            style={
+              pathname === "/admin/orders-from-me" ? "default" : "inactive"
+            }
+          >
+            Orders from me
           </MyButton>
         </Link>
       </div>

@@ -23,7 +23,7 @@ export async function POST(req: Request) {
 
   const session = event.data.object as Stripe.Checkout.Session;
   const address = session?.customer_details?.address;
-  console.log("session from stripe.webhooks:", session);
+  //console.log("session from stripe.webhooks:", session);
 
   const addressComponents = [
     address?.line1,
@@ -37,8 +37,16 @@ export async function POST(req: Request) {
   const addressString = addressComponents.filter((c) => c !== null).join(", ");
 
   if (event.type === "checkout.session.completed") {
-    const ordersIds = session?.metadata?.orderIds?.split("_") || [];
-    console.log("ordersIds from checkout.session.completed: ", ordersIds);
+    const ordersIds = session?.metadata?.ordersIds?.split("_") || [];
+    /*  console.log(
+      "session?.metadata from checkout.session.completed: ",
+      session?.metadata
+    );
+    console.log(
+      "metadata.ordersIds from checkout.session.completed: ",
+      session?.metadata?.orderIds
+    ); */
+    //console.log("ordersIds from checkout.session.completed: ", ordersIds);
 
     for (let orderId of ordersIds) {
       const order = await db.order.update({
@@ -54,7 +62,7 @@ export async function POST(req: Request) {
           orderItems: true,
         },
       });
-      console.log("order from checkout.session.completed: ", order);
+      //console.log("order from checkout.session.completed: ", order);
 
       for (let orderItem of order.orderItems) {
         const prod = await db.product.findFirst({
@@ -62,9 +70,9 @@ export async function POST(req: Request) {
             id: orderItem.productId,
           },
         });
-        console.log("prod from checkout.session.completed: ", prod);
+        //console.log("prod from checkout.session.completed: ", prod);
         if (prod && prod.number) {
-          await db.product.update({
+          const prod2 = await db.product.update({
             where: {
               id: orderItem.productId,
             },
@@ -72,67 +80,9 @@ export async function POST(req: Request) {
               number: prod.number - 1,
             },
           });
+          //console.log("prod2 from checkout.session.completed: ", prod2);
         }
       }
-
-      /*  const productIds = order.orderItems.map((orderItem) => orderItem.productId);
-    const products = await db.product.findMany({
-      where: {
-        id: {
-          in: [...productIds],
-        },
-      },
-    });
-    await db.product.updateMany({
-      where: {
-        id: {
-          in: [...productIds],
-        },
-      },
-      data: {
-        number: {number-1} //products.map((product) => product.number - 1),
-      },
-    });
-
-    await db.category.update({
-      where: {
-        id: category.id,
-      },
-      data: {
-        name: category.name.trim(),
-        slug: category.slug,
-        properties: {
-          deleteMany: {},
-        },
-      },
-    });
-
-    const categoryCr = await db.category.update({
-      where: {
-        id: category.id,
-      },
-      data: {
-        properties: {
-          create: category.properties.map((property: Property) => {
-            return {
-              name: property.name.trim(),
-              slug: property.slug,
-              values: {
-                create: property.values.map((value: Value) => {
-                  return {
-                    name: value.name.trim(),
-                    slug: value.slug,
-                  };
-                }),
-              },
-            };
-          }),
-        },
-      },
-      include: {
-        properties: { include: { values: true } },
-      },
-    }); */
     }
 
     return new NextResponse(null, { status: 200 });

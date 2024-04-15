@@ -79,9 +79,10 @@ const Summary = () => {
           <Currency value={totalPrice} />
         </div>
       </div>
-      <div className="mt-0 space-y-2">
-        For testing upon clicking &ldquo;Checkout&ldquo; enter credit card code
-        4242 4242 4242 4242, any CVC and any expiration date in the future
+      <div className="mt-3 space-y-2 text-sm text-orange-500">
+        For testing upon clicking &ldquo;Checkout&ldquo; enter credit card
+        number 4242 4242 4242 4242, any CVC and any expiration date in the
+        future
       </div>
       <MyButton
         onClick={onCheckout}
