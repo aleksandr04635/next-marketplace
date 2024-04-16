@@ -27,7 +27,7 @@ export const Header = () => {
     >
       <div className="flex w-full flex-col">
         <div className="w-full flex flex-col sm:flex-row justify-between items-center gap-1 sm:gap-5 md:gap-10 lg:gap-16">
-          <div className="w-full flex justify-between items-center gap-2">
+          <div className="w-full flex justify-between items-center gap-2 lg:gap-4 lg:grow-[1] lg:w-2/3">
             <MenuDropdown>
               <SideContent>
                 <StoreSidebar />
@@ -47,7 +47,7 @@ export const Header = () => {
               About&nbsp;this&nbsp;project
             </Link>
           </div>
-          <div className="w-full flex justify-between items-center gap-2">
+          <div className="w-full flex justify-between items-center gap-2 lg:grow-[2]  ">
             <SearchFormForHeader type="wide-scr" />
             <ThemeSwitch />
             <CartButton />

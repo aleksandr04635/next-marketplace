@@ -133,6 +133,7 @@ const ProductsList: React.FC<ProductsListProps> = async ({
       category: true,
       images: true,
       productProperties: true,
+      user: true,
     },
     orderBy: {
       createdAt: "desc",

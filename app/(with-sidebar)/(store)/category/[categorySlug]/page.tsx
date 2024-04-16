@@ -30,7 +30,7 @@ export async function generateMetadata({
       slug: params.categorySlug || "",
     },
   });
-  console.log("category from CategoryPage: ", category);
+  //console.log("category from CategoryPage: ", category);
   const str = category?.name || "";
   return {
     title: `${str} | My Marketplace`,

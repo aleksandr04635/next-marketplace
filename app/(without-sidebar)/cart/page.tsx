@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 import { clearCart, selectCart } from "@/redux/cart/cartSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 
-import Summary from "./components/summary";
-import CartItem from "./components/cart-item";
+import Summary from "./_components/summary";
+import CartItem from "./_components/cart-item";
 import MyButton from "@/components/ui/my-button";
 
 export const revalidate = 0;

@@ -59,7 +59,7 @@ type ProductFormValues = z.infer<typeof productFormSchema> & {
   id: string;
 };
 export const updateProduct = async (data: ProductFormValues) => {
-  console.log("data from createCategory: ", data);
+  //console.log("data from  updateProduct: ", data);
   //export const updateProduct = async (category: Category) => {
   //console.log("category entered into from updateCategory: ", category);
   try {
@@ -128,7 +128,7 @@ export const updateProduct = async (data: ProductFormValues) => {
         images: true,
       },
     });
-    console.log("product exiting from updateProduct: ", productUp);
+    // console.log("product exiting from updateProduct: ", productUp);
     /*     await db.category.update({
       where: {
         id: category.id,

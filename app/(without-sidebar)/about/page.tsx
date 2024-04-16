@@ -3,6 +3,11 @@ import React from "react";
 
 type Props = {};
 
+export const metadata = {
+  title: "About this marketplace | My Marketplace",
+  description: "Description of My Marketplace project",
+};
+
 function page({}: Props) {
   return (
     <div className="mx-auto max-w-2xl p-3 text-justify ">
@@ -12,80 +17,77 @@ function page({}: Props) {
         </h1>
         <div className="text-md flex flex-col gap-4">
           <p>
-            This blogspot was created by me, Oleksandr Liashchenko as a
+            This marketplace was created by me, Oleksandr Liashchenko as a
             demonstration of my skill set.
           </p>
           <p>
-            It uses React as a front framework and Express as a back one with
-            Mongo database accessed through Mongoose ORM. Deployment to Vercel
-            required the minimization of the number of .js files in the API
-            directory and a new database connection for each serverless
-            function. That&apos;s the reason of the file structure of the api
-            folder being so far from optimal. For UI elements Flowbite library
-            with Tailwind styles is used.
+            It was built with Next.js 14 framework with Postgres database,
+            accessed via Prisma ORM. For UI Snadcn-ui component library is used
+            with Tailwind styling.
           </p>
           <p>
-            Redux Toolkit is used to store user data, the theme, and the number
-            of posts per page, persisting them in the local storage. RTK query
-            performs comments, posts and comments fetching, creating and
-            updating by invalidating the cached query results by corresponding
-            data mutations. For example, create a post with tags and then delete
-            it from a posts list screen. The numbers of posts with tags in the
-            tags list will change by posts mutations. Also, you can edit a post
-            in completely another window and change its tag, and upon returning
-            to the main window with the tags list it will change.
+            Authentication is done with Auth.js (the new name of Next-auth v5).
+            Options for Google and Github OAuth authentication as well as via
+            email and password, stored in the database, are available. In the
+            last case, the full set of email sending is implemented - for email
+            verification, including the case of password changing, password
+            resetting via email, and sending a code to email in the optional
+            case of two-factor authentication, that you can turn on on the
+            setting page. Emails are created from templates and are sent via
+            Nodemailer with Google SMTP.
           </p>
           <p>
-            The entire comments tree system worked in this way, by invalidation
-            of queries in the cache by mutations initially, you can still find
-            this code commented, but then I remade the comments tree into manual
-            cache changing by optimistic update - changing the cache before the
-            delivery of the query result in cases of editing and liking of
-            comments, or pessimistic update - by changing the result of previous
-            queries depending on the result of new ones to another endpoint in
-            cases of creation and deletion of comments. It minimised the time
-            the user sees any loading to the minimum. Possible errors are
-            accounted for too - you can uncomment commented throwing of test
-            errors in comment.route.js in the API folder and see the result, for
-            example by clicking like of comment - like count would initially
-            change and then the error would appear with rollback of like count
-            change, without loading indicators that you can see during the
-            initial loading.
+            This is not just a shop with pre-programmed products or ones,
+            created by a single owner according to a pre-programmed template of
+            categories. Any authenticated user can create not only their
+            products but entire categories with their own set of product
+            properties with a set of possible options, like color, size, screen
+            resolution, and so on.
           </p>
           <p>
-            Note how I made a logical tree of comments more readable with just a
-            style. Also, try to delete an already commented comment. It will
-            just change status and will be deleted automatically when all the
-            comments to it will be deleted - try it. It works even for an entire
-            branch of comments, marked for deletion while at least one comment
-            to them all remains not deleted - they all will be deleted in DB and
-            UI by deletion of that last comment.
+            All the forms are made with a combination of react-hook-form, Zod
+            validation, and Shadcn-UI component library. Particularly note the
+            form for product creation, in which property value selection fields
+            appear depending on the selected product category.
           </p>
           <p>
-            Note how the pagination is made: the number of posts on the topmost
-            page varies depending on the total number of posts, corresponding to
-            the query. It, and the whole pagination system was made with the
-            intent of full correspondence of shown data to the URL, so that the
-            addition of new posts doesn&apos;t change which posts are shown by
-            the old URL, so that they all can be stored in bookmarks, for
-            example. Note how changing the number of posts per page changes the
-            URL, just like the selection of author or tag, the posts of which
-            are shown.
+            Also notice the products filtering system, Prisma queries for which,
+            which depend on the user-created categories system, I have made
+            myself with nothing but Prisma documentation for reference.
           </p>
           <p>
-            User authentication is made with two options: email and password or
-            via Google account. Note that after registration with Google OAuth,
-            you will be able to create a password on the profile page or through
-            an email password resetting mechanism, and use it just as a
-            combination of email and password, or as originally, through a
-            Google account. Also, appreciate how I made a password reset
-            functionality and email verification with sending an email made from
-            a template. Your email can also be changed on your profile page,
-            with confirmation email sending and safety assurance - you would be
-            able to use an old email until the new one is saved in the DB upon
-            its confirmation.
+            Also, notice how the shown products list completely corresponds to
+            the URL, the price, the page number, and the search query included,
+            so you can add the list of products, selected by you, to your
+            browser bookmarks. The page title depends on the selected category
+            or the product name for the same purpose.
           </p>
-
+          <p>
+            Stripe payment system is integrated, including its webhook, which
+            changes order status in the database, decreases the quantity of the
+            available products, and adds the data, the user inputted in the
+            Stripe system, such as the phone number and delivery address.
+          </p>
+          <p>
+            Note, that the user can simultaneously add to their cart products,
+            created by different users and pay for them in one go, which creates
+            separate order entities for each seller. You can see these orders
+            both as buyer and seller in the corresponding menu items.
+          </p>
+          <p>
+            For the shopping cart functionality Redux Toolkit is used, which
+            persists data in the local storage with the redux-persist library,
+            so the user can add the products to their cart without signing in
+            for any time, and then sign in to pay.
+          </p>
+          <p>
+            Dark theme switching is made with next-themes. It utilizes browser
+            preffered theme as a default, but you can switch it in browser
+            settings or developer tools and the site will switch the theme
+            accordingly.
+          </p>
+          <p>Images for products and user image are uploaded to Cloudinary.</p>
+          <p>For product description TinyMCE rich text editor is used.</p>
           <Link
             className="link-stand"
             href={`https://github.com/aleksandr04635/next-marketplace`}

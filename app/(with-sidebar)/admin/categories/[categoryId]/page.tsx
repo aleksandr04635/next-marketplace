@@ -70,7 +70,7 @@ const CategoryPage = async ({ params }: { params: { categoryId: string } }) => {
 
   //this route serves only for editing and creating of new ones
   return (
-    <Card className=" w-full mx-auto max-w-[600px] md:w-[600px] ">
+    <Card className=" w-full my-2 mx-auto max-w-[600px] md:w-[600px] ">
       <CardHeader>
         <p className="text-2xl font-semibold text-center py-0"> Category</p>
       </CardHeader>

@@ -7,24 +7,31 @@ import { Expand, ShoppingCart } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Currency from "../../../../components/currency";
 import Link from "next/link";
-import { ProductCard } from "@/types";
+import { ProductCardEx } from "@/types";
 import MyButton from "@/components/ui/my-button";
 import { GrCart } from "react-icons/gr";
 import { addProduct } from "@/redux/cart/cartSlice";
 import { useAppDispatch } from "@/redux/store";
+import { User } from "@prisma/client";
 
 //import IconButton  from "@/components/ui/icon-button";
 //import usePreviewModal from "@/hooks/use-preview-modal";
 //import useCart from "@/hooks/use-cart";
 //import { Product } from "@/types";
 
-const ProductCard: React.FC<ProductCard> = ({ data }) => {
+/* interface Props extends ProductCardType {
+  user: User;
+} */
+//const ProductCard: React.FC<ProductCardType & { user: User }> = ({ data }) => {
+//const ProductCard: React.FC<Props> = ({ data }) => {
+const ProductCard: React.FC<ProductCardEx> = ({ data }) => {
+  //console.log("data from ProductCard: ", data);
   //const previewModal = usePreviewModal();
   //const cart = useCart();
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  const handleClick = () => {
+  /*   const handleClick = () => {
     router.push(`/product/${data?.id}`);
   };
 
@@ -38,7 +45,7 @@ const ProductCard: React.FC<ProductCard> = ({ data }) => {
     event.stopPropagation();
 
     // cart.addItem(data);
-  };
+  }; */
 
   // group cursor-pointer overflow-hidden relative  h-full h-[170px]
   return (
@@ -77,7 +84,6 @@ const ProductCard: React.FC<ProductCard> = ({ data }) => {
         </div>*/}
       </div>
       <div className="flex flex-col justify-between h-[230px]  p-2 space-y-0">
-        {" "}
         {/*  h-[250px] */}
         <MyButton
           variant="icon"
@@ -93,8 +99,11 @@ const ProductCard: React.FC<ProductCard> = ({ data }) => {
           rel="noopener noreferrer"
           className="link-stand cursor-pointer"
         >
-          <p className="font-semibold text-base text-justify">{data.name}</p>{" "}
+          <p className="font-semibold text-base text-justify">{data.name}</p>
         </Link>
+        <p className="font-semibold text-base text-justify">
+          store: {data.user.storeName || data.user.email}
+        </p>
         <div className="flex items-center justify-between">
           <Currency value={+data?.price} />
         </div>

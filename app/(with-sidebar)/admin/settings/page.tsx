@@ -80,7 +80,7 @@ const SettingsPage = () => {
   };
 
   return (
-    <Card className=" w-full mx-auto max-w-[600px] md:w-[600px] ">
+    <Card className=" w-full my-2 mx-auto max-w-[600px] md:w-[600px] ">
       <CardHeader>
         <p className="text-2xl font-semibold text-center py-0">⚙️ Settings</p>
       </CardHeader>
@@ -95,6 +95,9 @@ const SettingsPage = () => {
                   <FormItem>
                     <div className="flex flex-col  items-center space-y-2 ">
                       <FormLabel>Front image of your store</FormLabel>
+                      <div className="mx-auto text-sm ">
+                        (Click to change it)
+                      </div>
                       <FormControl>
                         <FrontImageUpload
                           value={field.value ? field.value : ""}

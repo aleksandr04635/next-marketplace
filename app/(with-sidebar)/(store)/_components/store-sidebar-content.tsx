@@ -54,7 +54,7 @@ export const StoreSidebarContent = ({
   currentQ.page = null; //NEW
   //console.log("currentQ from StoreSidebarContent: ", currentQ);
 
-  const DEFAULT_PRICE = [0, 100] as [number, number];
+  const DEFAULT_PRICE = [0, 200] as [number, number];
   //const minPrice = Math.min(filter.price.range[0], filter.price.range[1]);
   //const maxPrice = Math.max(filter.price.range[0], filter.price.range[1]);
 
@@ -195,7 +195,7 @@ export const StoreSidebarContent = ({
                       />
                       <label
                         htmlFor={`${pr.slug}-${val.slug}`}
-                        className="ml-3 text-sm cursor-pointer dark:text-cyan-500 text-blue-500 group-hover:text-cyan-500 darl:group-hover:text-blue-500"
+                        className="ml-3 text-sm cursor-pointer dark:text-cyan-500 text-blue-500 group-hover:text-cyan-500 dark:group-hover:text-blue-500"
                       >
                         {val.name}
                       </label>

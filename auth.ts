@@ -32,7 +32,9 @@ export const {
         where: { id: params.user.id },
         data: {
           emailVerified: new Date(),
-          storeName: params.user.name + "'s store",
+          storeName: params?.user?.name
+            ? params?.user?.name + "'s store"
+            : "New store",
         },
       });
     },

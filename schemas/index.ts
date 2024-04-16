@@ -12,7 +12,7 @@ export const SettingsSchema = z
     password: z.optional(z.string().min(6)),
     newPassword: z.optional(z.string().min(6)),
   })
-  .refine(
+  /*  .refine(
     (data) => {
       if (data.password && !data.newPassword) {
         return false;
@@ -23,7 +23,7 @@ export const SettingsSchema = z
       message: "To change a password enter your current one and a new one!",
       path: ["newPassword"],
     }
-  )
+  ) */
   .refine(
     (data) => {
       if (data.newPassword && !data.password) {

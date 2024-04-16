@@ -15,6 +15,7 @@ const OrdersPage = async () => {
       userToId: user?.id || "",
     },
     include: {
+      userFrom: true,
       orderItems: {
         include: {
           product: true,
@@ -30,6 +31,7 @@ const OrdersPage = async () => {
     id: item.id,
     phone: item.phone,
     address: item.address,
+    buyerEmail: item.userFrom.email || "",
     products: item.orderItems
       .map((orderItem) => orderItem.product.name)
       .join(", "),
@@ -42,8 +44,9 @@ const OrdersPage = async () => {
     createdAt: format(item.createdAt, "MMMM do, yyyy"),
   }));
 
+  //ml-0  lg:ml-2
   return (
-    <Card className=" w-full mx-auto ml-0 my-2 lg:ml-2 lg:max-w-[1200px] ">
+    <Card className=" w-full mx-auto my-2 lg:max-w-[1200px] ">
       <CardContent>
         <OrderClient data={formattedOrders} />
       </CardContent>

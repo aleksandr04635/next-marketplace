@@ -28,7 +28,7 @@ const ProductPage = async ({ params }: { params: { productId: string } }) => {
 
   //md:w-[900px]
   return (
-    <Card className=" w-full mx-auto max-w-[800px]  ">
+    <Card className=" w-full my-2 mx-auto max-w-[800px]  ">
       {/* <CardHeader>
         <p className="text-2xl font-semibold text-center py-0"> Category</p>
       </CardHeader> */}

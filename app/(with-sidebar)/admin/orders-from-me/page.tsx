@@ -15,6 +15,7 @@ const OrdersPage = async () => {
       userFromId: user?.id || "",
     },
     include: {
+      userTo: true,
       orderItems: {
         include: {
           product: true,
@@ -25,11 +26,13 @@ const OrdersPage = async () => {
       createdAt: "desc",
     },
   });
+  // console.log("orders from orders-from-me: ", orders);
 
   const formattedOrders: OrderColumn[] = orders.map((item) => ({
     id: item.id,
     phone: item.phone,
     address: item.address,
+    storeEmail: item.userTo.email || "",
     products: item.orderItems
       .map((orderItem) => orderItem.product.name)
       .join(", "),
@@ -42,8 +45,11 @@ const OrdersPage = async () => {
     createdAt: format(item.createdAt, "MMMM do, yyyy"),
   }));
 
+  //console.log("formattedOrders from orders-from-me: ", orders);
+
+  //ml-0  lg:ml-2
   return (
-    <Card className=" w-full mx-auto ml-0 my-2 lg:ml-2 lg:max-w-[1200px] ">
+    <Card className=" w-full mx-auto my-2 lg:max-w-[1200px] ">
       <CardContent>
         <OrderClient data={formattedOrders} />
       </CardContent>

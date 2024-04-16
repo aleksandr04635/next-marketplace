@@ -41,6 +41,9 @@ import ImageUpload from "@/app/(with-sidebar)/admin/products/[productId]/_compon
 import { Checkbox } from "@/components/ui/checkbox";
 import { AlertModal } from "@/components/ui/alert-modal";
 import PropertiesControl from "./properties-control";
+
+import TinyMCEEditor from "./TinyMCEEditor";
+
 import MyButton from "@/components/ui/my-button";
 import { FormError } from "@/components/form-error";
 import { Textarea } from "@/components/ui/textarea";
@@ -545,7 +548,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
               )}
             />
           </div>
-          <FormField
+          {/*  <FormField
             control={form.control}
             name="description"
             render={({ field }) => (
@@ -554,60 +557,59 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                 <FormControl>
                   <Textarea
                     placeholder="Product description"
-                    className=" min-h-[150px] h-fit" /* className="resize-none h-[150px]" */
+                    className=" min-h-[150px] h-fit" 
                     {...field}
                   />
-                  {/*          <div
-                    className="
-    grid
-    text-sm
-    after:px-3.5
-    after:py-2.5
-    [&>textarea]:text-inherit
-    after:text-inherit
-    [&>textarea]:resize-none
-    [&>textarea]:overflow-hidden
-    [&>textarea]:[grid-area:1/1/2/2]
-    after:[grid-area:1/1/2/2]
-    after:whitespace-pre-wrap
-    after:invisible
-    after:content-[attr(data-cloned-val)_'_']
-    after:border
-"
-                  >
-                    <textarea
-                      className="w-full text-slate-600 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded px-3.5 py-2.5 outline-none focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
-                      name="message"
-                      id="message"
-                      rows={2}
-                      onInput={
-                        (this!.parentNode!.dataset!.clonedVal = this!.value!)
-                      }
-                      placeholder="Your request..."
-                      required
-                    ></textarea>
-                  </div> */}
+                                  </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          /> */}
+          <FormField
+            control={form.control}
+            name="description"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Description</FormLabel>
+                <FormControl>
+                  <TinyMCEEditor
+                    value2={field.value}
+                    onChange={(val: any) => {
+                      field.onChange(val);
+                      /* console.log(
+                    "onChage from TinyMCEEditor ,val: ",
+                    val
+                  ); */
+                    }}
+                    /* value2={formData.content || ""}
+            onChange={(value3) => {
+              setFormData({ ...formData, content: value3 });
+            }} */
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
+
           {/* COMMENT IN PRODUCTION */}
-          <div className="group flex items-center w-fit ">
-            <input
-              type="checkbox"
-              id="mul"
-              onChange={() => setMultiple(!multiple)}
-              checked={multiple}
-              className="h-4 w-4 cursor-pointer rounded border-blue-500 dark:border-cyan-500 text-indigo-600 focus:ring-indigo-500"
-            />
-            <label
-              htmlFor="mul"
-              className="ml-3 text-sm cursor-pointer dark:text-cyan-500 text-blue-500 group-hover:text-cyan-500 darl:group-hover:text-blue-500"
-            >
-              Create multiple
-            </label>
-          </div>
+          {!initialData && (
+            <div className="group flex items-center w-fit ">
+              <input
+                type="checkbox"
+                id="mul"
+                onChange={() => setMultiple(!multiple)}
+                checked={multiple}
+                className="h-4 w-4 cursor-pointer rounded border-blue-500 dark:border-cyan-500 text-indigo-600 focus:ring-indigo-500"
+              />
+              <label
+                htmlFor="mul"
+                className="ml-3 text-sm cursor-pointer dark:text-cyan-500 text-blue-500 group-hover:text-cyan-500 darl:group-hover:text-blue-500"
+              >
+                Create multiple
+              </label>
+            </div>
+          )}
           {/*  {categorySelected && (
               <FormField
                 control={form.control}

@@ -27,7 +27,7 @@ export const MenuDropdown = ({ children }: { children: React.ReactNode }) => {
   //w-48 color="red" w-fit
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="rounded-full  lg:hidden">
+      <DropdownMenuTrigger className="rounded-full  lg:hidden !outline-none ">
         <button
           className="  flex h-[40px] w-[40px]   items-center   justify-center rounded-full
   bg-gradient-to-bl from-cyan-400 via-blue-500 to-purple-600 p-[2px]

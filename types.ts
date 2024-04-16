@@ -3,6 +3,7 @@ import {
   Product,
   productProperty,
   Image as ImageType,
+  User,
 } from "@prisma/client";
 
 export interface CategoryPageProps {
@@ -17,6 +18,14 @@ export interface CategoryPageProps {
 
 export interface ProductCard {
   data: Product & {
+    images: ImageType[];
+    category: Category;
+    productProperties: productProperty[];
+  };
+}
+export interface ProductCardEx {
+  data: Product & {
+    user: User;
     images: ImageType[];
     category: Category;
     productProperties: productProperty[];
