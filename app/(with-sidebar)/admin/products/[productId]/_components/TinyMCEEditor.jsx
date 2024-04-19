@@ -111,8 +111,7 @@ export default function TinyMCEEditor({ value2, onChange }) {
             "autolink",
             "lists",
             "link",
-            "image",
-            "media",
+
             "charmap",
             "preview",
             "anchor",
@@ -129,7 +128,7 @@ export default function TinyMCEEditor({ value2, onChange }) {
             "autoresize",
           ],
           toolbar:
-            "paste undo redo remove| blocks |  link image media | code | preview |" +
+            "paste undo redo remove| blocks |  link | code | preview |" +
             "bold italic forecolor | alignleft aligncenter " +
             "alignright alignjustify | bullist numlist outdent indent | " +
             "removeformat  | help",

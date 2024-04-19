@@ -17,25 +17,29 @@ const ProductsPage = async () => {
       </div>
     </div>
   );} */
+  console.log("user from ProductsPage:", user);
+
   const products = await db.product.findMany({
-    where: {
-      userId: user?.id || "",
-    },
+    where:
+      user?.role == "ADMIN" ? {} : { userId: user?.id || "GIVE NO PRODUCT" },
     include: {
       category: true,
       images: true,
       productProperties: true,
+      user: true,
     },
     orderBy: {
       createdAt: "desc",
     },
   });
+  console.log("products from ProductsPage:", products);
 
   const formattedProducts: ProductColumn[] = products.map((item) => ({
     id: item.id,
     name: item.name,
     userId: item.userId,
     number: item.number,
+    storeName: item.user.storeName || item.user.email || "",
     imagesNumber: item.images.length,
     description: item.description,
     price: formatter.format(item.price.toNumber()),

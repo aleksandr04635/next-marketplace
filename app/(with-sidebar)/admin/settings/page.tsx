@@ -222,7 +222,7 @@ const SettingsPage = () => {
                 </>
               )}
               {/*  ADMIN COMMENT IN PRODUCTION*/}
-              <FormField
+              {/*  <FormField
                 control={form.control}
                 name="role"
                 render={({ field }) => (
@@ -246,7 +246,7 @@ const SettingsPage = () => {
                     <FormMessage />
                   </FormItem>
                 )}
-              />
+              /> */}
               {user?.isOAuth === false && (
                 <FormField
                   control={form.control}

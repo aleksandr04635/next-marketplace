@@ -91,7 +91,10 @@ const ProductComponent: React.FC<ProductCard> = ({ data }) => {
 
             {/* <div className="text-justify">{data.description}</div> */}
             <div className="text-justify">
-              <div dangerouslySetInnerHTML={{ __html: data.description }}></div>
+              <div
+                className="description"
+                dangerouslySetInnerHTML={{ __html: data.description }}
+              ></div>
             </div>
           </div>
         </div>
