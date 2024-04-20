@@ -55,12 +55,12 @@ export const columns: ColumnDef<ProductColumn>[] = [
     accessorKey: "number",
     header: "In stock",
   },
-  {
+  /*   {
     header: "Images",
     accessorKey: "imagesNumber",
     //id: "imagesNumber",
     //cell: ({ row }) => <div>{row.original.imagesNumber}</div>,
-  },
+  }, */
   {
     accessorKey: "category",
     header: "Category",

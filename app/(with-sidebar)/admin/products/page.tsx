@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+import { Metadata } from "next";
 
 import { db } from "@/lib/db";
 import { formatter } from "@/lib/utils";
@@ -7,6 +8,11 @@ import { ProductsClient } from "./_components/client";
 import { ProductColumn } from "./_components/columns";
 import { currentUser } from "@/lib/auth";
 import { Card, CardContent } from "@/components/ui/card";
+
+export const metadata: Metadata = {
+  title: "Products administering | My Marketplace",
+  description: "A marketplace created with Next.js 14 and Prisma",
+};
 
 const ProductsPage = async () => {
   const user = await currentUser();
@@ -17,7 +23,7 @@ const ProductsPage = async () => {
       </div>
     </div>
   );} */
-  console.log("user from ProductsPage:", user);
+  //console.log("user from ProductsPage:", user);
 
   const products = await db.product.findMany({
     where:
@@ -32,7 +38,7 @@ const ProductsPage = async () => {
       createdAt: "desc",
     },
   });
-  console.log("products from ProductsPage:", products);
+  //console.log("products from ProductsPage:", products);
 
   const formattedProducts: ProductColumn[] = products.map((item) => ({
     id: item.id,

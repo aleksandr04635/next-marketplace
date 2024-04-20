@@ -239,7 +239,7 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
       category.properties
         .map((p) => p.slug)
         .indexOf(slugFromString(property)) !== -1 ||
-      slugFromString(property).length < 3
+      slugFromString(property).length < 2
     );
   }
 
@@ -247,11 +247,14 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
     return (
       category.properties[i].values
         .map((v) => v.slug)
-        .indexOf(newValues[i].slug) !== -1 || newValues[i].slug.length < 3
+        .indexOf(newValues[i].slug) !== -1 || newValues[i].slug.length < 2
     );
   }
 
   function categoryError() {
+    if (category.name.length < 5) {
+      return "Category name must be at least 5 symbols long";
+    }
     if (category.properties.length < 1) {
       return "Category must have at least one property";
     }
@@ -341,7 +344,7 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
         loading={isPending}
       />
       <div className="space-y-2 flex  flex-col">
-        <Label htmlFor="name">Laptops</Label>
+        <Label htmlFor="name">Category name</Label>
         <Input
           type="text"
           id="name"
@@ -387,10 +390,10 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
                       const filteredV = category.properties[i].values.filter(
                         (e, n) => n != j
                       ) as Value[];
-                      console.log(
+                      /* console.log(
                         "category.properties[i].values.filter: ",
                         filteredV
-                      );
+                      ); */
                       const newPr = category.properties.map((pr, n) =>
                         n == i ? { ...pr, values: filteredV } : pr
                       );
@@ -399,8 +402,6 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
                         properties: newPr,
                       });
                     }}
-                    /* onClick={() => setTags(tags.filter((e, n) => n != i))} */
-
                     className="mr-4 flex w-full cursor-pointer items-center justify-start space-x-2 rounded-lg bg-active-bg 
                   px-2 py-1 dark:bg-dark-active-bg dark:text-white "
                   >
@@ -414,7 +415,7 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
                 <Input
                   type="text"
                   id={"value" + i}
-                  placeholder="New value option name"
+                  placeholder="New property value option name"
                   value={newValues[i]?.name || ""}
                   onChange={(e) => {
                     const newV = newValues.map((v, n) =>
@@ -425,7 +426,7 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
                           }
                         : v
                     );
-                    console.log("newV: ", newV);
+                    //console.log("newV: ", newV);
                     setNewValues(newV);
                   }}
                 />

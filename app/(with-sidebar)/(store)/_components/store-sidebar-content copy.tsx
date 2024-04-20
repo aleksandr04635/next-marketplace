@@ -42,12 +42,31 @@ export const StoreSidebarContent = ({
     (cat) => cat.slug == pathname?.split("/")[2]
   );
 
-  //let DEFAULT_PRICE = [0, 700] as [number, number];
+  let DEFAULT_PRICE = [0, 700] as [number, number];
   const valuesArr = categorySelected?.properties.map((pr, i) => pr.slug);
   //console.log("categorySelected from StoreSidebarContent: ", categorySelected);
   const [val, setVal] = useState(categorySelected ? valuesArr : ["categories"]);
-  const [DEFAULT_PRICE, setDEFAULT_PRICE] = useState([0, 700]);
+  // const [DEFAULT_PRICE, setDEFAULT_PRICE] = useState([0, 700]);
   console.log("DEFAULT_PRICE from StoreSidebarContent: ", DEFAULT_PRICE);
+  useEffect(() => {
+    //DEFAULT_PRICE[0] = categorySelected?._min as number;
+    //DEFAULT_PRICE[1] = categorySelected?._max as number;
+    /*  setDEFAULT_PRICE([
+      categorySelected?._min || 0,
+      categorySelected?._max || 700,
+    ]); */
+    //setMinPrice(categorySelected?._min || 0);
+    //setMaxPrice(categorySelected?._max || 700);
+    setVal(
+      categorySelected
+        ? categorySelected?.properties.map((pr, i) => pr.slug)
+        : ["categories"]
+    );
+    console.log(
+      "categorySelected from StoreSidebarContent: ",
+      categorySelected
+    );
+  }, [categorySelected]);
 
   const currentQ = qs.parse(searchParams.toString());
   currentQ.page = null; //NEW
@@ -63,33 +82,7 @@ export const StoreSidebarContent = ({
   const [maxPrice, setMaxPrice] = useState(
     price ? +price.split("_")[1] : DEFAULT_PRICE[1]
   );
-
-  useEffect(() => {
-    //DEFAULT_PRICE[0] = categorySelected?._min as number;
-    //DEFAULT_PRICE[1] = categorySelected?._max as number;
-    setDEFAULT_PRICE([
-      Math.floor(+(categorySelected?._min || 0) / 5) * 5,
-      Math.ceil(+(categorySelected?._max || 700) / 5) * 5,
-    ]);
-    let price = searchParams.get("price");
-    if (price) {
-      setMinPrice(+price.split("_")[0]);
-      setMaxPrice(+price.split("_")[1]);
-    } else {
-      setMinPrice(Math.floor(+(categorySelected?._min || 0) / 5) * 5);
-      setMaxPrice(Math.ceil(+(categorySelected?._max || 700) / 5) * 5);
-    }
-    setVal(
-      categorySelected
-        ? categorySelected?.properties.map((pr, i) => pr.slug)
-        : ["categories"]
-    );
-    console.log(
-      "categorySelected from StoreSidebarContent: ",
-      categorySelected
-    );
-  }, [categorySelected]);
-  console.log("minPrice from StoreSidebarContent: ", minPrice);
+  //console.log("minPrice from StoreSidebarContent: ", minPrice);
 
   function isChecked(prslug: string, valslug: string) {
     const st = currentQ[prslug] as string;
@@ -104,32 +97,6 @@ export const StoreSidebarContent = ({
       return false;
     }
   }
-
-  /* NOT USED
-  function changeCheck(pr: Property, val: Value) {
-    const st = currentQ[pr.slug] as string;
-    const query = { ...currentQ };
-    const ind = st ? st.split("_").indexOf(val.slug) : -1;
-    if (ind != -1) {
-      query[pr.slug] = st.split("_").toSpliced(ind, 1).join("_");
-    } else {
-      query[pr.slug] = query[pr.slug]
-        ? query[pr.slug] + "_" + val.slug
-        : val.slug;
-    }
-    if (query[pr.slug] == "") {
-      query[pr.slug] = null;
-    }
-    const url = qs.stringifyUrl(
-      {
-        url: window.location.href,
-        query,
-      },
-      { skipNull: true }
-    );
-    router.push(url);
-  } */
-
   // type="single"
   return (
     <div className=" p-1">
@@ -211,41 +178,11 @@ export const StoreSidebarContent = ({
                 </AccordionTrigger>
                 <AccordionContent>
                   {pr.values.map((val, j) => (
-                    /* https://www.w3schools.com/howto/howto_css_custom_checkbox.asp */
-                    <div
-                      key={j}
-                      className="group checkbox-container flex items-center justify-center w-fit "
-                      onClick={() => {
-                        const st = currentQ[pr.slug] as string;
-                        const query = { ...currentQ };
-                        const ind = st ? st.split("_").indexOf(val.slug) : -1;
-                        if (ind != -1) {
-                          query[pr.slug] = st
-                            .split("_")
-                            .toSpliced(ind, 1)
-                            .join("_");
-                        } else {
-                          query[pr.slug] = query[pr.slug]
-                            ? query[pr.slug] + "_" + val.slug
-                            : val.slug;
-                        }
-                        if (query[pr.slug] == "") {
-                          query[pr.slug] = null;
-                        }
-                        const url = qs.stringifyUrl(
-                          {
-                            url: window.location.href,
-                            query,
-                          },
-                          { skipNull: true }
-                        );
-                        router.push(url);
-                      }}
-                    >
+                    <div key={j} className="group flex items-center w-full ">
                       <input
                         type="checkbox"
                         id={`${pr.slug}-${val.slug}`}
-                        /*  onChange={() => {
+                        onChange={() => {
                           const st = currentQ[pr.slug] as string;
                           const query = { ...currentQ };
                           const ind = st ? st.split("_").indexOf(val.slug) : -1;
@@ -270,19 +207,15 @@ export const StoreSidebarContent = ({
                             { skipNull: true }
                           );
                           router.push(url);
-                        }} */
+                        }}
                         checked={isChecked(pr.slug, val.slug)}
-                        className="h-4 w-4  rounded
-                         border-blue-500 dark:border-cyan-500 text-indigo-600 focus:ring-indigo-500"
+                        className="h-4 w-4 cursor-pointer rounded border-blue-500 dark:border-cyan-500 text-indigo-600 focus:ring-indigo-500"
                       />
-
                       <label
                         htmlFor={`${pr.slug}-${val.slug}`}
-                        className="ml-0 flex items-center justify-center text-sm cursor-pointer
-                         dark:text-cyan-500 text-blue-500 group-hover:text-cyan-500 dark:group-hover:text-blue-500"
+                        className="ml-3 text-sm cursor-pointer dark:text-cyan-500 text-blue-500 group-hover:text-cyan-500 dark:group-hover:text-blue-500"
                       >
                         {val.name}
-                        <span className="checkmark"></span>
                       </label>
                     </div>
                   ))}

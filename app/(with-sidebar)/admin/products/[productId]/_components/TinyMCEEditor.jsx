@@ -17,7 +17,7 @@ export default function TinyMCEEditor({ value2, onChange }) {
     theme === "light" ? "/index.css" : "/index.css,dark"
   );
   // const [cont, setCont] = useState("");
-  console.log("value2:", value2);
+  //console.log("value2:", value2);
   // console.log("cont:", cont);
 
   let skinSt = theme === "light" ? "oxide" : "oxide-dark";
@@ -128,10 +128,8 @@ export default function TinyMCEEditor({ value2, onChange }) {
             "autoresize",
           ],
           toolbar:
-            "paste undo redo remove| blocks |  link | code | preview |" +
-            "bold italic forecolor | alignleft aligncenter " +
-            "alignright alignjustify | bullist numlist outdent indent | " +
-            "removeformat  | help",
+            "paste undo redo remove blocks bullist numlist  alignleft aligncenter alignright alignjustify link code preview |" +
+            "bold italic forecolor | outdent indent  | removeformat  | help",
           content_style:
             "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
         }}

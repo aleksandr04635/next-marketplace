@@ -23,19 +23,24 @@ const Slider = React.forwardRef<
     </SliderPrimitive.Track>
     <SliderPrimitive.Thumb
       className="block h-4 w-4 rounded-full border-2 border-blue-500 dark:border-cyan-500 bg-background 
-     ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 
-     focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50" /* border-primary */
+      ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-0 
+      focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-50" /* border-primary */
     />
     <SliderPrimitive.Thumb
       className="block h-4 w-4 rounded-full border-2 border-blue-500 dark:border-cyan-500 bg-background 
-    ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 
-    focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+    ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-0 
+    focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-50"
     />
   </SliderPrimitive.Root>
 ));
 Slider.displayName = SliderPrimitive.Root.displayName;
 
 export { Slider };
+
+/* className="block h-4 w-4 rounded-full border-2 border-blue-500 dark:border-cyan-500 bg-background 
+ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 
+focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50" */
+
 /* "dark-active-bg": "#151e37",
 "active-bg": "#f2faff",
 "dark-main-bg": "#10172a",

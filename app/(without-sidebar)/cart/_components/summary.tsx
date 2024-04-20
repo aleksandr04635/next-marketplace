@@ -31,6 +31,7 @@ const Summary = () => {
     if (searchParams.get("success")) {
       toast.success("Payment completed.");
       dispatch(clearCart());
+      router.push("/admin/orders-from-me");
     }
 
     if (searchParams.get("canceled")) {

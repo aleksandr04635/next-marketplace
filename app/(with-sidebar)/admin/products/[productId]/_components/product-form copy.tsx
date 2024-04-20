@@ -72,7 +72,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
   initialData,
   categories,
 }) => {
-  console.log("initialData from ProductForm: ", initialData);
+  //console.log("initialData from ProductForm: ", initialData);
   //console.log("categories from ProductForm: ", categories);
   const params = useParams();
   const router = useRouter();

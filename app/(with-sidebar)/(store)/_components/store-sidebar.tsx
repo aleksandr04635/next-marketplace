@@ -30,6 +30,16 @@ export const StoreSidebar = async () => {
   console.log("fullUrl:", fullUrl);
   console.log("pathname:", pathname); */
 
+  /*   const max = await db.product.aggregate({
+    _max: {
+      price: true,
+    },
+    _min: {
+      price: true,
+    },
+  });
+  console.log("max from StoreSidebar: ", max); */
+
   const categories = await db.category.findMany({
     include: {
       _count: {
@@ -43,7 +53,43 @@ export const StoreSidebar = async () => {
       //createdAt: "desc",
     },
   });
-  //console.log("categories from StoreSidebar: ", categories);
+
+  const categories2 = [];
+  for (let cat of categories) {
+    //console.log("cat from StoreSidebar: ", cat);
+    const sides = await db.product.aggregate({
+      where: { categoryId: cat.id },
+      _max: {
+        price: true,
+      },
+      _min: {
+        price: true,
+      },
+    });
+    //console.log("sides from StoreSidebar: ", sides);
+    // cat._max = sides._max.price;
+    //cat._min = sides._min.price;
+    categories2.push({
+      ...cat,
+      _max: sides._max.price as unknown as number,
+      _min: sides._min.price as unknown as number,
+    });
+  }
+
+  // console.log("categories2 from StoreSidebar: ", categories2);
+  /*   const categories = await db.category.findMany({
+    include: {
+           _count: {
+        select: { products: true },
+      },
+      properties: { include: { values: true } },
+      //products: true,
+    },
+    orderBy: {
+      products: { _count: "desc" },
+      //createdAt: "desc",
+    },
+  }); */
 
   /*  const formattedCategories: ProductColumn[] = categories.map((item) => ({
     id: item.id,
@@ -65,7 +111,7 @@ export const StoreSidebar = async () => {
 
   return (
     <div>
-      <StoreSidebarContent categories={categories} />
+      <StoreSidebarContent categories={categories2} />
     </div>
   );
 };

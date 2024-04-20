@@ -20,7 +20,7 @@ const CartPage = () => {
   const [isMounted, setIsMounted] = useState(false);
   const dispatch = useAppDispatch();
   const { cart } = useAppSelector(selectCart);
-  console.log("  cart  from CartPage: ", cart);
+  //console.log("  cart  from CartPage: ", cart);
   let num = 0;
   if (cart) {
     for (let item of cart) {

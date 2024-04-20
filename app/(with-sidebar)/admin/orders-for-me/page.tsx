@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+import { Metadata } from "next";
 
 import { db } from "@/lib/db";
 import { formatter } from "@/lib/utils";
@@ -7,6 +8,11 @@ import { OrderColumn } from "./_components/columns";
 import { OrderClient } from "./_components/client";
 import { currentUser } from "@/lib/auth";
 import { Card, CardContent } from "@/components/ui/card";
+
+export const metadata: Metadata = {
+  title: "Orders for me | My Marketplace",
+  description: "A marketplace created with Next.js 14 and Prisma",
+};
 
 const OrdersPage = async () => {
   const user = await currentUser();

@@ -51,7 +51,7 @@ const ProductCard: React.FC<ProductCardEx> = ({ data }) => {
   return (
     <div
       className="bg-white dark:bg-dark-additional-bg/40 overflow-hidden  rounded-lg
-     border dark:border-main-border h-full "
+     border border-main-border dark:border-main-border h-full "
     >
       <div className="aspect-square bg-gray-100 relative">
         <Link
@@ -83,7 +83,7 @@ const ProductCard: React.FC<ProductCardEx> = ({ data }) => {
           </div> 
         </div>*/}
       </div>
-      <div className="flex flex-col justify-between h-[230px]  p-2 space-y-0">
+      <div className="flex flex-col justify-between h-[310px]  p-2 space-y-0">
         {/*  h-[250px] */}
         <MyButton
           variant="icon"
@@ -93,27 +93,27 @@ const ProductCard: React.FC<ProductCardEx> = ({ data }) => {
           <GrCart className="mr-2 h-5 w-5" />
           Add To Cart
         </MyButton>
+        <div className="flex text-base  items-center justify-between">
+          <Currency value={+data?.price} />
+        </div>
         <Link
           href={`/product/${data?.id}`}
           target="_blank"
           rel="noopener noreferrer"
           className="link-stand cursor-pointer"
         >
-          <p className="font-semibold text-base text-justify">{data.name}</p>
+          <p className="font-semibold text-sm text-justify">{data.name}</p>
         </Link>
-        <p className="font-semibold text-base text-justify">
+        <p className=" text-sm text-justify">
           store: {data.user.storeName || data.user.email}
         </p>
-        <div className="flex items-center justify-between">
-          <Currency value={+data?.price} />
-        </div>
         {/*     <p className="text-sm text-gray-500">{data.category?.name}</p> */}
         <div className="space-y-0">
           {data.productProperties.map((pr, j) => (
             <div
               key={j}
               className="mr-4 flex flex-col sm:flex-row w-full  sm:items-center justify-start space-x-2 rounded-lg
-           bg-active-bg         px-2 py-0 dark:bg-dark-active-bg dark:text-white "
+           bg-active-bg         px-2 py-0 dark:bg-dark-active-bg dark:text-white text-sm "
             >
               <div>
                 {pr.propertyName}

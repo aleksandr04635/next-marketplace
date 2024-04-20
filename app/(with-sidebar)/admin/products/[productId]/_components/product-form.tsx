@@ -75,7 +75,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
   initialData,
   categories,
 }) => {
-  console.log("initialData from ProductForm: ", initialData);
+  //console.log("initialData from ProductForm: ", initialData);
   //console.log("categories from ProductForm: ", categories);
   const params = useParams();
   const router = useRouter();
@@ -88,7 +88,8 @@ export const ProductForm: React.FC<ProductFormProps> = ({
   // const [categoryH, setCategoryH] = useState(any);
 
   const title = initialData ? "Edit a product" : "Create a product";
-  const description = initialData ? "Edit a product." : "Add a new product";
+  //const description = initialData ? "Edit a product." : "Add a new product";
+  const description = "";
   const toastMessage = initialData ? "Product updated." : "Product created.";
   const action = initialData ? "Save changes" : "Create";
 
@@ -138,7 +139,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
   // const cat = form.watch("name");
   const watchAllFields = form.watch();
   useEffect(() => {
-    //console.log("watchAllFields from ProductForm: ", watchAllFields);
+    console.log("watchAllFields from ProductForm: ", watchAllFields);
     productError();
   }, [watchAllFields, initialData]);
 
@@ -162,16 +163,16 @@ export const ProductForm: React.FC<ProductFormProps> = ({
   //console.log("categorySelected from ProductForm: ", categorySelected);
 
   useEffect(() => {
-    /* console.log("cat from ProductForm: ", categorySelectedId);
+    console.log("cat from ProductForm: ", categorySelectedId);
     console.log(
-      "initialData?..categoryId from ProductForm: ",
+      "initialData?.categoryId from ProductForm: ",
       initialData?.categoryId
-    ); */
+    );
     if (categorySelectedId != initialData?.categoryId) {
       const categorySelected: CategoryWithProperties | null | undefined =
         categories.find((cat) => cat.id == categorySelectedId);
 
-      //console.log("categorySelected from ProductForm: ", categorySelected);
+      console.log("categorySelected from ProductForm: ", categorySelected);
       const temp = [];
       for (let i = 0; i < categorySelected?.properties?.length!; i++) {
         const obj = {
@@ -283,7 +284,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                 console.log("data.success: ", data.success);
                 router.refresh();
                 toast.success(
-                  initialData ? "Product updated." : "Product created."
+                  initialData ? "Products updated." : "Products created."
                 );
                 setError(undefined);
                 //revalidatePath("/admin/categories/" + data.success);

@@ -38,10 +38,10 @@ const PropertiesControl: React.FC<PropertiesControlProps> = ({
   category,
   value,
 }) => {
-  //console.log("value from PropertiesControl:", value);
-  //console.log("category from PropertiesControl:", category);
+  console.log("value from PropertiesControl:", value);
+  console.log("category from PropertiesControl:", category);
   const [properties, setProperties] = useState<Property[]>(value);
-  //console.log("properties from PropertiesControl:", properties);
+  console.log("properties from PropertiesControl:", properties);
 
   const [isMounted, setIsMounted] = useState(false);
   /*   useEffect(() => {
@@ -80,7 +80,8 @@ const PropertiesControl: React.FC<PropertiesControlProps> = ({
             }}
             /*  defaultValue={properties[i]?.valueName || ""} */
             /* defaultValue={value[i]?.valueName || ""} */
-            defaultValue={prop.values[0].name || ""}
+            /*  defaultValue={prop.values[0].name || ""} */
+            defaultValue={value[i]?.valueName || prop.values[0].name || ""}
           >
             <SelectTrigger>
               <SelectValue placeholder={prop.name} />

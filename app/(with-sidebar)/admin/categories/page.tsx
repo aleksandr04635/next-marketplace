@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+import { Metadata } from "next";
 
 import { db } from "@/lib/db";
 import { CategoryForm } from "./[categoryId]/_components/category-form";
@@ -6,6 +7,11 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 import { CategoryColumn } from "./_components/columns";
 import { CategoryClient } from "./_components/client";
+
+export const metadata: Metadata = {
+  title: "Categories | My Marketplace",
+  description: "A marketplace created with Next.js 14 and Prisma",
+};
 
 export const revalidate = 0;
 const CategoryPage = async () => {
@@ -28,7 +34,7 @@ const CategoryPage = async () => {
     content: item.properties.map((pr) => {
       return {
         prName: pr.name,
-        prVal: pr.values.map((val) => val.name).join(","),
+        prVal: pr.values.map((val) => val.name).join(", "),
       };
     }),
     userId: item.userId,
