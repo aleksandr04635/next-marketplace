@@ -83,7 +83,7 @@ const ProductCard: React.FC<ProductCardEx> = ({ data }) => {
           </div> 
         </div>*/}
       </div>
-      <div className="flex flex-col justify-between h-[310px]  p-2 space-y-0">
+      <div className="flex flex-col justify-between h-[300px]  p-2 space-y-0">
         {/*  h-[250px] */}
         <MyButton
           variant="icon"
@@ -112,7 +112,7 @@ const ProductCard: React.FC<ProductCardEx> = ({ data }) => {
           {data.productProperties.map((pr, j) => (
             <div
               key={j}
-              className="mr-4 flex flex-col sm:flex-row w-full  sm:items-center justify-start space-x-2 rounded-lg
+              className="mr-4 flex  sm:flex-row w-full  sm:items-center justify-start space-x-2 rounded-lg
            bg-active-bg         px-2 py-0 dark:bg-dark-active-bg dark:text-white text-sm "
             >
               <div>

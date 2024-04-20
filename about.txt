@@ -16,3 +16,7 @@ https://github.com/aleksandr04635/next-marketplace
 
 Google OAuth is here
 https://console.cloud.google.com/apis/credentials?authuser=0&project=nextjs-ecommerce-402904
+
+github OAuth app: nextauth-tut
+https://github.com/settings/applications
+http://localhost:3000 changed for https://oleksandrs-next-marketplace.vercel.app

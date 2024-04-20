@@ -87,7 +87,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
         loading={isPending}
       />
       {user && (data.userId == user.id || user.role == "ADMIN") ? (
-        <div className="flex flex-col sm:flex-row gap-2 justify-center">
+        <div className="flex flex-col lg:flex-row gap-2 justify-center">
           <Link href={`/admin/categories/${data.id}`}>
             <MyButton
               className=" "

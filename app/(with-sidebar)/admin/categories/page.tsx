@@ -43,7 +43,7 @@ const CategoryPage = async () => {
 
   // max-w-[600px]
   return (
-    <Card className=" w-full my-2  mx-auto lg:max-w-[900px] ">
+    <Card className=" w-full my-2  mx-auto lg:max-w-[1100px] ">
       {/*  <CardHeader>
         <p className="text-2xl font-semibold text-center py-0">
           {`${categories?.length}`} Categories exist
