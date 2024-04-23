@@ -53,8 +53,7 @@ const ProductCard: React.FC<ProductCardEx> = ({ data }) => {
       className="bg-white dark:bg-dark-additional-bg/40 overflow-hidden  rounded-lg
      border border-main-border dark:border-main-border h-full "
     >
-      <div className=" w-full aspect-square bg-white">
-        {/*  relative */}
+      <div className="aspect-square bg-white relative">
         <Link
           href={`/product/${data?.id}`}
           target="_blank"
@@ -66,12 +65,11 @@ const ProductCard: React.FC<ProductCardEx> = ({ data }) => {
               "https://res.cloudinary.com/dqwdfhxgl/image/upload/v1712544917/contacts/hlpiz8yi2vi8ksfleelk.jpg"
             }
             alt=""
-            width={300}
-            height={300}
-            /* fill */
-            className=" object-contain h-full border-0" /* aspect-square */
+            fill
+            className="aspect-square object-cover border-0"
           />
         </Link>
+
         {/*<div className="opacity-0 group-hover:opacity-100 transition absolute w-full px-6 bottom-5">
            <div className="flex gap-x-6 justify-center">
             <IconButton 
@@ -85,7 +83,7 @@ const ProductCard: React.FC<ProductCardEx> = ({ data }) => {
           </div> 
         </div>*/}
       </div>
-      <div className="flex flex-col justify-between h-[290px]  p-2 space-y-0">
+      <div className="flex flex-col justify-between h-[300px]  p-2 space-y-0">
         {/*  h-[250px] */}
         <MyButton
           variant="icon"

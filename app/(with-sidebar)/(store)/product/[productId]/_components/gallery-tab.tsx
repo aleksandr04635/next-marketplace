@@ -14,12 +14,12 @@ const GalleryTab: React.FC<GalleryTabProps> = ({ image }) => {
     <Tab className="relative outline-none flex aspect-square cursor-pointer items-center justify-center rounded-md ">
       {({ selected }) => (
         <div>
-          <span className="absolute h-full w-full aspect-square inset-0  overflow-hidden rounded-md">
+          <span className="absolute bg-white h-full w-full aspect-square inset-0  overflow-hidden rounded-md">
             <NextImage
               fill
               src={image.url}
               alt=""
-              className="object-cover object-center"
+              className="object-contain object-center"
             />
           </span>
           <span
@@ -36,9 +36,9 @@ const GalleryTab: React.FC<GalleryTabProps> = ({ image }) => {
                 : " ring-transparent "
             )} */
             className={cn(
-              "absolute inset-0 rounded-md ring-1 ring-offset-0  ",
+              "absolute inset-0 rounded-md ring-2 ring-offset-0  ",
               selected
-                ? " ring-cyan-500 dark:ring-blue-500 focus:ring-1 "
+                ? " ring-cyan-500 dark:ring-blue-500 focus:ring-2 "
                 : " ring-transparent "
             )}
           />

@@ -25,12 +25,12 @@ const CartItem: React.FC<CartItemProps> = ({ product, number }) => {
 
   return (
     <div className="flex  flex-row py-3 border-b justify-center items-center">
-      <div className="relative h-16 w-16 rounded-md overflow-hidden sm:h-32 sm:w-32">
+      <div className="relative bg-white h-16 w-16 rounded-md overflow-hidden sm:h-32 sm:w-32">
         <Image
           fill
           src={product.data.images[0]?.url || DEFAULT_IMAGES[0].url}
           alt=""
-          className="object-cover object-center"
+          className="object-contain object-center"
         />
       </div>
       <div className="relative ml-4 flex flex-1 flex-col justify-between sm:ml-3">

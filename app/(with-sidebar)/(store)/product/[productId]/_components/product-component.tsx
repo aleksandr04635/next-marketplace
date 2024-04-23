@@ -1,7 +1,7 @@
 "use client";
 import { ShoppingCart } from "lucide-react";
 import Currency from "@/components/currency";
-import Gallery from "@/components/gallery";
+
 import { TiShoppingCart } from "react-icons/ti";
 import { GrCart } from "react-icons/gr";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,6 +11,7 @@ import { ProductCard } from "@/types";
 import MyButton from "@/components/ui/my-button";
 import { addProduct } from "@/redux/cart/cartSlice";
 import { useAppDispatch } from "@/redux/store";
+import Gallery from "./gallery";
 
 export const revalidate = 0;
 
