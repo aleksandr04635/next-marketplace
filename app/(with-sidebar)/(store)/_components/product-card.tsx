@@ -85,7 +85,7 @@ const ProductCard: React.FC<ProductCardEx> = ({ data }) => {
           </div> 
         </div>*/}
       </div>
-      <div className="flex flex-col justify-between h-[290px]  p-2 space-y-0">
+      <div className="flex flex-col justify-between h-[310px]  p-2 space-y-0">
         {/*  h-[250px] */}
         <MyButton
           variant="icon"
