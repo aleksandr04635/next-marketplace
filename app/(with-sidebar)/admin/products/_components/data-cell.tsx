@@ -28,9 +28,10 @@ export const DataCell: React.FC<DataCellProps> = ({ data }) => {
       {data.properties.map((pr, j) => (
         <div
           key={j}
-          className="mr-4 flex flex-col sm:flex-row w-full  sm:items-center justify-start space-x-2 rounded-lg bg-active-bg 
-        px-2 py-1 dark:bg-dark-active-bg dark:text-white "
+          className="mr-4 flex flex-col sm:flex-row w-full  sm:items-center justify-start space-x-2 rounded-lg 
+        px-2 py-1 border border-main-border dark:bg-inherit dark:text-white "
         >
+          {/*bg-active-bg  dark:bg-dark-active-bg */}
           <div>
             {pr.propertyName}
             {": "}

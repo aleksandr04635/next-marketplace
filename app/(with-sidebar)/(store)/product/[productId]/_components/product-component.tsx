@@ -55,8 +55,9 @@ const ProductComponent: React.FC<ProductCard> = ({ data }) => {
                 <div
                   key={j}
                   className="mr-4 flex flex-col sm:flex-row w-full  sm:items-center justify-start space-x-2 
-                      rounded-lg bg-active-bg   px-2 py-0 dark:bg-dark-active-bg dark:text-white "
+                      rounded-lg   px-2 py-0 bg-inherit dark:text-white "
                 >
+                  {/*bg-active-bg  dark:bg-dark-active-bg */}
                   <div>
                     {pr.propertyName}
                     {": "}
