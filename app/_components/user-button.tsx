@@ -75,14 +75,14 @@ export const UserButton = () => {
           <Link href="/admin/orders-for-me">
             <DropdownMenuItem className="cursor-pointer">
               {/* <Package className="h-4 w-4 mr-2" /> */}
-              <BsBoxArrowInDown className="h-4 w-4 mr-2" />
+              <BsBoxArrowUp className="h-4 w-4 mr-2" />
               Orders for me
             </DropdownMenuItem>
           </Link>
           <Link href="/admin/orders-from-me">
             <DropdownMenuItem className="cursor-pointer">
               {/* <Package className="h-4 w-4 mr-2" /> */}
-              <BsBoxArrowUp className="h-4 w-4 mr-2" />
+              <BsBoxArrowInDown className="h-4 w-4 mr-2" />
               Orders from me
             </DropdownMenuItem>
           </Link>
