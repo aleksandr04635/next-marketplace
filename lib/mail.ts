@@ -62,7 +62,7 @@ export const sendTwoFactorTokenEmail = async (email: string, token: string) => {
     const emailTemplate = Handlebars.compile(twoFactorTemplate);
 
     let mailOptions = {
-      from: `My blog <${process.env.EMAIL_FROM}>`,
+      from: `My marketplace <${process.env.EMAIL_FROM}>`,
       to: email,
       subject: "Your two factor authentication code",
       text: "Your two factor authentication code:" + token,
@@ -159,7 +159,7 @@ export const sendPasswordResetEmail = async (email: string, token: string) => {
     const emailTemplate = Handlebars.compile(resetTemplate);
 
     let mailOptions = {
-      from: `My blog <${process.env.EMAIL_FROM}>`,
+      from: `My marketplace <${process.env.EMAIL_FROM}>`,
       to: email,
       subject: "Reset your password",
       text: resetLink,
@@ -287,7 +287,7 @@ export const sendVerificationEmail = async (
     const emailTemplate = Handlebars.compile(confirmTemplate);
 
     let mailOptions = {
-      from: `My blog <${process.env.EMAIL_FROM}>`,
+      from: `My marketplace <${process.env.EMAIL_FROM}>`,
       to: email,
       subject: "Confirm your email",
       text: confirmLink,

@@ -37,7 +37,7 @@ export default function PaginationBar({
 
   const cName = (n: number) => {
     let cn =
-      "  border border-main-border px-2 dark:text-white outline-main-border  outline-1 hover:outline";
+      " select-none border border-main-border px-2 dark:text-white outline-main-border  outline-1 hover:outline";
     if (n == currentPage) {
       cn += " dark:bg-dark-active-bg bg-active-bg";
     }

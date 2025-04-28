@@ -35,13 +35,14 @@ export const UserButton = () => {
     }
     return (
       <DropdownMenu>
-        <DropdownMenuTrigger className="rounded-full !outline-none ">
+        <DropdownMenuTrigger className="rounded-full !outline-none flex flex-row items-center">
           <Avatar>
             <AvatarImage src={user?.image || ""} />
             <AvatarFallback className="bg-sky-500">
               <FaUser className="text-white" />
             </AvatarFallback>
           </Avatar>
+          <p> {user?.name}</p>
         </DropdownMenuTrigger>
         <DropdownMenuContent
           className="w-fit dark:bg-dark-additional-bg"

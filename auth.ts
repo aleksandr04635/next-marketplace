@@ -57,7 +57,7 @@ export const {
 
       if (existingUser.isTwoFactorEnabled) {
         const twoFactorConfirmation = await getTwoFactorConfirmationByUserId(
-          existingUser.id
+          existingUser.id,
         );
 
         if (!twoFactorConfirmation) return false;
@@ -75,7 +75,7 @@ export const {
 
     async jwt({ token }) {
       if (!token.sub) return token; //if logged out
-      //console.log("token from jwt calback: ", new Date(), { token });
+      console.log("token1 from jwt calback: ", token);
       const existingUser = await getUserById(token.sub); //sub is id in DB
 
       if (!existingUser) return token;
@@ -91,13 +91,14 @@ export const {
       token.role = existingUser.role;
       token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled;
 
+      console.log("token2 from jwt calback: ", token);
       return token;
     },
 
     //session is executed after JWT
     async session({ token, session }) {
-      //console.log("token from session callback: ", new Date(), token);
-      //console.log(" session from session callback: ", new Date(), session);
+      console.log("token from session callback: ", token);
+      console.log(" session1 from session callback: ", session);
       if (token.sub && session.user) {
         session.user.id = token.sub;
       }
@@ -117,7 +118,7 @@ export const {
         session.user.email = token.email;
         session.user.isOAuth = token.isOAuth as boolean;
       }
-
+      //console.log(" session2 from session callback: ", session);
       return session;
     },
   },

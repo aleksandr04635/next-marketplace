@@ -19,18 +19,24 @@ export const Footer = () => {
 
   //absolute bottom-0  bg-secondary
   return (
-    <div
-      className="w-full  h-16 pr-[20px]  rounded-none border-t absolute bottom-0
-      border-layout-border bg-white dark:bg-dark-additional-bg/40 flex items-center justify-between "
-    >
+    <div className="absolute bottom-0 flex h-16 w-full flex-col items-center justify-between rounded-none border-t border-layout-border bg-white pr-[20px] sm:flex-row dark:bg-dark-additional-bg/40">
       <Link
-        className="link-stand mx-10  "
+        className="link-stand mx-10"
         /*  href={window.location.origin + `?pageSize=${pageSize}`} */
         href="/"
         target="_blank"
         rel="noopener noreferrer"
       >
-        &copy; {new Date().getFullYear()} My Marketplace
+        &copy; {new Date().getFullYear()} My&nbsp;Marketplace
+      </Link>
+
+      <Link
+        className="link-stand text-base"
+        href={`https://oleksandrs-resume.vercel.app`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        My&nbsp;CV&nbsp;and&nbsp;contacts
       </Link>
 
       <Link

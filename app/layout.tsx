@@ -28,10 +28,13 @@ export default async function RootLayout({
 
   //h-fit justify-stretch from-sky-200 to-blue-600 gap-y-3 items-center
   //className="w-screen overflow-x-hidden "
+
+  /*  bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))]
+      dark:from-[#065179] dark:to-[#0e1425] */
   return (
     <SessionProvider session={session}>
       <html lang="en">
-        <body className="w-screen overflow-x-hidden ">
+        <body className="w-screen overflow-x-hidden">
           <div className={` ${inter.className}`}>
             <ReduxProvider>
               {/*  <StoreProvider> */}
@@ -42,13 +45,9 @@ export default async function RootLayout({
               >
                 <Toaster />
                 <ToastProvider />
-                <div
-                  className="  relative w-full flex flex-col    min-h-screen bg-white
-     bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))]
-      dark:from-[#065179] dark:to-[#0e1425]"
-                >
+                <div className="relative flex min-h-screen w-full flex-col bg-white dark:bg-[radial-gradient(ellipse_at_top,_hsl(206,95%,20%)_0%,_hsl(224,45%,5%)_100%)]">
                   <Header />
-                  <div className=" mb-[63px] ">{children}</div>
+                  <div className="mb-[63px]">{children}</div>
                   <Footer />
                 </div>
               </ThemeProvider>

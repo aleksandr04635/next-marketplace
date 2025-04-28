@@ -2,6 +2,16 @@ import { Metadata } from "next";
 import { db } from "@/lib/db";
 import ProductComponent from "./_components/product-component";
 
+export async function generateStaticParams() {
+  // const slugs = await getAllPostSlugs();
+  const products = await db.product.findMany({});
+  // e.g., [{ slug: 'my-first-post' }]
+  //console.log("products from Product Page: ", products);
+  const idList = products.map(({ id }) => ({ productId: id }));
+  //console.log("idList from Product Page: ", idList);
+  return idList;
+}
+
 export async function generateMetadata({
   params,
 }: ProductPageProps): Promise<Metadata> {
